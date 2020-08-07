@@ -1,0 +1,30 @@
+@import 'materialize-css/sass/materialize.scss';
+@import "../../../theme/colors.scss";
+
+
+.telegramLayer {
+  background-color: $baseHalfLighten;
+  padding-top: 30px !important;
+  padding-bottom: 30px !important;
+
+  & h5 {
+    margin: 0;
+    display: inline-block;
+    color: $warmText;
+    margin-right: 20px;
+    vertical-align: middle;
+    margin-bottom: 4px;
+
+    @media #{$medium-and-down} {
+      width: 100%;
+    }
+  }
+
+  a.btn {
+    background-color: $telegram;
+
+    @media #{$medium-and-down} {
+      margin-top: 20px;
+    }
+  }
+}

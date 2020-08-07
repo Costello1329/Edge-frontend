@@ -1,0 +1,21 @@
+@import 'materialize-css/sass/materialize.scss';
+
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.rowNoBottomMargin {
+  margin-bottom: 0 !important;
+}
+
+.colNoSidePadding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}

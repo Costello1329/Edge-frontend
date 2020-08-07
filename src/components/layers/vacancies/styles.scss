@@ -1,0 +1,17 @@
+@import "../../../theme/colors.scss";
+
+
+.vacanciesLayer {
+  background-color: $baseLighten;
+  padding-top: 40px !important;
+  padding-bottom: 40px !important;
+
+  & h4 {
+    margin-top: 0;
+    color: $warmText;
+  }
+
+  & .card {
+    background-color: $base;
+  }
+}

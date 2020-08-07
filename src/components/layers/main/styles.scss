@@ -1,0 +1,43 @@
+@import "../../../theme/colors.scss";
+
+
+.mainLayer {
+  background-color: $baseHalfLighten;
+  padding-top: 40px !important;
+  padding-bottom: 40px !important;
+
+  & .mainLayerText {
+    color: $warmText !important;
+  }
+
+  & .mainLayerTextDarken {
+    color: $warmTextDarken !important;
+  }
+
+  & .mainLayerCompanyLogo {
+    height: 40px;
+    margin-top: 20px;
+    text-align: center;
+
+    & > span {
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+    }
+
+    & > img {
+      max-height: 40px;
+      max-width: 100%;
+      vertical-align: middle;
+    }
+  }
+
+  & .mainLayerButtons {
+    margin-top: 30px;
+
+    & > a.btn {
+      background-color: $contrast;
+      color: $warmText
+    }
+  }
+}
