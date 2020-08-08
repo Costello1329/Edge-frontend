@@ -2,9 +2,9 @@ import React from "react";
 import Materialize from "materialize-css"; 
 import {discard} from "../../../utils/Discard";
 import {Guid} from "../../../utils/guid";
+import {localization} from "../../../services/localization";
 
 import "./styles.scss";
-import { localization } from "../../../services/localization";
 
 
 
@@ -30,25 +30,53 @@ export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
           <h4 className="col">{localization.localize("vacancies")}</h4>
         </div>
         <div className="row rowNoBottomMargin">{
-          props.vacancies.map((vacancy: Vacancy): JSX.Element =>
-            <article className="col s6">
-              <div className="card-panel">
-                <header className="row">
-                  <div className="col s6">
-                    {vacancy.companyName}
+          ((): Vacancy[][] => {
+            let groups: Vacancy[][] = [];
+
+            props.vacancies.forEach(
+              (vacancy): void => {
+                if (groups.length !== 0 && groups[groups.length - 1].length < 2)
+                  groups[groups.length - 1].push(vacancy);
+
+                else 
+                  groups.push([vacancy]);
+              }
+            );
+
+            return groups;
+          })().map((group: Vacancy[]): JSX.Element =>
+            <div className="row rowNoBottomMargin">{
+              group.map((vacancy: Vacancy): JSX.Element =>
+                <article className="col s6">
+                  <div className="card-panel">
+                    <header className="row">
+                      <div className="col s6 vacanciesLayerCompanyName">
+                        <h5>{vacancy.companyName}</h5>
+                      </div>
+                      <div className="col s6">
+                        <div className="col s12 colNoSidePadding">
+                          <p className="right pNoMargin">
+                            {vacancy.moneySummary}
+                          </p>
+                        </div>
+                        <div className="col s12 colNoSidePadding">
+                          <p className="right pNoMargin">
+                            {vacancy.moneyPeriod}
+                          </p>
+                        </div>
+                      </div>
+                    </header>
+                    <section>
+                      <div className="vacanciesLayerJobTitle">
+                        <h6>{vacancy.jobTitle}</h6>
+                      </div>
+                      <div>{vacancy.skillLevel}</div>
+                      <div><p>{vacancy.description}</p></div>
+                    </section>
                   </div>
-                  <div className="sum col s6">
-                    <div className="right">{vacancy.moneySummary}</div>
-                    <div className="right">{vacancy.moneyPeriod}</div>
-                  </div>
-                </header>
-                <section className="description">
-                  <div>{vacancy.jobTitle}</div>
-                  <div>{vacancy.skillLevel}</div>
-                  <div><p>{vacancy.description}</p></div>
-                </section>
-              </div>
-            </article>
+                </article>
+              )
+            }</div>
           )
         }</div>
       </div>

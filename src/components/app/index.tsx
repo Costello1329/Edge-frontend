@@ -56,6 +56,66 @@ extends React.Component {
             sed do eiusmod tempor incididunt ut labore et dolore magna \
             aliqua. Ut enim ad minim veniam, quis nostrud exercitation \
             ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        }, {
+          guid: getRandomGuid(),
+          companyName: "Yandex",
+          jobTitle: "Backend engineer",
+          skillLevel: "Junior",
+          moneySummary: "1 500 - 2 500 $",
+          moneyPeriod: "в месяц",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, \
+            sed do eiusmod tempor incididunt ut labore et dolore magna \
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation \
+            ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        }, {
+          guid: getRandomGuid(),
+          companyName: "Сто семнадцать и два",
+          jobTitle: "Fullstack engineer",
+          skillLevel: "CTO",
+          moneySummary: "400 000 - 500 000 $",
+          moneyPeriod: "в год",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, \
+            sed do eiusmod tempor incididunt ut labore et dolore magna \
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation \
+            ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        }, {
+          guid: getRandomGuid(),
+          companyName: "Google",
+          jobTitle: "Fullstack engineer",
+          skillLevel: "Middle",
+          moneySummary: "4 000 - 5 000 $",
+          moneyPeriod: "в месяц",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, \
+            sed do eiusmod tempor incididunt ut labore et dolore magna \
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation \
+            ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        }, {
+          guid: getRandomGuid(),
+          companyName: "Google",
+          jobTitle: "Fullstack engineer",
+          skillLevel: "Middle",
+          moneySummary: "4 000 - 5 000 $",
+          moneyPeriod: "в месяц",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, \
+            sed do eiusmod tempor incididunt ut labore et dolore magna \
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation \
+            ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        }, {
+          guid: getRandomGuid(),
+          companyName: "Google",
+          jobTitle: "Fullstack engineer",
+          skillLevel: "Middle",
+          moneySummary: "4 000 - 5 000 $",
+          moneyPeriod: "в месяц",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, \
+            sed do eiusmod tempor incididunt ut labore et dolore magna \
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation \
+            ullamco laboris nisi ut aliquip ex ea commodo consequat."
         }]}/>
         <TelegramLayer link = "https://tttttt.me/sns_deanon"/>
       </main>

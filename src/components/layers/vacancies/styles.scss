@@ -15,4 +15,14 @@
     background-color: $base;
     color: $warmText;
   }
+
+  & .vacanciesLayerCompanyName > h5 {
+    margin: 0;
+  }
+
+  & .vacanciesLayerJobTitle > h6 {
+    margin: 0;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
 }
