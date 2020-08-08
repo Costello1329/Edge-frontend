@@ -11,7 +11,8 @@ export interface Locale {
   mainLayerCompaniesTitle: string,
   viewVacancies: string,
   putVacancy: string,
-  joinOurTelegram: string
+  joinOurTelegram: string,
+  vacancies: string
 };
 
 export const ru_RU: Locale = {
@@ -29,7 +30,8 @@ export const ru_RU: Locale = {
   mainLayerCompaniesTitle: "Нам доверяют",
   viewVacancies: "Посмотреть",
   putVacancy: "Разместить",
-  joinOurTelegram: "Присоединяйтесь к нам в Telegram:"
+  joinOurTelegram: "Присоединяйтесь к нам в Telegram:",
+  vacancies: "Вакансии"
 };
 
 // export const en_GB: Locale = {};

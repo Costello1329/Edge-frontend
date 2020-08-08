@@ -6,6 +6,7 @@ import {Footer} from "../bars/footer";
 import {MainLayer} from "../layers/main";
 import {TelegramLayer} from "../layers/telegram";
 import {VacanciesLayer} from "../layers/vacancies";
+import {getRandomGuid} from "../../utils/guid";
 
 import "./styles.scss";
 
@@ -43,7 +44,19 @@ extends React.Component {
           "https://profunctor.io/static/media/l_snap.b4d04892.svg",
           "https://profunctor.io/static/media/l_rev.507a7e70.svg"
         ]}/>
-        <VacanciesLayer/>
+        <VacanciesLayer vacancies = {[{
+          guid: getRandomGuid(),
+          companyName: "Google",
+          jobTitle: "Fullstack engineer",
+          skillLevel: "Middle",
+          moneySummary: "4 000 - 5 000 $",
+          moneyPeriod: "в месяц",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, \
+            sed do eiusmod tempor incididunt ut labore et dolore magna \
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation \
+            ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        }]}/>
         <TelegramLayer link = "https://tttttt.me/sns_deanon"/>
       </main>
       <Footer/>

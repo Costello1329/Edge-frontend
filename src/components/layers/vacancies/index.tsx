@@ -1,64 +1,51 @@
 import React from "react";
 import Materialize from "materialize-css"; 
 import {discard} from "../../../utils/Discard";
+import {Guid} from "../../../utils/guid";
 
 import "./styles.scss";
+import { localization } from "../../../services/localization";
 
 
 
-interface VacanciesLayerProps {};
+interface Vacancy {
+  guid: Guid
+  companyName: string,
+  jobTitle: string,
+  skillLevel: string,
+  moneySummary: string,
+  moneyPeriod: string,
+  description: string,
+};
 
-interface VacanciesLayerState {};
+interface VacanciesLayerProps {
+  vacancies: Vacancy[]
+};
 
-export class VacanciesLayer
-extends React.Component<VacanciesLayerProps, VacanciesLayerState> {
-  constructor (props: VacanciesLayerProps) {
-    super(props);
-    this.state = {};
-  }
-
-  public readonly componentDidMount = (): void =>
-    discard(setTimeout(
-      (): void =>
-        discard(Materialize.AutoInit())
-    ));
-
-  public readonly render = (): JSX.Element =>
+export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
+  (props: VacanciesLayerProps) => 
     <div className="vacanciesLayer">
       <div className="container">
         <div className="row rowNoBottomMargin">
-          <h4 className="col">Вакансии</h4>
+          <h4 className="col">{localization.localize("vacancies")}</h4>
         </div>
         <div className="row rowNoBottomMargin">{
-          "123456".split("").map((): JSX.Element =>
+          props.vacancies.map((vacancy: Vacancy): JSX.Element =>
             <article className="col s6">
               <div className="card-panel">
                 <header className="row">
-                  <div className="company col s6 m8">
-                    Google
+                  <div className="col s6">
+                    {vacancy.companyName}
                   </div>
-                  <div className="sum col s6 m4">
-                    <div className="number">
-                      $ 50 000
-                    </div>
-                    <div className="period">
-                      в год
-                    </div>
+                  <div className="sum col s6">
+                    <div className="right">{vacancy.moneySummary}</div>
+                    <div className="right">{vacancy.moneyPeriod}</div>
                   </div>
                 </header>
                 <section className="description">
-                  <div className="position">
-                    Full-stack Developer
-                  </div>
-                  <div className="level">
-                    Middle
-                  </div>
-                  <div className="full-text">
-                    <p>
-                      Товарищи! Реализация намеченных плановых заданий обеспечивает
-                      участие в формировании направлений прогрессивного развития.
-                    </p>
-                  </div>
+                  <div>{vacancy.jobTitle}</div>
+                  <div>{vacancy.skillLevel}</div>
+                  <div><p>{vacancy.description}</p></div>
                 </section>
               </div>
             </article>
@@ -66,4 +53,3 @@ extends React.Component<VacanciesLayerProps, VacanciesLayerState> {
         }</div>
       </div>
     </div>;
-};
