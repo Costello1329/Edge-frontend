@@ -73,7 +73,7 @@ function buildWebpackConfig (rules, plugins, development) {
     
     output: {
       path: `${__dirname}/../build`,
-      publicPath: "/",
+      publicPath: "../build",
       filename: "assets/a[hash:7].js",
       chunkFilename: "assets/v[id][contenthash:7].js"
     },
@@ -103,13 +103,16 @@ function buildWebpackConfig (rules, plugins, development) {
     devtool: development ? "cheap-module-eval-source-map" : false,
     
     devServer: {
-      contentBase: "./build",
+      contentBase: `${__dirname}/../build`,
       compress: true,
       disableHostCheck: true,
       historyApiFallback: true,
+      writeToDisk: true,
       hot: true,
       port: 1329,
-      host: "127.0.0.1"
+      host: "localhost",
+      publicPath: 'http://localhost:1329/build/',
+      hotOnly: true
     },
   
     /*stats: {
