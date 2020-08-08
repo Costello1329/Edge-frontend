@@ -9,13 +9,12 @@ import "./styles.scss";
 
 
 interface Vacancy {
-  guid: Guid
+  guid: Guid,
   companyName: string,
   jobTitle: string,
   skillLevel: string,
   moneySummary: string,
-  moneyPeriod: string,
-  description: string,
+  location: string
 };
 
 interface VacanciesLayerProps {
@@ -59,11 +58,6 @@ export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
                             {vacancy.moneySummary}
                           </p>
                         </div>
-                        <div className="col s12 colNoSidePadding">
-                          <p className="right pNoMargin">
-                            {vacancy.moneyPeriod}
-                          </p>
-                        </div>
                       </div>
                     </header>
                     <section>
@@ -71,7 +65,7 @@ export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
                         <h6>{vacancy.jobTitle}</h6>
                       </div>
                       <div>{vacancy.skillLevel}</div>
-                      <div><p>{vacancy.description}</p></div>
+                      <div><p>{vacancy.location}</p></div>
                     </section>
                   </div>
                 </article>
