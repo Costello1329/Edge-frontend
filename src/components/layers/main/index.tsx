@@ -12,10 +12,10 @@ interface MainLayerProps {
 
 export const MainLayer: React.FunctionComponent<MainLayerProps> =
   (props: MainLayerProps): JSX.Element =>
-    <div className="row rowNoBottomMargin mainLayer">
+    <div className="row rowNoBottomMargin mainLayer z-depth-1">
       <div className="container">
         <div className="col s12 l5 colNoSidePadding">
-          <h3 className="mainLayerText center">
+          <h3 className="first mainLayerText center">
             {localization.localize("mainLayerCompaniesTitle")}
           </h3>
           <div className="row">{
@@ -23,12 +23,20 @@ export const MainLayer: React.FunctionComponent<MainLayerProps> =
               (companyLogoSrc: string, index: number): JSX.Element =>
                 <div
                   className={classNames([
-                    "col s4 mainLayerCompanyLogo",
+                    "col s4 m3 mainLayerCompanyLogo",
                     "mainLayerCompanyLogo",
                     index === (
                       props.companyLogoSrcs.length -
                       props.companyLogoSrcs.length % 3
-                    ) ? `offset-s${6 - 2 * (props.companyLogoSrcs.length % 3)}` : ""
+                    ) ? `offset-s${6 - 2 * (props.companyLogoSrcs.length % 3)}` : "",
+                    index === (
+                      props.companyLogoSrcs.length -
+                      props.companyLogoSrcs.length % 4
+                    ) ? `offset-m${
+                      (6 - 1.5 * (props.companyLogoSrcs.length % 4))
+                        .toString()
+                        .replace(".", "_")
+                    }` : ""
                   ])}
                   key={`main-layer-logo-${index}`}
                 >
@@ -52,10 +60,10 @@ export const MainLayer: React.FunctionComponent<MainLayerProps> =
             )
           }
           <div className="mainLayerButtons">
-            <a className="col s5 m4 l5 offset-m1 btn waves-effect">
+            <a className="col btn waves-effect">
               {localization.localize("putVacancy")}
             </a>
-            <a className="col s5 m4 l5 offset-s2 offset-m2 offset-l2 btn waves-effect">
+            <a className="col btn waves-effect buttonLeft">
               {localization.localize("viewVacancies")}
             </a>
           </div>

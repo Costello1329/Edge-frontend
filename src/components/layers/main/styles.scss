@@ -3,8 +3,12 @@
 
 .mainLayer {
   background-color: $baseHalfLighten;
-  padding-top: 40px !important;
-  padding-bottom: 40px !important;
+  padding-top: 60px !important;
+  padding-bottom: 60px !important;
+
+  & h3.first {
+    margin-top: 0;
+  }
 
   & .mainLayerText {
     color: $warmText !important;
@@ -16,7 +20,7 @@
 
   & .mainLayerCompanyLogo {
     height: 40px;
-    margin-top: 20px;
+    margin-top: 30px;
     text-align: center;
 
     & > span {
@@ -39,5 +43,9 @@
       background-color: $contrast;
       color: $warmText
     }
+  }
+
+  & .buttonLeft {
+    margin-left: 16px;
   }
 }

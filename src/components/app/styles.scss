@@ -24,3 +24,27 @@ main {
   margin-top: 0;
   margin-bottom: 0;
 }
+
+.row .col.offset-m0_5 {
+  margin-left: percentage(1/24);
+}
+
+.row .col.offset-m1_5 {
+  margin-left: percentage(3/24);
+}
+
+.row .col.offset-m2_5 {
+  margin-left: percentage(5/24);
+}
+
+.row .col.offset-m3_5 {
+  margin-left: percentage(7/24);
+}
+
+.row .col.offset-m4_5 {
+  margin-left: percentage(9/24);
+}
+
+.row .col.offset-m5_5 {
+  margin-left: percentage(11/24);
+}

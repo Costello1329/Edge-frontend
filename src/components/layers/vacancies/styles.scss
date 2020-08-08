@@ -3,10 +3,11 @@
 
 .vacanciesLayer {
   background-color: $baseLighten;
-  padding-top: 40px !important;
-  padding-bottom: 40px !important;
+  padding-top: 60px !important;
+  padding-bottom: 60px !important;
+  z-index: -1;
 
-  & h4 {
+  & h3 {
     margin-top: 0;
     color: $warmText;
   }
@@ -14,15 +15,33 @@
   & .card-panel {
     background-color: $base;
     color: $warmText;
+    border-radius: 2px;
   }
 
-  & .vacanciesLayerCompanyName > h5 {
+  & .jobTitle > h5 {
     margin: 0;
   }
 
-  & .vacanciesLayerJobTitle > h6 {
+  & .moneySummary > h6 {
     margin: 0;
     font-weight: bold;
     margin-bottom: 5px;
+  }
+
+  & .secondLine {
+    margin-top: 4px;
+  }
+
+  & .vacancies {
+    /* display: flex;
+    flex-direction: column;
+    flex-wrap: wrap; */
+    cursor: pointer;
+    columns: 50% 2;
+  }
+
+  & .location,
+  & .companyName {
+    text-align: right;
   }
 }

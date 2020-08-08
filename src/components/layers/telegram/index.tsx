@@ -15,7 +15,7 @@ interface TelegramLayerProps {
 
 export const TelegramLayer: React.FunctionComponent<TelegramLayerProps> =
   (props: TelegramLayerProps): JSX.Element =>
-    <div className="row rowNoBottomMargin telegramLayer">
+    <div className="row rowNoBottomMargin telegramLayer z-depth-1">
       <div className="container center-align">
         <h5>{localization.localize("joinOurTelegram")}</h5>
         <a

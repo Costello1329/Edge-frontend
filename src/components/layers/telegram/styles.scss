@@ -4,8 +4,8 @@
 
 .telegramLayer {
   background-color: $baseHalfLighten;
-  padding-top: 30px !important;
-  padding-bottom: 30px !important;
+  padding-top: 35px !important;
+  padding-bottom: 40px !important;
 
   & h5 {
     margin: 0;
@@ -24,7 +24,7 @@
     background-color: $telegram;
 
     @media #{$medium-and-down} {
-      margin-top: 20px;
+      margin-top: 10px;
     }
   }
 }

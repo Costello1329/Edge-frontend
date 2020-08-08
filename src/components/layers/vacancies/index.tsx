@@ -26,51 +26,33 @@ export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
     <div className="vacanciesLayer">
       <div className="container">
         <div className="row rowNoBottomMargin">
-          <h4 className="col">{localization.localize("vacancies")}</h4>
+          <h3 className="col">{localization.localize("vacancies")}</h3>
         </div>
-        <div className="row rowNoBottomMargin">{
-          ((): Vacancy[][] => {
-            let groups: Vacancy[][] = [];
-
-            props.vacancies.forEach(
-              (vacancy): void => {
-                if (groups.length !== 0 && groups[groups.length - 1].length < 2)
-                  groups[groups.length - 1].push(vacancy);
-
-                else 
-                  groups.push([vacancy]);
-              }
-            );
-
-            return groups;
-          })().map((group: Vacancy[]): JSX.Element =>
-            <div className="row rowNoBottomMargin">{
-              group.map((vacancy: Vacancy): JSX.Element =>
-                <article className="col s6">
-                  <div className="card-panel">
-                    <header className="row">
-                      <div className="col s6 vacanciesLayerCompanyName">
-                        <h5>{vacancy.companyName}</h5>
-                      </div>
-                      <div className="col s6">
-                        <div className="col s12 colNoSidePadding">
-                          <p className="right pNoMargin">
-                            {vacancy.moneySummary}
-                          </p>
-                        </div>
-                      </div>
-                    </header>
-                    <section>
-                      <div className="vacanciesLayerJobTitle">
-                        <h6>{vacancy.jobTitle}</h6>
-                      </div>
-                      <div>{vacancy.skillLevel}</div>
-                      <div><p>{vacancy.location}</p></div>
-                    </section>
+        <div className="vacancies row rowNoBottomMargin">{
+          props.vacancies.map((vacancy: Vacancy): JSX.Element =>
+            <article className="col s12">
+              <div className="card-panel">
+                <header className="row">
+                <div className="col s6 jobTitle">
+                    <h5>{vacancy.jobTitle}</h5>
+                    <p className="secondLine pNoMargin">{vacancy.skillLevel}</p>
                   </div>
-                </article>
-              )
-            }</div>
+                  <div className="col s6">
+                    <div className="col s12 colNoSidePadding companyName">
+                      <h5 className="right pNoMargin">{vacancy.companyName}</h5>
+                    </div>
+                    <div className="col s12 colNoSidePadding location">
+                      <p className="right pNoMargin secondLine">{vacancy.location}</p>
+                    </div>
+                  </div>
+                </header>
+                <section>
+                  <div className="moneySummary">
+                    <h6>{vacancy.moneySummary}</h6>
+                  </div>
+                </section>
+              </div>
+            </article>
           )
         }</div>
       </div>
