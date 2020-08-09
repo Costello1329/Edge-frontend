@@ -40,18 +40,13 @@ extends React.Component {
           "https://profunctor.io/static/media/l_fb.d0f54c89.svg",
           "https://profunctor.io/static/media/l_rev.507a7e70.svg",
           "https://profunctor.io/static/media/l_n26.a986064e.svg",
-          "https://profunctor.io/static/media/l_ya.e6cde41a.svg",
-          "https://profunctor.io/static/media/l_snap.b4d04892.svg",
-          "https://profunctor.io/static/media/l_rev.507a7e70.svg",
-          "https://profunctor.io/static/media/l_snap.b4d04892.svg",
-          "https://profunctor.io/static/media/l_snap.b4d04892.svg",
-          "https://profunctor.io/static/media/l_rev.507a7e70.svg"
         ]}/>
         <VacanciesLayer vacancies = {[{
           guid: getRandomGuid(),
           companyName: "Google",
           jobTitle: "Fullstack engineer",
           skillLevel: "Middle",
+          stack: "JS, TS, React, SCSS, SASS, Rust, Python",
           moneySummary: "4 000 – 5 000 $",
           location: "Moscow"
         }, {
@@ -59,13 +54,15 @@ extends React.Component {
           companyName: "Yandex",
           jobTitle: "Backend engineer",
           skillLevel: "Junior",
+          stack: "Blowjob, Anal",
           moneySummary: "1 500 – 2 500 $",
           location: "London"
         }, {
           guid: getRandomGuid(),
           companyName: "Сто семнадцать и два",
-          jobTitle: "Fullstack engineer",
+          jobTitle: "Callback engineer",
           skillLevel: "CTO",
+          stack: "Autohotkey",
           moneySummary: "40 000 – 50 000 $",
           location: "Prague"
         }, {
@@ -73,6 +70,7 @@ extends React.Component {
           companyName: "Google",
           jobTitle: "Fullstack engineer",
           skillLevel: "Middle",
+          stack: "Python",
           moneySummary: "4 000 – 5 000 $",
           location: "Greece"
         }, {
@@ -80,6 +78,7 @@ extends React.Component {
           companyName: "Google",
           jobTitle: "Fullstack engineer",
           skillLevel: "Middle",
+          stack: "Python",
           moneySummary: "4 000 – 5 000 $",
           location: "Georgia"
         }, {
@@ -87,6 +86,7 @@ extends React.Component {
           companyName: "Google",
           jobTitle: "Fullstack engineer",
           skillLevel: "Middle",
+          stack: "JS, Python",
           moneySummary: "4 000 – 5 000 $",
           location: "Ukraine"
         }]}/>

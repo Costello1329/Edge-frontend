@@ -19,6 +19,10 @@
   & > nav {
     background-color: $base !important;
   }
+
+  & .last {
+    padding-right: 0;
+  }
 }
 
 .edgeBarFooter {

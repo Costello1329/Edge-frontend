@@ -1,3 +1,4 @@
+@import 'materialize-css/sass/materialize.scss';
 @import "../../../theme/colors.scss";
 
 
@@ -20,6 +21,12 @@
 
   & .jobTitle > h5 {
     margin: 0;
+    line-height: 1.25;
+
+    @media #{$small-and-down} {
+      font-weight: bold;
+      font-size: 1.15rem;
+    }
   }
 
   & .moneySummary > h6 {
@@ -33,9 +40,6 @@
   }
 
   & .vacancies {
-    /* display: flex;
-    flex-direction: column;
-    flex-wrap: wrap; */
     cursor: pointer;
     columns: 50% 2;
   }
@@ -43,5 +47,14 @@
   & .location,
   & .companyName {
     text-align: right;
+  }
+
+  & .smaller {
+    font-size: 1.3rem;
+  }
+
+  & .stack > p {
+    margin-bottom: 4px;
+    margin-top: 0;
   }
 }

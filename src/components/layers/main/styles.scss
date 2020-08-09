@@ -1,3 +1,4 @@
+@import 'materialize-css/sass/materialize.scss';
 @import "../../../theme/colors.scss";
 
 
@@ -6,8 +7,23 @@
   padding-top: 60px !important;
   padding-bottom: 60px !important;
 
-  & h3.first {
-    margin-top: 0;
+  @media #{$medium-and-down} {
+    & h3.first {
+      margin-top: 0;
+    }
+  }
+
+  @media #{$medium-and-down} {
+    & h3.second {
+      margin-top: 60px;
+      font-size: 1.3rem;
+    }
+  }
+
+  @media #{$large-and-up} {
+    & h3.second {
+      text-align: center;
+    }
   }
 
   & .mainLayerText {
@@ -18,9 +34,16 @@
     color: $warmTextDarken !important;
   }
 
+  & .flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: -20px;
+  }
+
   & .mainLayerCompanyLogo {
     height: 40px;
-    margin-top: 30px;
+    margin: 40px 30px 0;
     text-align: center;
 
     & > span {

@@ -3,16 +3,20 @@ import Materialize from "materialize-css";
 import {discard} from "../../../utils/Discard";
 import {Guid} from "../../../utils/guid";
 import {localization} from "../../../services/localization";
+import classNames from "classnames";
 
 import "./styles.scss";
 
 
+
+const kMaxCompanyWordLength: number = 9;
 
 interface Vacancy {
   guid: Guid,
   companyName: string,
   jobTitle: string,
   skillLevel: string,
+  stack: string,
   moneySummary: string,
   location: string
 };
@@ -39,14 +43,27 @@ export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
                   </div>
                   <div className="col s6">
                     <div className="col s12 colNoSidePadding companyName">
-                      <h5 className="right pNoMargin">{vacancy.companyName}</h5>
+                      <h5 className={classNames([
+                        "right pNoMargin",
+                        vacancy.companyName.split(" ").reduce(
+                          (accumulator: string, word: string) =>
+                            accumulator.length < word.length ? word : accumulator,
+                          ""
+                        ).length > kMaxCompanyWordLength ?
+                        "smaller" : ""
+                      ])}>{vacancy.companyName}</h5>
                     </div>
                     <div className="col s12 colNoSidePadding location">
-                      <p className="right pNoMargin secondLine">{vacancy.location}</p>
+                      <p className="right pNoMargin secondLine">
+                        {vacancy.location}
+                      </p>
                     </div>
                   </div>
                 </header>
                 <section>
+                  <div className="stack">
+                    <p>{vacancy.stack}</p>
+                  </div>
                   <div className="moneySummary">
                     <h6>{vacancy.moneySummary}</h6>
                   </div>
