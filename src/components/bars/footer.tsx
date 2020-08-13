@@ -1,11 +1,12 @@
 import React from "react";
 import {localization} from "../../services/localization";
+import EdgeLogo from "../../../assets/svg/edge-logo.svg";
 
 import "./styles.scss";
 
 
 
-export const Footer: React.FunctionComponent<{}> =
+export const Footer: React.FunctionComponent =
   (): JSX.Element =>
     <footer className="page-footer edgeBarFooter">
       <div className="footer-copyright container">
@@ -18,7 +19,9 @@ export const Footer: React.FunctionComponent<{}> =
           </p>
         </div>
         <div className="col s6">
-          <p className="right edgeBarText">edge</p>
+          <div className="right edgeBarText">
+            <EdgeLogo/>
+          </div>
         </div>
       </div>
     </footer>;

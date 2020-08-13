@@ -49,7 +49,18 @@ const commonRules = [
         }
       }
     ]
-  }
+  },
+  {
+    test: /\.svg$/,
+    use: [
+      {
+        loader: "svg-react-loader",
+        options: {
+          outputPath: "assets"
+        },
+      },
+    ],
+  },
 ];
 
 const commonPlugins = [

@@ -7,22 +7,27 @@
   padding-top: 60px !important;
   padding-bottom: 60px !important;
 
-  @media #{$medium-and-down} {
+  @media #{$small-and-down} {
     & h3.first {
       margin-top: 0;
     }
-  }
 
-  @media #{$medium-and-down} {
     & h3.second {
       margin-top: 60px;
       font-size: 1.3rem;
     }
   }
 
+  @media #{$medium-and-down} {
+    & h3.second {
+      margin-bottom: 50px;
+    }
+  }
+
   @media #{$large-and-up} {
     & h3.second {
       text-align: center;
+      margin-bottom: 40px;
     }
   }
 
@@ -57,18 +62,38 @@
       max-width: 100%;
       vertical-align: middle;
     }
-  }
 
-  & .mainLayerButtons {
-    margin-top: 30px;
+    & svg {
+      height: 40px;
+  
+      @media #{$medium-and-down} {
+        height: 30px;
+      }
+  
+      @media #{$large-and-up} {
+        height: calc(20px + 1vw);
+      }
 
-    & > a.btn {
-      background-color: $contrast;
-      color: $warmText
+      @media #{$extra-large-and-up} {
+        height: 40px;
+      }
+    }
+
+    @media #{$medium-and-down} {
+      margin: 10px 20px;
     }
   }
 
-  & .buttonLeft {
-    margin-left: 16px;
+  & .mainLayerButtons {
+    margin-top: 25px;
+
+    & > .btnRight {
+      margin-left: 15px;
+    }
+
+    & a.btn {
+      background-color: $contrast;
+      color: $warmText
+    }
   }
 }

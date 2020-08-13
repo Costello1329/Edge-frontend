@@ -1,6 +1,6 @@
 export enum LocaleType {
   ru_RU = "ru_RU",
-  // en_GB = "en_GB"
+  en_GB = "en_GB"
 };
 
 export interface Locale {
@@ -12,7 +12,11 @@ export interface Locale {
   viewVacancies: string,
   putVacancy: string,
   joinOurTelegram: string,
-  vacancies: string
+  vacancies: string,
+  watchAllVacancies: string,
+  telegramGroupName: string,
+  russian: string,
+  english: string
 };
 
 export const ru_RU: Locale = {
@@ -31,7 +35,13 @@ export const ru_RU: Locale = {
   viewVacancies: "Посмотреть",
   putVacancy: "Разместить",
   joinOurTelegram: "Присоединяйтесь к нам в Telegram:",
-  vacancies: "Вакансии"
+  vacancies: "Вакансии",
+  watchAllVacancies: "Посмотреть все",
+  telegramGroupName: "@sns_deanon",
+  russian: "Русский",
+  english: "English"
 };
+
+export const en_GB: Locale = {} as Locale;
 
 // export const en_GB: Locale = {};

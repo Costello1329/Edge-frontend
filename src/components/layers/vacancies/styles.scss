@@ -57,4 +57,13 @@
     margin-bottom: 4px;
     margin-top: 0;
   }
+
+  & .btn {
+    background-color: $contrast;
+    color: $warmText;
+
+    &:hover {
+      background-color: $contrast;
+    }
+  }
 }

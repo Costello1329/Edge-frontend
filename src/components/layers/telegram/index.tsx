@@ -20,9 +20,9 @@ export const TelegramLayer: React.FunctionComponent<TelegramLayerProps> =
         <h5>{localization.localize("joinOurTelegram")}</h5>
         <a
           className="btn waves-effect"
-          onClick={(): void => discard(open(props.link))}
+          onClick={(): void => discard(window.open(props.link))}
         >
-          @edge_jobs
+          {localization.localize("telegramGroupName")}
           <i className="material-icons left">
             <InlineIcon icon={telegramIcon} height={23}/>
           </i>

@@ -1,6 +1,4 @@
 import React from "react";
-import Materialize from "materialize-css"; 
-import {discard} from "../../../utils/Discard";
 import {Guid} from "../../../utils/guid";
 import {localization} from "../../../services/localization";
 import classNames from "classnames";
@@ -32,7 +30,7 @@ export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
         <div className="row rowNoBottomMargin">
           <h3 className="col">{localization.localize("vacancies")}</h3>
         </div>
-        <div className="vacancies row rowNoBottomMargin">{
+        <div className="vacancies row">{
           props.vacancies.map((vacancy: Vacancy): JSX.Element =>
             <article className="col s12">
               <div className="card-panel">
@@ -72,5 +70,11 @@ export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
             </article>
           )
         }</div>
+        <div className="row rowNoBottomMargin center-align">
+          <a className="btn waves-effect">
+            <i className="material-icons left">format_align_justify</i>
+            {localization.localize("watchAllVacancies")}
+          </a>
+        </div>
       </div>
     </div>;
