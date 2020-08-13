@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import {localization} from "../../../services/localization";
 
 import "./styles.scss";
@@ -6,6 +7,7 @@ import "./styles.scss";
 
 
 interface MainLayerProps {
+  vacanciesPageUrl: string,
   companyLogoSrcs: JSX.Element[]
 }
 
@@ -31,10 +33,12 @@ export const MainLayer: React.FunctionComponent<MainLayerProps> =
               {localization.localize("putVacancy")}
               <i className="material-icons left">add</i>
             </a>
-            <a className="btn waves-effect btnRight">
-              <i className="material-icons left">format_align_justify</i>
-              {localization.localize("viewVacancies")}
-            </a>
+            <Link to={props.vacanciesPageUrl} className="btnRight">
+              <a className="btn waves-effect">
+                <i className="material-icons left">format_align_justify</i>
+                {localization.localize("viewVacancies")}
+              </a>
+            </Link>
           </div>
         </div>
         <div className="col s12 l5_5 colNoSidePadding left">

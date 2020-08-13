@@ -1,6 +1,7 @@
 import React from "react";
 import {Guid} from "../../../utils/guid";
 import {localization} from "../../../services/localization";
+import {Link} from "react-router-dom";
 import classNames from "classnames";
 
 import "./styles.scss";
@@ -20,7 +21,8 @@ interface Vacancy {
 };
 
 interface VacanciesLayerProps {
-  vacancies: Vacancy[]
+  vacancies: Vacancy[],
+  vacanciesPageUrl: string
 };
 
 export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
@@ -71,10 +73,12 @@ export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
           )
         }</div>
         <div className="row rowNoBottomMargin center-align">
-          <a className="btn waves-effect">
-            <i className="material-icons left">format_align_justify</i>
-            {localization.localize("watchAllVacancies")}
-          </a>
+          <Link to={props.vacanciesPageUrl}>
+            <a className="btn waves-effect">
+              <i className="material-icons left">format_align_justify</i>
+              {localization.localize("watchAllVacancies")}
+            </a>
+          </Link>
         </div>
       </div>
     </div>;

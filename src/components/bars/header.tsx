@@ -1,4 +1,5 @@
 import React from "react";
+import {Link, withRouter, RouteComponentProps} from "react-router-dom";
 import classNames from "classnames";
 import {IconifyIcon, InlineIcon} from "@iconify/react";
 import EdgeLogo from "../../../assets/svg/edge-logo.svg";
@@ -14,18 +15,23 @@ interface HeaderIcon {
   class: string | undefined
 }
 
-interface HeaderProps {
-  icons: HeaderIcon[]
-};
+type HeaderProps = {
+  icons: HeaderIcon[],
+  homePageUrl: string,
+} & RouteComponentProps;
 
-export const Header: React.FunctionComponent<HeaderProps> =
+export const InnerHeader: React.FunctionComponent<HeaderProps> =
   (props: HeaderProps): JSX.Element =>
     <header className="edgeBarHeader">
       <nav>
         <div className="nav-wrapper container">
-          <a className="edgeBarText">
-            <EdgeLogo/>
-          </a>
+          {
+            props.location.pathname === "/" ?
+            <a className="edgeBarText"><EdgeLogo/></a> :
+            <Link to={props.homePageUrl}>
+              <a className="edgeBarText"><EdgeLogo/></a>
+            </Link>
+          }
           <ul id="nav-mobile" className="right">{
             props.icons.map((icon: HeaderIcon, index: number): JSX.Element =>
               <li key = {`header-icon-${index}`}>
@@ -49,3 +55,6 @@ export const Header: React.FunctionComponent<HeaderProps> =
         </div>
       </nav>
     </header>;
+
+
+export const Header = withRouter(InnerHeader);
