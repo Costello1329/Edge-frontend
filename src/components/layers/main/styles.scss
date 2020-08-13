@@ -1,10 +1,35 @@
+@import 'materialize-css/sass/materialize.scss';
 @import "../../../theme/colors.scss";
 
 
 .mainLayer {
   background-color: $baseHalfLighten;
-  padding-top: 40px !important;
-  padding-bottom: 40px !important;
+  padding-top: 60px !important;
+  padding-bottom: 60px !important;
+
+  @media #{$small-and-down} {
+    & h3.first {
+      margin-top: 0;
+    }
+
+    & h3.second {
+      margin-top: 60px;
+      font-size: 1.3rem;
+    }
+  }
+
+  @media #{$medium-and-down} {
+    & h3.second {
+      margin-bottom: 50px;
+    }
+  }
+
+  @media #{$large-and-up} {
+    & h3.second {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+  }
 
   & .mainLayerText {
     color: $warmText !important;
@@ -14,9 +39,16 @@
     color: $warmTextDarken !important;
   }
 
+  & .flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: -20px;
+  }
+
   & .mainLayerCompanyLogo {
     height: 40px;
-    margin-top: 20px;
+    margin: 40px 30px 0;
     text-align: center;
 
     & > span {
@@ -30,12 +62,36 @@
       max-width: 100%;
       vertical-align: middle;
     }
+
+    & svg {
+      height: 40px;
+  
+      @media #{$medium-and-down} {
+        height: 30px;
+      }
+  
+      @media #{$large-and-up} {
+        height: calc(20px + 1vw);
+      }
+
+      @media #{$extra-large-and-up} {
+        height: 40px;
+      }
+    }
+
+    @media #{$medium-and-down} {
+      margin: 10px 20px;
+    }
   }
 
   & .mainLayerButtons {
-    margin-top: 30px;
+    margin-top: 25px;
 
-    & > a.btn {
+    & > .btnRight {
+      margin-left: 15px;
+    }
+
+    & a.btn {
       background-color: $contrast;
       color: $warmText
     }

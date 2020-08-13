@@ -1,3 +1,4 @@
+@import 'materialize-css/sass/materialize.scss';
 @import "../../theme/colors.scss";
 
 
@@ -18,6 +19,24 @@
   
   & > nav {
     background-color: $base !important;
+
+    & .last {
+      margin-right: -15px;
+    }
+
+    & .edgeBarText {
+      display: inline-block;
+
+      & > svg {
+        vertical-align: middle;
+        position: relative;
+        bottom: 3px;
+      }
+    }
+
+    & li > a > i {
+      color: $warmText;
+    }
   }
 }
 
@@ -34,7 +53,15 @@
     padding: 24px 0 !important;
 
     & > .edgeBarFooterParagraphs > p {
-      margin: 4px 0 !important;
+      margin: 0 !important;
+    }
+  }
+
+  & div.edgeBarText {
+    display: inline-block;
+    & svg {
+      height: 24px;
+      vertical-align: middle;
     }
   }
 }

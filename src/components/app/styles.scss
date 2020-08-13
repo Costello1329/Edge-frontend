@@ -1,4 +1,4 @@
-@import 'materialize-css/sass/materialize.scss';
+@import '../../../node_modules/materialize-css/sass/materialize.scss';
 
 
 body {
@@ -18,4 +18,18 @@ main {
 .colNoSidePadding {
   padding-left: 0 !important;
   padding-right: 0 !important;
+}
+
+.pNoMargin {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media #{$large-and-up} {
+  .row .col.l5_5 {
+    width: percentage(11/24);
+    margin-left: auto;
+    left: auto;
+    right: auto;
+  }
 }

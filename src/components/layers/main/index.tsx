@@ -1,45 +1,20 @@
 import React from "react";
 import {localization} from "../../../services/localization";
-import classNames from "classnames";
 
 import "./styles.scss";
 
 
 
 interface MainLayerProps {
-  companyLogoSrcs: string[]
+  companyLogoSrcs: JSX.Element[]
 }
 
 export const MainLayer: React.FunctionComponent<MainLayerProps> =
   (props: MainLayerProps): JSX.Element =>
-    <div className="row rowNoBottomMargin mainLayer">
+    <div className="row rowNoBottomMargin mainLayer z-depth-1">
       <div className="container">
-        <div className="col s12 l5 colNoSidePadding">
-          <h3 className="mainLayerText center">
-            {localization.localize("mainLayerCompaniesTitle")}
-          </h3>
-          <div className="row">{
-            props.companyLogoSrcs.map(
-              (companyLogoSrc: string, index: number): JSX.Element =>
-                <div
-                  className={classNames([
-                    "col s4 mainLayerCompanyLogo",
-                    "mainLayerCompanyLogo",
-                    index === (
-                      props.companyLogoSrcs.length -
-                      props.companyLogoSrcs.length % 3
-                    ) ? `offset-s${6 - 2 * (props.companyLogoSrcs.length % 3)}` : ""
-                  ])}
-                  key={`main-layer-logo-${index}`}
-                >
-                  <span></span>
-                  <img src={companyLogoSrc}/>
-                </div>
-            )
-          }</div>
-        </div>
-        <div className="col s12 l5 offset-l2 colNoSidePadding">
-          <h3 className="mainLayerText">
+        <div className="col s12 l5_5 offset-m1 colNoSidePadding right">
+          <h3 className="first mainLayerText">
             {localization.localize("mainLayerTitle")}
           </h3>
           {
@@ -52,13 +27,32 @@ export const MainLayer: React.FunctionComponent<MainLayerProps> =
             )
           }
           <div className="mainLayerButtons">
-            <a className="col s5 m4 l5 offset-m1 btn waves-effect">
+            <a className="btn waves-effect">
               {localization.localize("putVacancy")}
+              <i className="material-icons left">add</i>
             </a>
-            <a className="col s5 m4 l5 offset-s2 offset-m2 offset-l2 btn waves-effect">
+            <a className="btn waves-effect btnRight">
+              <i className="material-icons left">format_align_justify</i>
               {localization.localize("viewVacancies")}
             </a>
           </div>
+        </div>
+        <div className="col s12 l5_5 colNoSidePadding left">
+          <h3 className="second mainLayerText center">
+            {localization.localize("mainLayerCompaniesTitle")}
+          </h3>
+          <div className="row flex">{
+            props.companyLogoSrcs.map(
+              (logo: JSX.Element, index: number): JSX.Element =>
+                <div
+                  className="mainLayerCompanyLogo"
+                  key={`main-layer-logo-${index}`}
+                >
+                  <span></span>
+                  {logo}
+                </div>
+            )
+          }</div>
         </div>
       </div>
     </div>;

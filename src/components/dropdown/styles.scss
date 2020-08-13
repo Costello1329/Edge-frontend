@@ -1,0 +1,14 @@
+@import "../../theme/colors.scss";
+
+
+.dropdown-content > li {
+  background-color: $base;
+
+  & > a {
+    color: $warmText !important;
+  }
+
+  &:hover {
+    background-color: $baseLighten !important;
+  }
+}
