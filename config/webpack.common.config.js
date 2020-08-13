@@ -3,7 +3,7 @@ const webpack = require("webpack");
 const TerserJSPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const OptimizeCSSAssetsPlugin = 
+const OptimizeCSSAssetsPlugin =
   require("optimize-css-assets-webpack-plugin");
 // const LoadablePlugin = require("@loadable/webpack-plugin");
 
@@ -18,37 +18,31 @@ const commonRules = [
   },
   {
     test: /\.html$/,
-    use: [
-      {
-        loader: "html-loader",
-        options:
-        {
-          minimize: true
-        }
-      }
-    ]
+    loader: "html-loader",
+    options: {
+      minimize: true
+    }
   },
   {
     test: /\.ttf$/,
-    use: [
-      {
-        loader: "file-loader",
-        options: {
-            outputPath: "assets"
-        }
-      }
-    ]
+    loader: "file-loader",
+    options: {
+      outputPath: "assets"
+    }
   },
   {
     test: /\.png$/,
-    use: [
-      {
-        loader: "file-loader",
-        options: {
-          outputPath: "assets"
-        }
-      }
-    ]
+    loader: "file-loader",
+    options: {
+      outputPath: "assets"
+    }
+  },
+  {
+    test: /\.svg$/,
+    loader: "svg-react-loader",
+    options: {
+      outputPath: "assets"
+    }
   }
 ];
 
@@ -66,29 +60,29 @@ const commonPlugins = [
   // new LoadablePlugin({ filename: "stats.json", writeToDisk: true })
 ];
 
-function buildWebpackConfig (rules, plugins, development) {
+function buildWebpackConfig(rules, plugins, development) {
   return {
     mode: development ? "development" : "production",
     entry: "./src/index.tsx",
-    
+
     output: {
       path: `${__dirname}/../build`,
-      publicPath: "/",
+      publicPath: "",
       filename: "assets/a[hash:7].js",
       chunkFilename: "assets/v[id][contenthash:7].js"
     },
-  
+
     module: {
-      rules
+      rules: rules
     },
-  
+
     resolve: {
-      modules: ["../src", "node_modules"],
+      modules: ["../src", "../node_modules"],
       extensions: [".css", "sass", ".scss", ".ts", ".tsx", ".js", ".json"]
     },
-  
-    plugins,
-  
+
+    plugins: plugins,
+
     optimization: {
       minimizer: [
         new TerserJSPlugin({
@@ -99,19 +93,22 @@ function buildWebpackConfig (rules, plugins, development) {
         new OptimizeCSSAssetsPlugin({})
       ]
     },
-  
+
     devtool: development ? "cheap-module-eval-source-map" : false,
-    
+
     devServer: {
-      contentBase: "./build",
+      contentBase: `${__dirname}/../build`,
       compress: true,
       disableHostCheck: true,
       historyApiFallback: true,
+      writeToDisk: true,
       hot: true,
       port: 1329,
-      host: "127.0.0.1"
+      host: "localhost",
+      publicPath: 'http://localhost:1329/build/',
+      hotOnly: true
     },
-  
+
     /*stats: {
       all: true,
       children: false,
@@ -124,7 +121,7 @@ function buildWebpackConfig (rules, plugins, development) {
       errorDetails: true
     }*/
   };
-  
+
 }
 
 module.exports = {
