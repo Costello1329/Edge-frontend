@@ -56,7 +56,7 @@ export class App extends React.Component {
           <HomePage vacanciesPageUrl="/vacancies"/>
         </Route>
         <Route exact path="/vacancies">
-          <VacanciesPage/>
+          <VacanciesPage homePageUrl="/"/>
         </Route>
       </main>
       <Footer/>
