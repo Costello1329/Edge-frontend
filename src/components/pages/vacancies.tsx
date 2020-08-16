@@ -1,59 +1,70 @@
 import React from "react";
 import {discard} from "../../utils/Discard";
+import {BreadcrumbsLayer} from "../layers/breadcrumbs";
 import {VacanciesLayer} from "../layers/vacancies";
+import {localization} from "../../services/localization";
 import {getRandomGuid} from "../../utils/guid";
+import {Breadcrumb} from "../layers/breadcrumbs";
 import {Vacancy} from "../layers/vacancies";
 
 
 
+const breadcrumbs: Breadcrumb[] = [{
+  text: localization.localize("home"),
+  url: "/"
+}, {
+  text: localization.localize("vacancies"),
+  url: "/vacancies"
+}]
+
 const vacancies: Vacancy[] = [{
-    guid: getRandomGuid(),
-    companyName: "Google",
-    jobTitle: "Fullstack engineer",
-    skillLevel: "Middle",
-    stack: "JS, TS, React, SCSS, SASS, Rust, Python",
-    moneySummary: "4 000 – 5 000 $",
-    location: "Moscow"
-  }, {
-    guid: getRandomGuid(),
-    companyName: "Yandex",
-    jobTitle: "Backend engineer",
-    skillLevel: "Junior",
-    stack: "Blowjob, Anal",
-    moneySummary: "1 500 – 2 500 $",
-    location: "London"
-  }, {
-    guid: getRandomGuid(),
-    companyName: "Сто семнадцать и два",
-    jobTitle: "Callback engineer",
-    skillLevel: "CTO",
-    stack: "Autohotkey",
-    moneySummary: "40 000 – 50 000 $",
-    location: "Prague"
-  }, {
-    guid: getRandomGuid(),
-    companyName: "Google",
-    jobTitle: "Fullstack engineer",
-    skillLevel: "Middle",
-    stack: "Python",
-    moneySummary: "4 000 – 5 000 $",
-    location: "Greece"
-  }, {
-    guid: getRandomGuid(),
-    companyName: "Google",
-    jobTitle: "Fullstack engineer",
-    skillLevel: "Middle",
-    stack: "Python",
-    moneySummary: "4 000 – 5 000 $",
-    location: "Georgia"
-  }, {
-    guid: getRandomGuid(),
-    companyName: "Google",
-    jobTitle: "Fullstack engineer",
-    skillLevel: "Middle",
-    stack: "JS, Python",
-    moneySummary: "4 000 – 5 000 $",
-    location: "Ukraine"
+  guid: getRandomGuid(),
+  companyName: "Google",
+  jobTitle: "Fullstack engineer",
+  skillLevel: "Middle",
+  stack: "JS, TS, React, SCSS, SASS, Rust, Python",
+  moneySummary: "4 000 – 5 000 $",
+  location: "Moscow"
+}, {
+  guid: getRandomGuid(),
+  companyName: "Yandex",
+  jobTitle: "Backend engineer",
+  skillLevel: "Junior",
+  stack: "Blowjob, Anal",
+  moneySummary: "1 500 – 2 500 $",
+  location: "London"
+}, {
+  guid: getRandomGuid(),
+  companyName: "Сто семнадцать и два",
+  jobTitle: "Callback engineer",
+  skillLevel: "CTO",
+  stack: "Autohotkey",
+  moneySummary: "40 000 – 50 000 $",
+  location: "Prague"
+}, {
+  guid: getRandomGuid(),
+  companyName: "Google",
+  jobTitle: "Fullstack engineer",
+  skillLevel: "Middle",
+  stack: "Python",
+  moneySummary: "4 000 – 5 000 $",
+  location: "Greece"
+}, {
+  guid: getRandomGuid(),
+  companyName: "Google",
+  jobTitle: "Fullstack engineer",
+  skillLevel: "Middle",
+  stack: "Python",
+  moneySummary: "4 000 – 5 000 $",
+  location: "Georgia"
+}, {
+  guid: getRandomGuid(),
+  companyName: "Google",
+  jobTitle: "Fullstack engineer",
+  skillLevel: "Middle",
+  stack: "JS, Python",
+  moneySummary: "4 000 – 5 000 $",
+  location: "Ukraine"
 }];
 
 
@@ -88,12 +99,18 @@ extends React.Component<VacanciesPageProps, VacanciesPageState> {
     );
 
   public readonly render = (): JSX.Element =>
-    <React.Fragment>{
-      this.state.loading ?
-      "Ща, падажжи" : 
-      <VacanciesLayer
-        button = {null}
-        vacancies = {this.state.vacancies}
+    <React.Fragment>
+      <BreadcrumbsLayer 
+        breadcrumbs={breadcrumbs}
       />
-    }</React.Fragment>;
+      
+      {
+        this.state.loading ?
+        "Ща, падажжи" : 
+        <VacanciesLayer
+          button={null}
+          vacancies={this.state.vacancies}
+        />
+      }
+    </React.Fragment>;
 };

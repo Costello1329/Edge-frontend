@@ -20,7 +20,7 @@ type HeaderProps = {
   homePageUrl: string,
 } & RouteComponentProps;
 
-export const InnerHeader: React.FunctionComponent<HeaderProps> =
+const InnerHeader: React.FunctionComponent<HeaderProps> =
   (props: HeaderProps): JSX.Element =>
     <header className="edgeBarHeader">
       <nav>
