@@ -57,4 +57,4 @@ const InnerHeader: React.FunctionComponent<HeaderProps> =
     </header>;
 
 
-export const Header = withRouter(HeaderInner);
+export const Header = withRouter(InnerHeader);
