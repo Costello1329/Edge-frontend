@@ -1,4 +1,5 @@
-@import '../../../node_modules/materialize-css/sass/materialize.scss';
+@import "../../../node_modules/materialize-css/sass/materialize.scss";
+@import "../../theme/colors.scss";
 
 
 body {
@@ -9,6 +10,7 @@ body {
 
 main {
   flex: 1 0 auto;
+  background-color: $baseLighten;
 }
 
 .rowNoBottomMargin {

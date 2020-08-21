@@ -6,6 +6,7 @@ import {localization} from "../../services/localization";
 import {getRandomGuid} from "../../utils/guid";
 import {Breadcrumb} from "../layers/breadcrumbs";
 import {Vacancy} from "../layers/vacancies";
+import {Preloader} from "../preloader/index";
 
 
 
@@ -103,10 +104,11 @@ extends React.Component<VacanciesPageProps, VacanciesPageState> {
       <BreadcrumbsLayer 
         breadcrumbs={breadcrumbs}
       />
-      
       {
         this.state.loading ?
-        "Ща, падажжи" : 
+        <div className = "container preloaderWrapper">
+          <Preloader/>
+        </div> :
         <VacanciesLayer
           button={null}
           vacancies={this.state.vacancies}

@@ -12,6 +12,8 @@ import LogoSberbank from "../../../assets/svg/companies/sberbank.svg";
 import LogoYandex from "../../../assets/svg/companies/yandex.svg";
 import {preferences} from "../../services/preferences";
 
+import "./styles.scss";
+
 
 
 interface HomePageProps {
