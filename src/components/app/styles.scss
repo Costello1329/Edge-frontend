@@ -25,6 +25,14 @@ main {
   margin-bottom: 0;
 }
 
+.row .col {
+  padding: 0;
+}
+
+.card-panel .row {
+    padding: 0 0.75em;
+}
+
 @media #{$large-and-up} {
   .row .col.l5_5 {
     width: percentage(11/24);

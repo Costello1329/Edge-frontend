@@ -1,0 +1,21 @@
+@import 'materialize-css/sass/materialize.scss';
+@import "../../../theme/colors.scss";
+
+
+main > nav {
+  background-color: $baseLighten !important;
+
+  & span,
+  & span > a {
+    color: $warmText !important;
+  }
+}
+
+.breadcrumbsLayer {
+  padding-top: 60px;
+}
+
+.breadcrumb a,
+.breadcrumb::before {
+  color: $warmTextDarken !important;
+}

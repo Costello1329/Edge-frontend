@@ -10,7 +10,7 @@ import "./styles.scss";
 
 const kMaxCompanyWordLength: number = 9;
 
-interface Vacancy {
+export interface Vacancy {
   guid: Guid,
   companyName: string,
   jobTitle: string,
@@ -22,7 +22,10 @@ interface Vacancy {
 
 interface VacanciesLayerProps {
   vacancies: Vacancy[],
-  vacanciesPageUrl: string
+  button: null | {
+    text: string,
+    url: string
+  }
 };
 
 export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
@@ -71,14 +74,16 @@ export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
               </div>
             </article>
           )
-        }</div>
-        <div className="row rowNoBottomMargin center-align">
-          <Link to={props.vacanciesPageUrl}>
-            <a className="btn waves-effect">
-              <i className="material-icons left">format_align_justify</i>
-              {localization.localize("watchAllVacancies")}
-            </a>
-          </Link>
-        </div>
-      </div>
+        }</div>{
+          props.button !== null ? 
+          <div className="row rowNoBottomMargin center-align">
+            <Link to={props.button.url}>
+              <a className="btn waves-effect">
+                <i className="material-icons left">format_align_justify</i>
+                {props.button.text}
+              </a>
+            </Link>
+          </div> : 
+          <></>
+      }</div>
     </div>;

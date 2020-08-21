@@ -3,6 +3,7 @@ import {MainLayer} from "../layers/main";
 import {TelegramLayer} from "../layers/telegram";
 import {VacanciesLayer} from "../layers/vacancies";
 import {getRandomGuid} from "../../utils/guid";
+import {localization} from "../../services/localization";
 import Logo1C from "../../../assets/svg/companies/onec.svg";
 import LogoAlpha from "../../../assets/svg/companies/alpha.svg";
 import LogoKaspersky from "../../../assets/svg/companies/kaspersky.svg";
@@ -32,7 +33,10 @@ export const HomePage: React.FunctionComponent<HomePageProps> =
         ]}
       />
       <VacanciesLayer
-        vacanciesPageUrl = {props.vacanciesPageUrl}
+        button = {{
+          text: localization.localize("watchAllVacancies"),
+          url: props.vacanciesPageUrl
+        }}
         vacancies = {[{
           guid: getRandomGuid(),
           companyName: "Google",
