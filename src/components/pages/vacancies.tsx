@@ -1,7 +1,7 @@
 import React from "react";
 import {discard} from "../../utils/Discard";
 import {BreadcrumbsLayer} from "../layers/breadcrumbs";
-import {VacanciesLayer} from "../layers/vacancies";
+import {VacanciesFilterLayer} from "../layers/vacanciesFilter";
 import {localization} from "../../services/localization";
 import {getRandomGuid} from "../../utils/guid";
 import {Breadcrumb} from "../layers/breadcrumbs";
@@ -109,10 +109,7 @@ extends React.Component<VacanciesPageProps, VacanciesPageState> {
         <div className = "container preloaderWrapper">
           <Preloader/>
         </div> :
-        <VacanciesLayer
-          button={null}
-          vacancies={this.state.vacancies}
-        />
+        <VacanciesFilterLayer/>
       }
     </React.Fragment>;
 };
