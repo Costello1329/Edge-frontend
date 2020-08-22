@@ -17,7 +17,12 @@ export interface Locale {
   watchAllVacancies: string,
   telegramGroupName: string,
   russian: string,
-  english: string
+  english: string,
+  filter: string,
+  level: string,
+  stack: string,
+  location: string,
+  salary: string
 };
 
 export const ru_RU: Locale = {
@@ -41,7 +46,12 @@ export const ru_RU: Locale = {
   watchAllVacancies: "Посмотреть все",
   telegramGroupName: "@sns_deanon",
   russian: "Русский",
-  english: "English"
+  english: "English",
+  filter: "Фильтр",
+  level: "Уровень",
+  stack: "Область",
+  location: "Локация",
+  salary: "Ставка"
 };
 
 export const en_GB: Locale = {} as Locale;
