@@ -4,6 +4,7 @@
 
 main > nav {
   background-color: $baseLighten !important;
+  box-shadow: none !important;
 
   & span,
   & span > a {

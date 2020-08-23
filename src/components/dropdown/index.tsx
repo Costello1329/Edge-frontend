@@ -15,7 +15,7 @@ export interface DropdownProps {
 };
 
 export const Dropdown = (props: DropdownProps): JSX.Element =>
-  <ul className = "dropdown-content" id = {props.id}>{
+  <ul className="dropdown-content" id={props.id}>{
     props.options.map((option: DropdownOption, index: number): JSX.Element =>
       <li key={`dropdown-${props.id}-option-${index}`}>
         <a onClick = {(): void => option.callback()}>{option.text}</a>

@@ -20,8 +20,6 @@ export class App extends React.Component {
   public readonly componentDidMount = (): void =>
     discard(setTimeout((): void => {
       Materialize.AutoInit();
-      
-      // M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'));
     }));
 
   public readonly render = (): JSX.Element =>

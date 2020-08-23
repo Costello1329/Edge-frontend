@@ -2,41 +2,44 @@
 @import "../../../theme/colors.scss";
 
 
-.card-panel.filter {
-  cursor: default !important;
-  padding: 0 24px;
+.vacanciesFilterLayer {
+  .card-panel.filter {
+    cursor: default !important;
+    padding: 0 24px;
 
-  & .row {
-    margin-bottom: 0 !important;
+    & .row {
+      margin-bottom: 0 !important;
+    }
+
+    & h5 {
+      margin-top: 0;
+    }
   }
 
-  & h5 {
-    margin-top: 0;
-  }
-}
+  .select-wrapper {
+    & input.select-dropdown {
+      /* To be changed to .filter when aware of how to assign it to <select> */
+      border-bottom-color: $warmTextDarken !important;
+      color: $warmText !important;
+    }
 
-.select-wrapper {
-  & input.select-dropdown { /* To be changed to .filter when aware of how to assign it to <select> */
-    border-bottom-color: $warmTextDarken !important;
+    & .caret {
+      fill: $warmTextDarken !important;
+    }
+  }
+
+  .select-dropdown.dropdown-content li.selected {
+    background-color: $baseHalfLighten !important;
+  }
+
+  .select-dropdown li.disabled, 
+  .select-dropdown li.disabled > span, 
+  .select-dropdown li.optgroup {
+      color: $warmTextDarken !important;
+      background-color: $baseHalfLighten !important;
+  }
+
+  .dropdown-content li > span {
     color: $warmText !important;
   }
-
-  & .caret {
-    fill: $warmTextDarken !important;
-  }
-}
-
-.select-dropdown.dropdown-content li.selected {
-  background-color: $baseHalfLighten !important;
-}
-
-.select-dropdown li.disabled, 
-.select-dropdown li.disabled > span, 
-.select-dropdown li.optgroup {
-    color: $warmTextDarken !important;
-    background-color: $baseHalfLighten !important;
-}
-
-.dropdown-content li > span {
-  color: $warmText !important;
 }

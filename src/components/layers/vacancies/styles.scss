@@ -8,6 +8,19 @@
   padding-bottom: 60px !important;
   z-index: -1;
 
+  & .btn {
+    background-color: $contrast;
+    color: $warmText;
+
+    &:hover {
+      background-color: $contrast;
+    }
+  }
+}
+
+
+.vacanciesLayer,
+.vacanciesFilterLayer {
   & h3 {
     margin-top: 0;
     color: $warmText;
@@ -56,14 +69,5 @@
   & .stack > p {
     margin-bottom: 4px;
     margin-top: 0;
-  }
-
-  & .btn {
-    background-color: $contrast;
-    color: $warmText;
-
-    &:hover {
-      background-color: $contrast;
-    }
   }
 }
