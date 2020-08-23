@@ -41,7 +41,7 @@ export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
               <div className="card-panel">
                 <header className="row">
                 <div className="col s6 jobTitle">
-                    <h5>{vacancy.jobTitle}</h5>
+                    <h5>{localization.localize(vacancy.jobTitle as any)}</h5>
                     <p className="secondLine pNoMargin">{vacancy.skillLevel}</p>
                   </div>
                   <div className="col s6">

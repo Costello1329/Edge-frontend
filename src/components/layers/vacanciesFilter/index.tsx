@@ -2,7 +2,7 @@ import React from "react";
 import {localization} from "../../../services/localization";
 import classNames from "classnames";
 import {vacancies} from "../../../models/statics"
-import {Vacancy} from "../../../models/vacancy";
+import {Vacancy, VacancyLevel, VacancySkill} from "../../../models/vacancy";
 import {Preloader} from "../../preloader";
 import Materialize from "materialize-css";
 
@@ -16,14 +16,23 @@ interface VacanciesFilterLayerProps {};
 
 interface VacanciesFilterLayerState {
   loading: boolean,
-  vacancies: Vacancy[]
+  vacancies: Vacancy[],
+  vacanciesFiltered: Vacancy[],
+  vacancyLevel: string,
+  vacancySkill: string
 };
 
 export class VacanciesFilterLayer
 extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
   constructor (props: VacanciesFilterLayerProps) {
     super(props);
-    this.state = { vacancies: [], loading: false };
+    this.state = {
+      vacancies: [],
+      vacanciesFiltered: [],
+      loading: false,
+      vacancyLevel: "0",
+      vacancySkill: "0"
+    };
   }
 
   public componentDidMount (): void {
@@ -33,7 +42,11 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
     this.setState(
       { loading: true },
       () => setTimeout(
-        () => this.setState({ vacancies, loading: false }), 1000
+        () => this.setState({
+          vacancies,
+          vacanciesFiltered: vacancies,
+          loading: false
+        }), 1000
       )
     );
   }
@@ -42,7 +55,8 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
     (): void => this.updateDynamicContent();
 
   public updateDynamicContent (): void {
-    const selects: HTMLSelectElement[] = [... document.querySelectorAll('select')];
+    const selects: HTMLSelectElement[] =
+      [... document.querySelectorAll("select")];
 
     selects.map(
       (el: HTMLSelectElement) =>
@@ -55,6 +69,39 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
     );
   }
 
+  private readonly getFilteredVacancies = (
+    levelOption: number,
+    skillOption: number
+  ): Vacancy[] =>
+    this.state.vacancies.filter(
+      (vacancy: Vacancy): boolean =>
+        (levelOption === 0 ?
+          true :
+          vacancy.skillLevel === Object.values(VacancyLevel)[levelOption - 1]
+        ) && (skillOption === 0 ?
+          true :
+          vacancy.jobTitle === Object.values(VacancySkill)[skillOption - 1]
+        )
+    );
+
+  public readonly handleVacancyLevelChange =
+    (vacancyLevel: string): void =>
+      this.setState({
+        vacanciesFiltered: this.getFilteredVacancies(
+          parseInt(vacancyLevel),
+          parseInt(this.state.vacancySkill)
+        ), vacancyLevel
+      });
+
+  public readonly handleVacancySkillChange =
+    (vacancySkill: string): void =>
+      this.setState({
+        vacanciesFiltered: this.getFilteredVacancies(
+          parseInt(this.state.vacancyLevel),
+          parseInt(vacancySkill)
+        ), vacancySkill
+      });
+
   private readonly getLoadedContents = (): JSX.Element => 
     <div className="vacanciesFilterLayer">
       <div className="container">
@@ -64,42 +111,72 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
               <div className="row">
                 <div className="input-field col s12">
                   <h5>{localization.localize("filter")}</h5>
-                  <select className="filter">
-                    <option value="" disabled selected>
-                      {localization.localize("level")}
-                    </option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                  </select>
-                  <select className="filter">
-                    <option value="" disabled selected>
-                      {localization.localize("stack")}
-                    </option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                  </select>
-                  <select className="filter">
-                    <option value="" disabled selected>
-                      {localization.localize("location")}
-                    </option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                  </select>
+                  <div className = "col s12 noSidePadding">
+                    <select
+                      value = {this.state.vacancyLevel}
+                      onChange = {
+                        (event: React.ChangeEvent<HTMLSelectElement>): void =>
+                          this.handleVacancyLevelChange(event.target.value)
+                      }
+                    >
+                      <option value="" disabled selected>
+                        {localization.localize("level")}
+                      </option>
+                      {
+                        ["all", ... Object.values(VacancyLevel)].map(
+                          (value: string, index: number): JSX.Element =>
+                            <option value={index}>
+                              {localization.localize(value as any)}
+                            </option>
+                        )
+                      }
+                    </select>  
+                  </div>
+                  <div className = "col s12 noSidePadding">
+                    <select
+                      value = {this.state.vacancySkill}
+                      onChange = {
+                        (event: React.ChangeEvent<HTMLSelectElement>): void =>
+                          this.handleVacancySkillChange(event.target.value)
+                      }
+                    >
+                      <option value="" disabled selected>
+                        {localization.localize("stack")}
+                      </option>
+                      {
+                        ["all", ... Object.values(VacancySkill)].map(
+                          (value: string, index: number): JSX.Element =>
+                            <option value={index}>
+                              {localization.localize(value as any)}
+                            </option>
+                        )
+                      }
+                    </select>  
+                  </div>
+                  <div className = "col s12 noSidePadding">
+                    <select>
+                      <option value="" disabled selected>
+                        {localization.localize("location")}
+                      </option>
+                      <option value="1">Option 1</option>
+                      <option value="2">Option 2</option>
+                      <option value="3">Option 3</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div className="col s12 m9 pull-m3">{
-            this.state.vacancies.map((vacancy: Vacancy): JSX.Element =>
+            this.state.vacanciesFiltered.map((vacancy: Vacancy): JSX.Element =>
               <article className="col s12">
                 <div className="card-panel">
                   <header className="row">
                     <div className="col s6 jobTitle">
-                      <h5>{vacancy.jobTitle}</h5>
-                      <p className="secondLine pNoMargin">{vacancy.skillLevel}</p>
+                      <h5>{localization.localize(vacancy.jobTitle as any)}</h5>
+                      <p className="secondLine pNoMargin">
+                        {localization.localize(vacancy.skillLevel)}
+                      </p>
                     </div>
                     <div className="col s6">
                       <div className="col s12 colNoSidePadding companyName">
