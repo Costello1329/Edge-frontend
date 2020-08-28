@@ -8,6 +8,10 @@
   color: $warmText !important;
   border-radius: 2px;
 
+  &.premium {
+    border: 2px solid $warmText;
+  }
+
   & .jobTitle > h5 {
     margin: 0;
     line-height: 1.25;

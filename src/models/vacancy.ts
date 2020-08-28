@@ -2,19 +2,46 @@ import {Guid} from "../utils/guid";
 
 
 
-export interface Vacancy {
-  guid: Guid,
-  companyName: string,
-  jobTitle: VacancySkill,
-  skillLevel: VacancyLevel,
-  stack: string,
-  moneySummary: string,
-  location: string
+export type Vacancy = Pick<FullVacancy,
+  "guid" |
+  "premium" |
+  "location" |
+  "sallary" |
+  "level" |
+  "skill" |
+  "stack" |
+  "remote"
+> & {
+  companyName: FullVacancy["company"]["name"]
 };
 
-export interface FullVacancy extends Vacancy {
+export interface FullVacancy {
+  guid: Guid,
+  premium: boolean,
+  contact: {
+    email: string,
+    phone: string,
+    telegram: string
+  },
+  location: {
+    country: string,
+    city: string
+  },
+  company: {
+    name: string,
+    industry: string,
+    website: string
+  },
+  sallary: {
+    from: number,
+    to: number
+  }
+  level: VacancyLevel,
+  skill: VacancySkill,
+  stack: string[],
+  remote: boolean,
   description: string
-}
+};
 
 export enum VacancyLevel {
   Intern = "vacancyLevelIntern",

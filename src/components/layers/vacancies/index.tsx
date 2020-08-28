@@ -17,7 +17,7 @@ interface VacanciesLayerProps {
 };
 
 export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
-  (props: VacanciesLayerProps) => 
+  (props: VacanciesLayerProps): JSX.Element =>
     <div className="vacanciesLayer">
       <div className="container">
         <div className="row rowNoBottomMargin">

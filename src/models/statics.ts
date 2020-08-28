@@ -6,61 +6,108 @@ import {Vacancy, VacancyLevel, VacancySkill, FullVacancy} from "./vacancy";
 export const vacancies: Vacancy[] = [{
   guid: getRandomGuid(),
   companyName: "Google",
-  jobTitle: VacancySkill.Fullstack,
-  skillLevel: VacancyLevel.Middle,
-  stack: "JS, TS, React, SCSS, SASS, Rust, Python",
-  moneySummary: "4 000 – 5 000 $",
-  location: "Moscow"
+  premium: true,
+  location: {
+    city: "London",
+    country: "England"
+  },
+  sallary: { from: 3000, to: 5000 },
+  level: VacancyLevel.Senior,
+  skill: VacancySkill.Fullstack,
+  stack: ["JS", "TS", "React", "SCSS", "SASS", "Rust", "Python"],
+  remote: false
 }, {
   guid: getRandomGuid(),
   companyName: "Yandex",
-  jobTitle: VacancySkill.Backend,
-  skillLevel: VacancyLevel.Junior,
-  stack: "Blowjob, Anal",
-  moneySummary: "1 500 – 2 500 $",
-  location: "London"
+  premium: false,
+  location: {
+    city: "Moscow",
+    country: "Russia"
+  },
+  sallary: { from: 2000, to: 2500 },
+  level: VacancyLevel.Middle,
+  skill: VacancySkill.Fullstack,
+  stack: ["JS", "TS", "React"],
+  remote: false
 }, {
   guid: getRandomGuid(),
-  companyName: "Сто семнадцать и два",
-  jobTitle: VacancySkill.Frontend,
-  skillLevel: VacancyLevel.CTO,
-  stack: "Autohotkey",
-  moneySummary: "40 000 – 50 000 $",
-  location: "Prague"
+  companyName: "Mail",
+  premium: true,
+  location: {
+    city: "Moscow",
+    country: "Russia"
+  },
+  sallary: { from: 4000, to: 5000 },
+  level: VacancyLevel.Senior,
+  skill: VacancySkill.Backend,
+  stack: ["Scala", "Java", "Yaml"],
+  remote: false
 }, {
   guid: getRandomGuid(),
-  companyName: "Google",
-  jobTitle: VacancySkill.Fullstack,
-  skillLevel: VacancyLevel.Junior,
-  stack: "Python",
-  moneySummary: "4 000 – 5 000 $",
-  location: "Greece"
+  companyName: "1C",
+  premium: false,
+  location: {
+    city: "Moscow",
+    country: "Russia"
+  },
+  sallary: { from: 1000, to: 2000 },
+  level: VacancyLevel.Middle,
+  skill: VacancySkill.Desktop,
+  stack: ["1C"],
+  remote: true
 }, {
   guid: getRandomGuid(),
-  companyName: "Google",
-  jobTitle: VacancySkill.Backend,
-  skillLevel: VacancyLevel.Middle,
-  stack: "Python",
-  moneySummary: "4 000 – 5 000 $",
-  location: "Georgia"
+  companyName: "Сто семнадцать и два )))",
+  premium: false,
+  location: {
+    city: "Moscow",
+    country: "Russia"
+  },
+  sallary: { from: 100, to: 100 },
+  level: VacancyLevel.CTO,
+  skill: VacancySkill.SecurityEngineer,
+  stack: ["AutoHotkey", "Docker", "SSH"],
+  remote: true
 }, {
   guid: getRandomGuid(),
-  companyName: "Google",
-  jobTitle: VacancySkill.Fullstack,
-  skillLevel: VacancyLevel.Senior,
-  stack: "JS, Python",
-  moneySummary: "4 000 – 5 000 $",
-  location: "Ukraine"
+  companyName: "Allisto",
+  premium: true,
+  location: {
+    city: "Moscow",
+    country: "Russia"
+  },
+  sallary: { from: 10000, to: 15000 },
+  level: VacancyLevel.Middle,
+  skill: VacancySkill.Fullstack,
+  stack: ["Js", "Ts", "React", "Redux", "MobX", "Python", "Django", "SQL"],
+  remote: true
 }];
 
 export const fullVacancy: FullVacancy = {
   guid: getRandomGuid(),
-  companyName: "Google",
-  jobTitle: VacancySkill.Fullstack,
-  skillLevel: VacancyLevel.Junior,
-  stack: "Python",
-  moneySummary: "4 000 – 5 000 $",
-  location: "Greece",
+  premium: true,
+  contact: {
+    email: "mail@mail.ru",
+    phone: "+7(915)042-08-03",
+    telegram: "mainain"
+  },
+  location: {
+    country: "Russia",
+    city: "Moscow"
+  },
+  company: {
+    name: "Mail",
+    industry: "Desktop, mobile",
+    website: "mail.ru"
+  },
+  sallary: {
+    from: 3000,
+    to: 4000
+  },
+  level: VacancyLevel.CTO,
+  skill: VacancySkill.Fullstack,
+  stack: ["Java", "Docker"],
+  remote: false,
   description:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \
     Praesent sed semper dui. Sed interdum nunc pulvinar, accumsan \

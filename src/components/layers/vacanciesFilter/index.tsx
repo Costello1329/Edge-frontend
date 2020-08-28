@@ -36,9 +36,7 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
 
   private readonly getExistingLocations =
     (vacancies: VacancyProps[]): string[] =>
-      [... new Set(
-        vacancies.map((vacancy => vacancy.location))
-      )];
+      [... new Set(vacancies.map(vac => vac.location.city))];
 
   public readonly componentDidMount = (): void =>
     this.updateDynamicContent();
@@ -75,13 +73,15 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
       (vacancy: VacancyProps): boolean =>
         (levelOption === 0 ?
           true :
-          (vacancy.skillLevel === Object.values(VacancyLevel)[levelOption - 1])
+          (vacancy.level === Object.values(VacancyLevel)[levelOption - 1])
         ) && (skillOption === 0 ?
           true :
-          (vacancy.jobTitle === Object.values(VacancySkill)[skillOption - 1])
+          (vacancy.skill === Object.values(VacancySkill)[skillOption - 1])
         ) && (locationOption === 0 ?
-          true :
-          (vacancy.location === this.state.existingLocations[locationOption - 1])
+          true : (
+            vacancy.location.city ===
+            this.state.existingLocations[locationOption - 1]
+          )
         )
     );
 
@@ -207,7 +207,21 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
             </div>
           </div>
           <div className="col s12 m8 pull-m3">{
-            this.state.vacanciesFiltered.map(
+            this.state.vacanciesFiltered.sort(
+              (first: VacancyProps, second: VacancyProps): number => {
+                if (
+                  (first.premium && second.premium) ||
+                  (!first.premium && !second.premium)
+                )
+                  return 0;
+
+                else if (first.premium)
+                  return -1;
+
+                else
+                  return 1;
+              }
+            ).map(
               (vacancy: VacancyProps): JSX.Element =>
                 <article className="col s12">
                   <Vacancy {... vacancy}/>

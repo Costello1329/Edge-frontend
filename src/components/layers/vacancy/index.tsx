@@ -1,8 +1,6 @@
 import React from "react";
 import {localization} from "../../../services/localization";
-import classNames from "classnames";
-import {FullVacancy}
-  from "../../../models/vacancy";
+import {FullVacancy} from "../../../models/vacancy";
 
 import "./styles.scss";
 
@@ -14,18 +12,18 @@ interface VacancyLayerProps {
 
 export const VacancyLayer:
 React.FunctionComponent<VacancyLayerProps> =
-  (props: VacancyLayerProps): JSX.Element =>
+  ({ vacancy }: VacancyLayerProps): JSX.Element =>
     <div className="vacancyLayer">
       <div className="container">
         <div className="fullVacancy row">
-          <p>мой guid: {props.vacancy.guid.str}</p>
-          <p>мой companyName: {props.vacancy.companyName}</p>
-          <p>мой jobtitle: {localization.localize(props.vacancy.jobTitle)}</p>
-          <p>мой skillLevel: {localization.localize(props.vacancy.skillLevel)}</p>
-          <p>мой stack: {props.vacancy.stack}</p>
-          <p>мой moneySummary: {props.vacancy.moneySummary}</p>
-          <p>мой location: {props.vacancy.location}</p>
-          <p>мой description: {props.vacancy.description}</p>
+          <p>мой guid: {vacancy.guid.str}</p>
+          <p>мой companyName: {vacancy.company.name}</p>
+          <p>мой jobtitle: {localization.localize(vacancy.level)}</p>
+          <p>мой skillLevel: {localization.localize(vacancy.skill)}</p>
+          <p>мой stack: {vacancy.stack.join(", ")}</p>
+          <p>мой moneySummary: {vacancy.sallary.from} - {vacancy.sallary.to}</p>
+          <p>мой location: {vacancy.location.city}, {vacancy.location.country}</p>
+          <p>мой description: {vacancy.description}</p>
         </div>
       </div>
     </div>;
