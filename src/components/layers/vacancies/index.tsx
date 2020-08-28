@@ -1,17 +1,15 @@
 import React from "react";
-import {Vacancy} from "../../../models/vacancy";
+import {Vacancy as VacancyProps} from "../../../models/vacancy";
 import {localization} from "../../../services/localization";
 import {Link} from "react-router-dom";
-import classNames from "classnames";
+import {Vacancy} from "../../vacancy";
 
 import "./styles.scss";
 
 
 
-const kMaxCompanyWordLength: number = 9;
-
 interface VacanciesLayerProps {
-  vacancies: Vacancy[],
+  vacancies: VacancyProps[],
   button: null | {
     text: string,
     url: string
@@ -26,43 +24,11 @@ export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
           <h3 className="col">{localization.localize("vacancies")}</h3>
         </div>
         <div className="vacancies row">{
-          props.vacancies.map((vacancy: Vacancy): JSX.Element =>
-            <article className="col s12">
-              <div className="card-panel">
-                <header className="row">
-                <div className="col s6 jobTitle">
-                    <h5>{localization.localize(vacancy.jobTitle as any)}</h5>
-                    <p className="secondLine pNoMargin">{vacancy.skillLevel}</p>
-                  </div>
-                  <div className="col s6">
-                    <div className="col s12 colNoSidePadding companyName">
-                      <h5 className={classNames([
-                        "right pNoMargin",
-                        vacancy.companyName.split(" ").reduce(
-                          (accumulator: string, word: string) =>
-                            accumulator.length < word.length ? word : accumulator,
-                          ""
-                        ).length > kMaxCompanyWordLength ?
-                        "smaller" : ""
-                      ])}>{vacancy.companyName}</h5>
-                    </div>
-                    <div className="col s12 colNoSidePadding location">
-                      <p className="right pNoMargin secondLine">
-                        {vacancy.location}
-                      </p>
-                    </div>
-                  </div>
-                </header>
-                <section>
-                  <div className="stack">
-                    <p>{vacancy.stack}</p>
-                  </div>
-                  <div className="moneySummary">
-                    <h6>{vacancy.moneySummary}</h6>
-                  </div>
-                </section>
-              </div>
-            </article>
+          props.vacancies.map(
+            (vacancy: VacancyProps): JSX.Element =>
+              <article className="col s12">
+                <Vacancy {... vacancy}/>
+              </article>
           )
         }</div>{
           props.button !== null ? 

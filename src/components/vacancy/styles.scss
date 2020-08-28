@@ -1,0 +1,44 @@
+@import 'materialize-css/sass/materialize.scss';
+@import "../../theme/colors.scss";
+
+
+.vacancy {
+  cursor: pointer;
+  background-color: $base !important;
+  color: $warmText !important;
+  border-radius: 2px;
+
+  & .jobTitle > h5 {
+    margin: 0;
+    line-height: 1.25;
+
+    @media #{$small-and-down} {
+      font-weight: bold;
+      font-size: 1.15rem;
+    }
+  }
+
+  & .moneySummary > h6 {
+    margin: 0;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  & .secondLine {
+    margin-top: 4px;
+  }
+
+  & .location,
+  & .companyName {
+    text-align: right;
+  }
+
+  & .smaller {
+    font-size: 1.3rem;
+  }
+
+  & .stack > p {
+    margin-bottom: 4px;
+    margin-top: 0;
+  }
+};

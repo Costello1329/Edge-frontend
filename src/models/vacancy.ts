@@ -17,6 +17,7 @@ export interface FullVacancy extends Vacancy {
 }
 
 export enum VacancyLevel {
+  Intern = "vacancyLevelIntern",
   Junior = "vacancyLevelJunior",
   Middle = "vacancyLevelMiddle",
   Senior = "vacancyLevelSenior",
@@ -26,5 +27,12 @@ export enum VacancyLevel {
 export enum VacancySkill {
   Frontend = "vacancySkillFrontend",
   Backend = "vacancySkillBackend",
-  Fullstack = "vacancySkillFullstack"
+  Fullstack = "vacancySkillFullstack",
+  DevOps = "vacancySkillDevOps",
+  Android = "vacancySkillAndroid",
+  iOS = "vacancySkilliOS",
+  Mobile = "vacancySkillMobile",
+  Desktop = "vacancySkillDesktop",
+  DataScience = "vacancySkillDataScience",
+  SecurityEngineer = "vacancySkillSecurityEngineer"
 };

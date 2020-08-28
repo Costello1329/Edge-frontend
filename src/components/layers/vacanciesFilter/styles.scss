@@ -3,6 +3,11 @@
 
 
 .vacanciesFilterLayer {
+  & h3 {
+    margin-top: 0;
+    color: $warmText;
+  }
+
   .card-panel.filter {
     padding: 0 24px;
 
@@ -14,7 +19,7 @@
       margin-top: 0;
     }
   }
-
+  
   .select-wrapper {
     & input.select-dropdown {
       border-bottom-color: $warmTextDarken !important;
@@ -39,5 +44,17 @@
 
   .dropdown-content li > span {
     color: $warmText !important;
+  }
+
+  .filter {
+    background-color: $base !important;
+    color: $warmText !important;
+    border-radius: 2px;
+  }
+  
+  @media #{$medium-and-up} {
+    & .vacancies > .m3_5 {
+      width: percentage(7/24) !important;
+    }
   }
 }

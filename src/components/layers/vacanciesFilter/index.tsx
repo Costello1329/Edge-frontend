@@ -1,26 +1,24 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import {localization} from "../../../services/localization";
-import classNames from "classnames";
-import {Vacancy, VacancyLevel, VacancySkill} from "../../../models/vacancy";
+import {Vacancy as VacancyProps, VacancyLevel, VacancySkill}
+  from "../../../models/vacancy";
 import Materialize from "materialize-css";
+import {Vacancy} from "../../vacancy";
 
 import "./styles.scss";
 
 
 
-const kMaxCompanyWordLength: number = 9;
-
 interface VacanciesFilterLayerProps {
-  vacancies: Vacancy[];
+  vacancies: VacancyProps[];
 };
 
 interface VacanciesFilterLayerState {
-  vacanciesFiltered: Vacancy[],
+  vacanciesFiltered: VacancyProps[],
   existingLocations: string[],
-  vacancyLevel: number,
-  vacancySkill: number,
-  vacancyLocation: number
+  vacancyLevel: null | number,
+  vacancySkill: null | number,
+  vacancyLocation: null | number
 };
 
 export class VacanciesFilterLayer
@@ -30,14 +28,14 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
     this.state = {
       vacanciesFiltered: [... this.props.vacancies],
       existingLocations: this.getExistingLocations(this.props.vacancies),
-      vacancyLevel: 0,
-      vacancySkill: 0,
-      vacancyLocation: 0
+      vacancyLevel: null,
+      vacancySkill: null,
+      vacancyLocation: null
     };
   }
 
   private readonly getExistingLocations =
-    (vacancies: Vacancy[]): string[] =>
+    (vacancies: VacancyProps[]): string[] =>
       [... new Set(
         vacancies.map((vacancy => vacancy.location))
       )];
@@ -72,9 +70,9 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
     levelOption: number,
     skillOption: number,
     locationOption: number
-  ): Vacancy[] =>
+  ): VacancyProps[] =>
     this.props.vacancies.filter(
-      (vacancy: Vacancy): boolean =>
+      (vacancy: VacancyProps): boolean =>
         (levelOption === 0 ?
           true :
           (vacancy.skillLevel === Object.values(VacancyLevel)[levelOption - 1])
@@ -92,8 +90,8 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
       this.setState({
         vacanciesFiltered: this.getFilteredVacancies(
           vacancyLevel,
-          this.state.vacancySkill,
-          this.state.vacancyLocation
+          this.removeNullOption(this.state.vacancySkill),
+          this.removeNullOption(this.state.vacancyLocation)
         ), vacancyLevel
       });
 
@@ -101,9 +99,9 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
     (vacancySkill: number): void =>
       this.setState({
         vacanciesFiltered: this.getFilteredVacancies(
-          this.state.vacancyLevel,
+          this.removeNullOption(this.state.vacancyLevel),
           vacancySkill,
-          this.state.vacancyLocation
+          this.removeNullOption(this.state.vacancyLocation)
         ), vacancySkill
       });
 
@@ -111,24 +109,31 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
     (vacancyLocation: number): void =>
       this.setState({
         vacanciesFiltered: this.getFilteredVacancies(
-          this.state.vacancyLevel,
-          this.state.vacancySkill,
+          this.removeNullOption(this.state.vacancyLevel),
+          this.removeNullOption(this.state.vacancySkill),
           vacancyLocation
         ), vacancyLocation
       });
+
+  private readonly removeNullOption =
+    (option: number | null): number =>
+      option === null ? 0 : option
 
   public readonly render = (): JSX.Element => 
     <div className="vacanciesFilterLayer">
       <div className="container">
         <div className="vacancies row">
-          <div className="col s12 m3 push-m9">
+          <div className="col s12 m3_5 push-m9">
             <div className="card-panel filter">
               <div className="row">
                 <div className="input-field col s12">
                   <h5>{localization.localize("filter")}</h5>
                   <div className = "col s12 noSidePadding">
                     <select
-                      value = {this.state.vacancyLevel}
+                      {
+                        ... this.state.vacancyLevel === null ?
+                        {} : {value: this.state.vacancyLevel}
+                      }
                       onChange = {
                         (event: React.ChangeEvent<HTMLSelectElement>): void =>
                           this.handleVacancyLevelChange(
@@ -150,7 +155,10 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
                   </div>
                   <div className = "col s12 noSidePadding">
                     <select
-                      value = {this.state.vacancySkill}
+                      {
+                        ... this.state.vacancySkill === null ?
+                        {} : {value: this.state.vacancySkill}
+                      }
                       onChange = {
                         (event: React.ChangeEvent<HTMLSelectElement>): void =>
                           this.handleVacancySkillChange(
@@ -172,7 +180,10 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
                   </div>
                   <div className = "col s12 noSidePadding">
                     <select
-                      value = {this.state.vacancyLocation}
+                      {
+                        ... this.state.vacancyLocation === null ?
+                        {} : {value: this.state.vacancyLocation}
+                      }
                       onChange = {
                         (event: React.ChangeEvent<HTMLSelectElement>): void =>
                           this.handleVacancyLocationChange(
@@ -195,49 +206,12 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
               </div>
             </div>
           </div>
-          <div className="col s12 m9 pull-m3">{
-            this.state.vacanciesFiltered.map((vacancy: Vacancy): JSX.Element =>
-              <article className="col s12">
-                <Link to = {`${document.location.pathname}/${vacancy.guid.str}`}>
-                  <div className="card-panel vacancy">
-                    <header className="row">
-                      <div className="col s6 jobTitle">
-                        <h5>{localization.localize(vacancy.jobTitle as any)}</h5>
-                        <p className="secondLine pNoMargin">
-                          {localization.localize(vacancy.skillLevel)}
-                        </p>
-                      </div>
-                      <div className="col s6">
-                        <div className="col s12 colNoSidePadding companyName">
-                          <h5 className={classNames([
-                            "right pNoMargin",
-                            vacancy.companyName.split(" ").reduce(
-                              (accumulator: string, word: string) =>
-                                accumulator.length < word.length ?
-                                  word : accumulator,
-                              ""
-                            ).length > kMaxCompanyWordLength ?
-                            "smaller" : ""
-                          ])}>{vacancy.companyName}</h5>
-                        </div>
-                        <div className="col s12 colNoSidePadding location">
-                          <p className="right pNoMargin secondLine">
-                            {vacancy.location}
-                          </p>
-                        </div>
-                      </div>
-                    </header>
-                    <section>
-                      <div className="stack">
-                        <p>{vacancy.stack}</p>
-                      </div>
-                      <div className="moneySummary">
-                        <h6>{vacancy.moneySummary}</h6>
-                      </div>
-                    </section>
-                  </div>
-                </Link>
-              </article>
+          <div className="col s12 m8 pull-m3">{
+            this.state.vacanciesFiltered.map(
+              (vacancy: VacancyProps): JSX.Element =>
+                <article className="col s12">
+                  <Vacancy {... vacancy}/>
+                </article>
             )
           }</div>
         </div>

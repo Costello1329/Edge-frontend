@@ -2,16 +2,16 @@
 @import "../../../theme/colors.scss";
 
 
-.vacancy {
-  cursor: pointer;
-}
-
-
 .vacanciesLayer {
   background-color: $baseLighten;
   padding-top: 60px !important;
   padding-bottom: 60px !important;
   z-index: -1;
+  
+  & h3 {
+    margin-top: 0;
+    color: $warmText;
+  }
 
   & .btn {
     background-color: $contrast;
@@ -20,58 +20,5 @@
     &:hover {
       background-color: $contrast;
     }
-  }
-}
-
-
-.vacanciesLayer,
-.vacanciesFilterLayer {
-  & h3 {
-    margin-top: 0;
-    color: $warmText;
-  }
-
-  & .card-panel {
-    background-color: $base;
-    color: $warmText;
-    border-radius: 2px;
-  }
-
-  & .jobTitle > h5 {
-    margin: 0;
-    line-height: 1.25;
-
-    @media #{$small-and-down} {
-      font-weight: bold;
-      font-size: 1.15rem;
-    }
-  }
-
-  & .moneySummary > h6 {
-    margin: 0;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-
-  & .secondLine {
-    margin-top: 4px;
-  }
-
-  & .vacancies {
-    columns: 50% 2;
-  }
-
-  & .location,
-  & .companyName {
-    text-align: right;
-  }
-
-  & .smaller {
-    font-size: 1.3rem;
-  }
-
-  & .stack > p {
-    margin-bottom: 4px;
-    margin-top: 0;
   }
 }

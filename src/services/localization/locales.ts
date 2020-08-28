@@ -24,6 +24,8 @@ export interface Locale {
   stack: string,
   location: string,
   salary: string,
+  all: string,
+  vacancyLevelIntern: string,
   vacancyLevelJunior: string,
   vacancyLevelMiddle: string,
   vacancyLevelSenior: string,
@@ -31,7 +33,13 @@ export interface Locale {
   vacancySkillFrontend: string,
   vacancySkillBackend: string,
   vacancySkillFullstack: string,
-  all: string
+  vacancySkillDevOps: string,
+  vacancySkillAndroid: string,
+  vacancySkilliOS: string,
+  vacancySkillMobile: string,
+  vacancySkillDesktop: string,
+  vacancySkillDataScience: string,
+  vacancySkillSecurityEngineer: string
 };
 
 export const ru_RU: Locale = {
@@ -62,6 +70,8 @@ export const ru_RU: Locale = {
   stack: "Область",
   location: "Локация",
   salary: "Ставка",
+  all: "Все",
+  vacancyLevelIntern: "Intern",
   vacancyLevelJunior: "Junior",
   vacancyLevelMiddle: "Middle",
   vacancyLevelSenior: "Senior",
@@ -69,7 +79,13 @@ export const ru_RU: Locale = {
   vacancySkillFrontend: "Frontend",
   vacancySkillBackend: "Backend",
   vacancySkillFullstack: "Fullstack",
-  all: "Все"
+  vacancySkillDevOps: "DevOps",
+  vacancySkillAndroid: "Android",
+  vacancySkilliOS: "iOS",
+  vacancySkillMobile: "Mobile",
+  vacancySkillDesktop: "Desktop",
+  vacancySkillDataScience: "DataScience",
+  vacancySkillSecurityEngineer: "SecurityEngineer"
 };
 
 export const en_GB: Locale = {} as Locale;
