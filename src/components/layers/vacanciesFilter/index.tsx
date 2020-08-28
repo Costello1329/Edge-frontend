@@ -18,7 +18,8 @@ interface VacanciesFilterLayerState {
   existingLocations: string[],
   vacancyLevel: null | number,
   vacancySkill: null | number,
-  vacancyLocation: null | number
+  vacancyLocation: null | number,
+  vacancyRemoteOnly: boolean
 };
 
 export class VacanciesFilterLayer
@@ -30,7 +31,8 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
       existingLocations: this.getExistingLocations(this.props.vacancies),
       vacancyLevel: null,
       vacancySkill: null,
-      vacancyLocation: null
+      vacancyLocation: null,
+      vacancyRemoteOnly: false
     };
   }
 
@@ -67,7 +69,8 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
   private readonly getFilteredVacancies = (
     levelOption: number,
     skillOption: number,
-    locationOption: number
+    locationOption: number,
+    vacancyRemoteOnly: boolean
   ): VacancyProps[] =>
     this.props.vacancies.filter(
       (vacancy: VacancyProps): boolean =>
@@ -82,39 +85,53 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
             vacancy.location.city ===
             this.state.existingLocations[locationOption - 1]
           )
-        )
+        ) && (vacancyRemoteOnly ? vacancy.remote : true)
     );
 
-  public readonly handleVacancyLevelChange =
+  private readonly handleVacancyLevelChange =
     (vacancyLevel: number): void =>
       this.setState({
         vacanciesFiltered: this.getFilteredVacancies(
           vacancyLevel,
           this.removeNullOption(this.state.vacancySkill),
-          this.removeNullOption(this.state.vacancyLocation)
+          this.removeNullOption(this.state.vacancyLocation),
+          this.state.vacancyRemoteOnly
         ), vacancyLevel
       });
 
-  public readonly handleVacancySkillChange =
+  private readonly handleVacancySkillChange =
     (vacancySkill: number): void =>
       this.setState({
         vacanciesFiltered: this.getFilteredVacancies(
           this.removeNullOption(this.state.vacancyLevel),
           vacancySkill,
-          this.removeNullOption(this.state.vacancyLocation)
+          this.removeNullOption(this.state.vacancyLocation),
+          this.state.vacancyRemoteOnly
         ), vacancySkill
       });
 
-  public readonly handleVacancyLocationChange =
+  private readonly handleVacancyLocationChange =
     (vacancyLocation: number): void =>
       this.setState({
         vacanciesFiltered: this.getFilteredVacancies(
           this.removeNullOption(this.state.vacancyLevel),
           this.removeNullOption(this.state.vacancySkill),
-          vacancyLocation
+          vacancyLocation,
+          this.state.vacancyRemoteOnly
         ), vacancyLocation
       });
 
+  private readonly handleRemoteOnlyChange =
+    (vacancyRemoteOnly: boolean): void =>
+      this.setState({
+        vacanciesFiltered: this.getFilteredVacancies(
+          this.removeNullOption(this.state.vacancyLevel),
+          this.removeNullOption(this.state.vacancySkill),
+          this.removeNullOption(this.state.vacancyLocation),
+          vacancyRemoteOnly
+        ), vacancyRemoteOnly
+      });
+  
   private readonly removeNullOption =
     (option: number | null): number =>
       option === null ? 0 : option
@@ -191,7 +208,7 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
                       }
                     >
                       <option value="" disabled selected>
-                        {localization.localize("location")}
+                        {localization.localize("city")}
                       </option>
                       <option value={0}>{localization.localize("all")}</option>
                       {
@@ -200,7 +217,21 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
                             <option value={index + 1}>{value}</option>
                         )
                       }
-                    </select>  
+                    </select>
+                  </div>
+                  <div className="col s12 noSidePadding remoteOnly">
+                    <label htmlFor="remoteOnlyCheckbox">
+                      <input
+                        type="checkbox"
+                        id="remoteOnlyCheckbox"
+                        checked={this.state.vacancyRemoteOnly}
+                        onChange={
+                          (event: React.ChangeEvent<HTMLInputElement>): void =>
+                            this.handleRemoteOnlyChange(event.target.checked)
+                        }
+                      />
+                      <span>{localization.localize("remoteOnly")}</span>
+                    </label>
                   </div>
                 </div>
               </div>

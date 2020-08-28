@@ -50,6 +50,14 @@
     background-color: $base !important;
     color: $warmText !important;
     border-radius: 2px;
+
+    & .remoteOnly {
+      margin: 10px 0;
+
+      & > label {
+        color: $warmText !important;
+      }
+    }
   }
   
   @media #{$medium-and-up} {
