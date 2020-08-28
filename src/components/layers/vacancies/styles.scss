@@ -2,6 +2,11 @@
 @import "../../../theme/colors.scss";
 
 
+.vacancy {
+  cursor: pointer;
+}
+
+
 .vacanciesLayer {
   background-color: $baseLighten;
   padding-top: 60px !important;
@@ -53,7 +58,6 @@
   }
 
   & .vacancies {
-    cursor: pointer;
     columns: 50% 2;
   }
 

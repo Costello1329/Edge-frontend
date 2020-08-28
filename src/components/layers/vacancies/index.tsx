@@ -1,5 +1,5 @@
 import React from "react";
-import {Guid} from "../../../utils/guid";
+import {Vacancy} from "../../../models/vacancy";
 import {localization} from "../../../services/localization";
 import {Link} from "react-router-dom";
 import classNames from "classnames";
@@ -9,16 +9,6 @@ import "./styles.scss";
 
 
 const kMaxCompanyWordLength: number = 9;
-
-export interface Vacancy {
-  guid: Guid,
-  companyName: string,
-  jobTitle: string,
-  skillLevel: string,
-  stack: string,
-  moneySummary: string,
-  location: string
-};
 
 interface VacanciesLayerProps {
   vacancies: Vacancy[],

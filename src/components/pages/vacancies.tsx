@@ -3,9 +3,10 @@ import {discard} from "../../utils/Discard";
 import {BreadcrumbsLayer} from "../layers/breadcrumbs";
 import {VacanciesFilterLayer} from "../layers/vacanciesFilter";
 import {localization} from "../../services/localization";
-import {vacancies} from "../../models/statics";
 import {Breadcrumb} from "../layers/breadcrumbs";
-import {Vacancy} from "../layers/vacancies";
+import {Vacancy} from "../../models/vacancy";
+import {Preloader} from "../preloader";
+import {vacancies} from "../../models/statics";
 
 
 
@@ -51,6 +52,12 @@ extends React.Component<VacanciesPageProps, VacanciesPageState> {
   public readonly render = (): JSX.Element =>
     <React.Fragment>
       <BreadcrumbsLayer breadcrumbs={breadcrumbs}/>
-      <VacanciesFilterLayer/>
+      {
+        this.state.loading ?
+        <div className="container preloaderWrapper">
+          <Preloader/>
+        </div> :
+        <VacanciesFilterLayer vacancies={this.state.vacancies}/>
+      }
     </React.Fragment>;
 };

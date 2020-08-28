@@ -14,6 +14,7 @@ export interface Locale {
   joinOurTelegram: string,
   home: string,
   vacancies: string,
+  vacancy: string
   watchAllVacancies: string,
   telegramGroupName: string,
   russian: string,
@@ -51,6 +52,7 @@ export const ru_RU: Locale = {
   joinOurTelegram: "Присоединяйтесь к нам в Telegram:",
   home: "Домой",
   vacancies: "Вакансии",
+  vacancy: "Вакансия",
   watchAllVacancies: "Посмотреть все",
   telegramGroupName: "@sns_deanon",
   russian: "Русский",

@@ -1,5 +1,6 @@
 import React from "react";
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import {BrowserRouter as Router, Route, Redirect, Switch, RouteComponentProps}
+  from "react-router-dom";
 import Materialize from "materialize-css"; 
 import telegramIcon from '@iconify/icons-mdi/telegram';
 import {discard} from "../../utils/Discard";
@@ -11,6 +12,7 @@ import {LocaleType} from "../../services/localization/locales";
 import {Dropdown} from "../dropdown";
 import {HomePage} from "../pages/home";
 import {VacanciesPage} from "../pages/vacancies";
+import {VacancyPage} from "../pages/vacancy";
 
 import "./styles.scss";
 
@@ -25,8 +27,8 @@ export class App extends React.Component {
   public readonly render = (): JSX.Element =>
     <Router>
       <Dropdown
-        id = "dropdown-lang"
-        options = {[{
+        id="dropdown-lang"
+        options={[{
           text: localization.localize("russian"),
           callback: (): void => localization.setLocale(LocaleType.ru_RU)
         }, {
@@ -36,7 +38,7 @@ export class App extends React.Component {
       />
       <Header
         homePageUrl="/"
-        icons = {[{
+        icons={[{
           /// telegramIcon package has not been updated
           /// yet for new IconofyIcon support.
           data: { icon: telegramIcon as any, height: 29 },
@@ -51,12 +53,23 @@ export class App extends React.Component {
         }]}
       />
       <main>
-        <Route exact path="/">
-          <HomePage vacanciesPageUrl="/vacancies"/>
-        </Route>
-        <Route exact path="/vacancies">
-          <VacanciesPage homePageUrl="/"/>
-        </Route>
+        <Switch>
+          <Route exact path="/">
+            <HomePage vacanciesPageUrl="/vacancies"/>
+          </Route>
+          <Route exact path="/vacancies">
+            <VacanciesPage homePageUrl="/"/>
+          </Route>
+          <Route
+            path = {"/vacancies/:guid"}
+            exact
+            component = {
+              (innerProps: RouteComponentProps<{ guid: string }>): JSX.Element =>
+                <VacancyPage vacancyGuid = {innerProps.match.params.guid}/>
+            }
+          />
+          <Redirect to = "/"/>
+        </Switch>
       </main>
       <Footer/>
     </Router>;

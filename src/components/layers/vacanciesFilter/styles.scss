@@ -4,7 +4,6 @@
 
 .vacanciesFilterLayer {
   .card-panel.filter {
-    cursor: default !important;
     padding: 0 24px;
 
     & .row {
@@ -18,7 +17,6 @@
 
   .select-wrapper {
     & input.select-dropdown {
-      /* To be changed to .filter when aware of how to assign it to <select> */
       border-bottom-color: $warmTextDarken !important;
       color: $warmText !important;
     }

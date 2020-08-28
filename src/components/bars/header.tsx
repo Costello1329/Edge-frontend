@@ -34,7 +34,7 @@ const InnerHeader: React.FunctionComponent<HeaderProps> =
           }
           <ul id="nav-mobile" className="right">{
             props.icons.map((icon: HeaderIcon, index: number): JSX.Element =>
-              <li key = {`header-icon-${index}`}>
+              <li key={`header-icon-${index}`}>
                 <a
                   className={classNames([
                     index === props.icons.length - 1 ? "last" : "",

@@ -1,9 +1,8 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import {localization} from "../../../services/localization";
 import classNames from "classnames";
-import {vacancies} from "../../../models/statics"
 import {Vacancy, VacancyLevel, VacancySkill} from "../../../models/vacancy";
-import {Preloader} from "../../preloader";
 import Materialize from "materialize-css";
 
 import "./styles.scss";
@@ -12,14 +11,16 @@ import "./styles.scss";
 
 const kMaxCompanyWordLength: number = 9;
 
-interface VacanciesFilterLayerProps {};
+interface VacanciesFilterLayerProps {
+  vacancies: Vacancy[];
+};
 
 interface VacanciesFilterLayerState {
-  loading: boolean,
-  vacancies: Vacancy[],
   vacanciesFiltered: Vacancy[],
-  vacancyLevel: string,
-  vacancySkill: string
+  existingLocations: string[],
+  vacancyLevel: number,
+  vacancySkill: number,
+  vacancyLocation: number
 };
 
 export class VacanciesFilterLayer
@@ -27,32 +28,30 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
   constructor (props: VacanciesFilterLayerProps) {
     super(props);
     this.state = {
-      vacancies: [],
-      vacanciesFiltered: [],
-      loading: false,
-      vacancyLevel: "0",
-      vacancySkill: "0"
+      vacanciesFiltered: [... this.props.vacancies],
+      existingLocations: this.getExistingLocations(this.props.vacancies),
+      vacancyLevel: 0,
+      vacancySkill: 0,
+      vacancyLocation: 0
     };
   }
 
-  public componentDidMount (): void {
+  private readonly getExistingLocations =
+    (vacancies: Vacancy[]): string[] =>
+      [... new Set(
+        vacancies.map((vacancy => vacancy.location))
+      )];
+
+  public readonly componentDidMount = (): void =>
     this.updateDynamicContent();
 
-    /// Put requests to the server here.
-    this.setState(
-      { loading: true },
-      () => setTimeout(
-        () => this.setState({
-          vacancies,
-          vacanciesFiltered: vacancies,
-          loading: false
-        }), 1000
-      )
-    );
+  public componentDidUpdate (prevProps: VacanciesFilterLayerProps) {
+    if (prevProps !== this.props)
+      this.setState({
+        vacanciesFiltered: [... this.props.vacancies],
+        existingLocations: this.getExistingLocations(this.props.vacancies),
+      });
   }
-
-  public readonly componentDidUpdate =
-    (): void => this.updateDynamicContent();
 
   public updateDynamicContent (): void {
     const selects: HTMLSelectElement[] =
@@ -71,38 +70,54 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
 
   private readonly getFilteredVacancies = (
     levelOption: number,
-    skillOption: number
+    skillOption: number,
+    locationOption: number
   ): Vacancy[] =>
-    this.state.vacancies.filter(
+    this.props.vacancies.filter(
       (vacancy: Vacancy): boolean =>
         (levelOption === 0 ?
           true :
-          vacancy.skillLevel === Object.values(VacancyLevel)[levelOption - 1]
+          (vacancy.skillLevel === Object.values(VacancyLevel)[levelOption - 1])
         ) && (skillOption === 0 ?
           true :
-          vacancy.jobTitle === Object.values(VacancySkill)[skillOption - 1]
+          (vacancy.jobTitle === Object.values(VacancySkill)[skillOption - 1])
+        ) && (locationOption === 0 ?
+          true :
+          (vacancy.location === this.state.existingLocations[locationOption - 1])
         )
     );
 
   public readonly handleVacancyLevelChange =
-    (vacancyLevel: string): void =>
+    (vacancyLevel: number): void =>
       this.setState({
         vacanciesFiltered: this.getFilteredVacancies(
-          parseInt(vacancyLevel),
-          parseInt(this.state.vacancySkill)
+          vacancyLevel,
+          this.state.vacancySkill,
+          this.state.vacancyLocation
         ), vacancyLevel
       });
 
   public readonly handleVacancySkillChange =
-    (vacancySkill: string): void =>
+    (vacancySkill: number): void =>
       this.setState({
         vacanciesFiltered: this.getFilteredVacancies(
-          parseInt(this.state.vacancyLevel),
-          parseInt(vacancySkill)
+          this.state.vacancyLevel,
+          vacancySkill,
+          this.state.vacancyLocation
         ), vacancySkill
       });
 
-  private readonly getLoadedContents = (): JSX.Element => 
+  public readonly handleVacancyLocationChange =
+    (vacancyLocation: number): void =>
+      this.setState({
+        vacanciesFiltered: this.getFilteredVacancies(
+          this.state.vacancyLevel,
+          this.state.vacancySkill,
+          vacancyLocation
+        ), vacancyLocation
+      });
+
+  public readonly render = (): JSX.Element => 
     <div className="vacanciesFilterLayer">
       <div className="container">
         <div className="vacancies row">
@@ -116,7 +131,8 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
                       value = {this.state.vacancyLevel}
                       onChange = {
                         (event: React.ChangeEvent<HTMLSelectElement>): void =>
-                          this.handleVacancyLevelChange(event.target.value)
+                          this.handleVacancyLevelChange(
+                            parseInt(event.target.value))
                       }
                     >
                       <option value="" disabled selected>
@@ -137,7 +153,8 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
                       value = {this.state.vacancySkill}
                       onChange = {
                         (event: React.ChangeEvent<HTMLSelectElement>): void =>
-                          this.handleVacancySkillChange(event.target.value)
+                          this.handleVacancySkillChange(
+                            parseInt(event.target.value))
                       }
                     >
                       <option value="" disabled selected>
@@ -154,14 +171,25 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
                     </select>  
                   </div>
                   <div className = "col s12 noSidePadding">
-                    <select>
+                    <select
+                      value = {this.state.vacancyLocation}
+                      onChange = {
+                        (event: React.ChangeEvent<HTMLSelectElement>): void =>
+                          this.handleVacancyLocationChange(
+                            parseInt(event.target.value))
+                      }
+                    >
                       <option value="" disabled selected>
                         {localization.localize("location")}
                       </option>
-                      <option value="1">Option 1</option>
-                      <option value="2">Option 2</option>
-                      <option value="3">Option 3</option>
-                    </select>
+                      <option value={0}>{localization.localize("all")}</option>
+                      {
+                        this.state.existingLocations.map(
+                          (value: string, index: number): JSX.Element =>
+                            <option value={index + 1}>{value}</option>
+                        )
+                      }
+                    </select>  
                   </div>
                 </div>
               </div>
@@ -170,51 +198,49 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
           <div className="col s12 m9 pull-m3">{
             this.state.vacanciesFiltered.map((vacancy: Vacancy): JSX.Element =>
               <article className="col s12">
-                <div className="card-panel">
-                  <header className="row">
-                    <div className="col s6 jobTitle">
-                      <h5>{localization.localize(vacancy.jobTitle as any)}</h5>
-                      <p className="secondLine pNoMargin">
-                        {localization.localize(vacancy.skillLevel)}
-                      </p>
-                    </div>
-                    <div className="col s6">
-                      <div className="col s12 colNoSidePadding companyName">
-                        <h5 className={classNames([
-                          "right pNoMargin",
-                          vacancy.companyName.split(" ").reduce(
-                            (accumulator: string, word: string) =>
-                              accumulator.length < word.length ? word : accumulator,
-                            ""
-                          ).length > kMaxCompanyWordLength ?
-                          "smaller" : ""
-                        ])}>{vacancy.companyName}</h5>
-                      </div>
-                      <div className="col s12 colNoSidePadding location">
-                        <p className="right pNoMargin secondLine">
-                          {vacancy.location}
+                <Link to = {`${document.location.pathname}/${vacancy.guid.str}`}>
+                  <div className="card-panel vacancy">
+                    <header className="row">
+                      <div className="col s6 jobTitle">
+                        <h5>{localization.localize(vacancy.jobTitle as any)}</h5>
+                        <p className="secondLine pNoMargin">
+                          {localization.localize(vacancy.skillLevel)}
                         </p>
                       </div>
-                    </div>
-                  </header>
-                  <section>
-                    <div className="stack">
-                      <p>{vacancy.stack}</p>
-                    </div>
-                    <div className="moneySummary">
-                      <h6>{vacancy.moneySummary}</h6>
-                    </div>
-                  </section>
-                </div>
+                      <div className="col s6">
+                        <div className="col s12 colNoSidePadding companyName">
+                          <h5 className={classNames([
+                            "right pNoMargin",
+                            vacancy.companyName.split(" ").reduce(
+                              (accumulator: string, word: string) =>
+                                accumulator.length < word.length ?
+                                  word : accumulator,
+                              ""
+                            ).length > kMaxCompanyWordLength ?
+                            "smaller" : ""
+                          ])}>{vacancy.companyName}</h5>
+                        </div>
+                        <div className="col s12 colNoSidePadding location">
+                          <p className="right pNoMargin secondLine">
+                            {vacancy.location}
+                          </p>
+                        </div>
+                      </div>
+                    </header>
+                    <section>
+                      <div className="stack">
+                        <p>{vacancy.stack}</p>
+                      </div>
+                      <div className="moneySummary">
+                        <h6>{vacancy.moneySummary}</h6>
+                      </div>
+                    </section>
+                  </div>
+                </Link>
               </article>
             )
           }</div>
         </div>
       </div>
     </div>;
-
-  public readonly render = (): JSX.Element =>
-    this.state.loading ?
-    <div className = "container preloaderWrapper"><Preloader/></div> :
-    this.getLoadedContents();
 };

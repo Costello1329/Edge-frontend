@@ -12,6 +12,10 @@ export interface Vacancy {
   location: string
 };
 
+export interface FullVacancy extends Vacancy {
+  description: string
+}
+
 export enum VacancyLevel {
   Junior = "vacancyLevelJunior",
   Middle = "vacancyLevelMiddle",
