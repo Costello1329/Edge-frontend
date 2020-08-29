@@ -6,7 +6,7 @@ export type Vacancy = Pick<FullVacancy,
   "guid" |
   "premium" |
   "location" |
-  "sallary" |
+  "salary" |
   "level" |
   "skill" |
   "stack" |
@@ -32,7 +32,7 @@ export interface FullVacancy {
     industry: string,
     website: string
   },
-  sallary: {
+  salary: {
     from: number,
     to: number
   }

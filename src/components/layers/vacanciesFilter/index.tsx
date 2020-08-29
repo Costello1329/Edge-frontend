@@ -140,104 +140,108 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
     <div className="vacanciesFilterLayer">
       <div className="container">
         <div className="vacancies row">
-          <div className="col s12 m3_5 push-m9">
+          <div className="col s12 l3 push-l9">
             <div className="card-panel filter">
               <div className="row">
                 <div className="input-field col s12">
                   <h5>{localization.localize("filter")}</h5>
-                  <div className = "col s12 noSidePadding">
-                    <select
-                      {
-                        ... this.state.vacancyLevel === null ?
-                        {} : {value: this.state.vacancyLevel}
-                      }
-                      onChange = {
-                        (event: React.ChangeEvent<HTMLSelectElement>): void =>
-                          this.handleVacancyLevelChange(
-                            parseInt(event.target.value))
-                      }
-                    >
-                      <option value="" disabled selected>
-                        {localization.localize("level")}
-                      </option>
-                      {
-                        ["all", ... Object.values(VacancyLevel)].map(
-                          (value: string, index: number): JSX.Element =>
-                            <option value={index}>
-                              {localization.localize(value as any)}
-                            </option>
-                        )
-                      }
-                    </select>  
-                  </div>
-                  <div className = "col s12 noSidePadding">
-                    <select
-                      {
-                        ... this.state.vacancySkill === null ?
-                        {} : {value: this.state.vacancySkill}
-                      }
-                      onChange = {
-                        (event: React.ChangeEvent<HTMLSelectElement>): void =>
-                          this.handleVacancySkillChange(
-                            parseInt(event.target.value))
-                      }
-                    >
-                      <option value="" disabled selected>
-                        {localization.localize("stack")}
-                      </option>
-                      {
-                        ["all", ... Object.values(VacancySkill)].map(
-                          (value: string, index: number): JSX.Element =>
-                            <option value={index}>
-                              {localization.localize(value as any)}
-                            </option>
-                        )
-                      }
-                    </select>  
-                  </div>
-                  <div className = "col s12 noSidePadding">
-                    <select
-                      {
-                        ... this.state.vacancyLocation === null ?
-                        {} : {value: this.state.vacancyLocation}
-                      }
-                      onChange = {
-                        (event: React.ChangeEvent<HTMLSelectElement>): void =>
-                          this.handleVacancyLocationChange(
-                            parseInt(event.target.value))
-                      }
-                    >
-                      <option value="" disabled selected>
-                        {localization.localize("city")}
-                      </option>
-                      <option value={0}>{localization.localize("all")}</option>
-                      {
-                        this.state.existingLocations.map(
-                          (value: string, index: number): JSX.Element =>
-                            <option value={index + 1}>{value}</option>
-                        )
-                      }
-                    </select>
-                  </div>
-                  <div className="col s12 noSidePadding remoteOnly">
-                    <label htmlFor="remoteOnlyCheckbox">
-                      <input
-                        type="checkbox"
-                        id="remoteOnlyCheckbox"
-                        checked={this.state.vacancyRemoteOnly}
-                        onChange={
-                          (event: React.ChangeEvent<HTMLInputElement>): void =>
-                            this.handleRemoteOnlyChange(event.target.checked)
+                  <div className="row">
+                    <div className = "col s12 m6 l12 noSidePadding">
+                      <select
+                        {
+                          ... this.state.vacancyLevel === null ?
+                          {} : {value: this.state.vacancyLevel}
                         }
-                      />
-                      <span>{localization.localize("remoteOnly")}</span>
-                    </label>
+                        onChange = {
+                          (event: React.ChangeEvent<HTMLSelectElement>): void =>
+                            this.handleVacancyLevelChange(
+                              parseInt(event.target.value))
+                        }
+                      >
+                        <option value="" disabled selected>
+                          {localization.localize("level")}
+                        </option>
+                        {
+                          ["all", ... Object.values(VacancyLevel)].map(
+                            (value: string, index: number): JSX.Element =>
+                              <option value={index}>
+                                {localization.localize(value as any)}
+                              </option>
+                          )
+                        }
+                      </select>  
+                    </div>
+                    <div className="col s12 m6 l12 noSidePadding">
+                      <select
+                        {
+                          ... this.state.vacancySkill === null ?
+                          {} : {value: this.state.vacancySkill}
+                        }
+                        onChange = {
+                          (event: React.ChangeEvent<HTMLSelectElement>): void =>
+                            this.handleVacancySkillChange(
+                              parseInt(event.target.value))
+                        }
+                      >
+                        <option value="" disabled selected>
+                          {localization.localize("stack")}
+                        </option>
+                        {
+                          ["all", ... Object.values(VacancySkill)].map(
+                            (value: string, index: number): JSX.Element =>
+                              <option value={index}>
+                                {localization.localize(value as any)}
+                              </option>
+                          )
+                        }
+                      </select>  
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col s12 m6 l12 noSidePadding">
+                      <select
+                        {
+                          ... this.state.vacancyLocation === null ?
+                          {} : {value: this.state.vacancyLocation}
+                        }
+                        onChange = {
+                          (event: React.ChangeEvent<HTMLSelectElement>): void =>
+                            this.handleVacancyLocationChange(
+                              parseInt(event.target.value))
+                        }
+                      >
+                        <option value="" disabled selected>
+                          {localization.localize("city")}
+                        </option>
+                        <option value={0}>{localization.localize("all")}</option>
+                        {
+                          this.state.existingLocations.map(
+                            (value: string, index: number): JSX.Element =>
+                              <option value={index + 1}>{value}</option>
+                          )
+                        }
+                      </select>
+                    </div>
+                    <div className="col s12 m6 l12 oSidePadding remoteOnly">
+                      <label htmlFor="remoteOnlyCheckbox">
+                        <input
+                          type="checkbox"
+                          id="remoteOnlyCheckbox"
+                          checked={this.state.vacancyRemoteOnly}
+                          onChange={
+                            (event: React.ChangeEvent<HTMLInputElement>): void =>
+                              this.handleRemoteOnlyChange(event.target.checked)
+                          }
+                        />
+                        <span>{localization.localize("remoteOnly")}</span>
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col s12 m8 pull-m3">{
+          <div className="col s12 l8_5 pull-l3">{
             this.state.vacanciesFiltered.sort(
               (first: VacancyProps, second: VacancyProps): number => {
                 if (

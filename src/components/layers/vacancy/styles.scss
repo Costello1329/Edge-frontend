@@ -1,3 +1,18 @@
-.fullVacancy {
-  color: red;
+@import 'materialize-css/sass/materialize.scss';
+@import "../../../theme/colors.scss";
+
+.vacancy.full {
+  cursor: default;
+}
+
+section.description {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+a.btn {
+  &,
+  &:hover {
+    background-color: $telegram;
+  }
 }

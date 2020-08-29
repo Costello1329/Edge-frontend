@@ -51,6 +51,21 @@
     color: $warmText !important;
     border-radius: 2px;
 
+    @media screen and (min-width: 600px) and (max-width: 992px) {
+      & .input-field > .row .col:first-child {
+        padding-right: 1em !important;
+      }
+
+      & .input-field > .row .col:last-child {
+        padding-left: 1em !important;
+      }
+    }
+
+    & [type="checkbox"]:checked + span:not(.lever)::before {
+      border-right-color: $warmText;
+      border-bottom-color: $warmText;
+    }
+
     & .remoteOnly {
       margin: 10px 0;
 
@@ -60,9 +75,9 @@
     }
   }
   
-  @media #{$medium-and-up} {
-    & .vacancies > .m3_5 {
-      width: percentage(7/24) !important;
+  @media #{$large-and-up} {
+    & .vacancies > .l8_5 {
+      width: percentage(17/24) !important;
     }
   }
 }

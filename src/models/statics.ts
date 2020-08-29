@@ -11,7 +11,7 @@ export const vacancies: Vacancy[] = [{
     city: "London",
     country: "England"
   },
-  sallary: { from: 3000, to: 5000 },
+  salary: { from: 3000, to: 5000 },
   level: VacancyLevel.Senior,
   skill: VacancySkill.Fullstack,
   stack: ["JS", "TS", "React", "SCSS", "SASS", "Rust", "Python"],
@@ -24,7 +24,7 @@ export const vacancies: Vacancy[] = [{
     city: "Moscow",
     country: "Russia"
   },
-  sallary: { from: 2000, to: 2500 },
+  salary: { from: 2000, to: 2500 },
   level: VacancyLevel.Middle,
   skill: VacancySkill.Fullstack,
   stack: ["JS", "TS", "React"],
@@ -37,7 +37,7 @@ export const vacancies: Vacancy[] = [{
     city: "Moscow",
     country: "Russia"
   },
-  sallary: { from: 4000, to: 5000 },
+  salary: { from: 4000, to: 5000 },
   level: VacancyLevel.Senior,
   skill: VacancySkill.Backend,
   stack: ["Scala", "Java", "Yaml"],
@@ -50,7 +50,7 @@ export const vacancies: Vacancy[] = [{
     city: "Moscow",
     country: "Russia"
   },
-  sallary: { from: 1000, to: 2000 },
+  salary: { from: 1000, to: 2000 },
   level: VacancyLevel.Middle,
   skill: VacancySkill.Desktop,
   stack: ["1C"],
@@ -63,7 +63,7 @@ export const vacancies: Vacancy[] = [{
     city: "Moscow",
     country: "Russia"
   },
-  sallary: { from: 100, to: 100 },
+  salary: { from: 100, to: 100 },
   level: VacancyLevel.CTO,
   skill: VacancySkill.SecurityEngineer,
   stack: ["AutoHotkey", "Docker", "SSH"],
@@ -76,7 +76,7 @@ export const vacancies: Vacancy[] = [{
     city: "Moscow",
     country: "Russia"
   },
-  sallary: { from: 10000, to: 15000 },
+  salary: { from: 10000, to: 15000 },
   level: VacancyLevel.Middle,
   skill: VacancySkill.Fullstack,
   stack: ["Js", "Ts", "React", "Redux", "MobX", "Python", "Django", "SQL"],
@@ -100,7 +100,7 @@ export const fullVacancy: FullVacancy = {
     industry: "Desktop, mobile",
     website: "mail.ru"
   },
-  sallary: {
+  salary: {
     from: 3000,
     to: 4000
   },

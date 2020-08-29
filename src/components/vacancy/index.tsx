@@ -8,7 +8,7 @@ import "./styles.scss";
 
 
 
-const kMaxCompanyWordLength: number = 9;
+const kMaxCompanyWordLength: number = 9; // TODO: вынести на общий уровень, в настройки?
 
 
 export const Vacancy: React.FunctionComponent<VacancyProps> =
@@ -46,13 +46,21 @@ export const Vacancy: React.FunctionComponent<VacancyProps> =
             </div>
           </div>
         </header>
-        <section>
-          <div className="stack">
-            <p>{props.stack.join(", ")}</p>
+        <section className="row details">
+          <div className="col s6">
+            <div className="stack">
+              <p>{props.stack.join(", ")}</p>
+            </div>
+            <div className="moneySummary">
+              <h6>{props.salary.from} – {props.salary.to} $</h6>
+            </div>
           </div>
-          <div className="moneySummary">
-            <h6>{props.sallary.from} - {props.sallary.to} $</h6>
-          </div>
+          <div className="col s6">{
+            props.remote ?
+            <span className="remote" /* Localize: it throws an exception */>
+              Только удалённо
+            </span> : ""
+          }</div>
         </section>
       </div>
     </Link>;
