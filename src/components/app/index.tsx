@@ -3,16 +3,17 @@ import {BrowserRouter as Router, Route, Redirect, Switch, RouteComponentProps}
   from "react-router-dom";
 import Materialize from "materialize-css"; 
 import telegramIcon from '@iconify/icons-mdi/telegram';
-import {discard} from "../../utils/Discard";
+import {discard} from "../../utils/discard";
 import {Header} from "../bars/header";
 import {Footer} from "../bars/footer";
 import {preferences} from "../../services/preferences";
 import {localization} from "../../services/localization";
 import {LocaleType} from "../../services/localization/locales";
-import {Dropdown} from "../dropdown";
+import {Dropdown} from "../ui/dropdown";
 import {HomePage} from "../pages/home";
 import {VacanciesPage} from "../pages/vacancies";
 import {VacancyPage} from "../pages/vacancy";
+import {PostVacancyPage} from "../pages/postVacancy";
 
 import "./styles.scss";
 
@@ -20,9 +21,7 @@ import "./styles.scss";
 
 export class App extends React.Component {
   public readonly componentDidMount = (): void =>
-    discard(setTimeout((): void => {
-      Materialize.AutoInit();
-    }));
+    discard(setTimeout((): void => Materialize.AutoInit()));
 
   public readonly render = (): JSX.Element =>
     <Router>
@@ -37,7 +36,6 @@ export class App extends React.Component {
         }]}
       />
       <Header
-        homePageUrl="/"
         icons={[{
           /// telegramIcon package has not been updated
           /// yet for new IconofyIcon support.
@@ -55,10 +53,13 @@ export class App extends React.Component {
       <main>
         <Switch>
           <Route exact path="/">
-            <HomePage vacanciesPageUrl="/vacancies"/>
+            <HomePage/>
           </Route>
           <Route exact path="/vacancies">
-            <VacanciesPage homePageUrl="/"/>
+            <VacanciesPage/>
+          </Route>
+          <Route exact path="/post_vacancy">
+            <PostVacancyPage/>
           </Route>
           <Route
             path = {"/vacancies/:guid"}

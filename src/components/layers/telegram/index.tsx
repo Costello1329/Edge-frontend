@@ -2,7 +2,7 @@ import React from "react";
 import {localization} from "../../../services/localization";
 import {InlineIcon} from '@iconify/react';
 import telegramIcon from '@iconify/icons-mdi/telegram';
-import {discard} from "../../../utils/Discard";
+import {discard} from "../../../utils/discard";
 
 
 import "./styles.scss";

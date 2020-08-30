@@ -19,15 +19,12 @@ import "./styles.scss";
 const kVacanciesCount: number = 4;
 
 
-interface HomePageProps {
-  vacanciesPageUrl: string
-};
+interface HomePageProps {};
 
 export const HomePage: React.FunctionComponent<HomePageProps> =
   (props: HomePageProps): JSX.Element =>
     <React.Fragment>
       <MainLayer
-        vacanciesPageUrl = {props.vacanciesPageUrl}
         companyLogoSrcs = {[
           <LogoKaspersky/>,
           <Logo1C/>,
@@ -40,7 +37,7 @@ export const HomePage: React.FunctionComponent<HomePageProps> =
       <VacanciesLayer
         button = {{
           text: localization.localize("watchAllVacancies"),
-          url: props.vacanciesPageUrl
+          url: "/vacancies"
         }}
         vacancies = {vacancies.slice(0, kVacanciesCount)}
       />

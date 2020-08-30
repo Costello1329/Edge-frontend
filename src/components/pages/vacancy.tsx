@@ -1,26 +1,28 @@
 import React from "react";
-import {discard} from "../../utils/Discard";
+import {discard} from "../../utils/discard";
 import {BreadcrumbsLayer} from "../layers/breadcrumbs";
 import {localization} from "../../services/localization";
 import {Breadcrumb} from "../layers/breadcrumbs";
 import {FullVacancy} from "../../models/vacancy";
-import {Preloader} from "../preloader";
-import {VacancyLayer} from "../layers/vacancy";
+import {Preloader} from "../ui/preloader";
+import {FullVacancyLayer} from "../layers/fullVacancy";
 import {fullVacancy} from "../../models/statics";
 import {Redirect} from "react-router-dom";
 
 
 
-const getBreadcrumbs = (vacancyGuid: string): Breadcrumb[] => [{
-  text: localization.localize("home"),
-  url: "/"
-}, {
-  text: localization.localize("vacancies"),
-  url: "/vacancies"
-}, {
-  text: localization.localize("vacancy"),
-  url: `/vacancies/${vacancyGuid}`
-}];
+const getBreadcrumbs =
+(vacancyGuid: string): Breadcrumb[] =>
+  [{
+    text: localization.localize("home"),
+    url: "/"
+  }, {
+    text: localization.localize("vacancies"),
+    url: "/vacancies"
+  }, {
+    text: localization.localize("vacancy"),
+    url: `/vacancies/${vacancyGuid}`
+  }];
 
 
 interface VacancyPageProps {
@@ -61,7 +63,7 @@ extends React.Component<VacancyPageProps, VacancyPageState> {
         </div> : (
           this.state.vacancy === null ?
           <Redirect to="/vacancies"/> :
-          <VacancyLayer vacancy={this.state.vacancy}/>
+          <FullVacancyLayer vacancy={this.state.vacancy}/>
         )
       }
     </React.Fragment>;

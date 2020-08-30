@@ -1,10 +1,10 @@
 import React from "react";
 import {localization} from "../../../services/localization";
 import {FullVacancy} from "../../../models/vacancy";
-import { InlineIcon } from '@iconify/react';
+import {InlineIcon} from '@iconify/react';
 import telegramIcon from '@iconify/icons-mdi/telegram';
 import classNames from "classnames";
-import {discard} from "../../../utils/Discard";
+import {discard} from "../../../utils/discard";
 
 import "./styles.scss";
 
@@ -12,13 +12,13 @@ import "./styles.scss";
 
 const kMaxCompanyWordLength: number = 9;
 
-interface VacancyLayerProps {
+interface FullVacancyLayerProps {
   vacancy: FullVacancy;
 };
 
-export const VacancyLayer:
-React.FunctionComponent<VacancyLayerProps> =
-  ({ vacancy }: VacancyLayerProps): JSX.Element =>
+export const FullVacancyLayer:
+React.FunctionComponent<FullVacancyLayerProps> =
+  ({ vacancy }: FullVacancyLayerProps): JSX.Element =>
     <div className="vacancyLayer">
       <div className="container">
         <div className="fullVacancy row">
@@ -66,8 +66,8 @@ React.FunctionComponent<VacancyLayerProps> =
                 </div>
                 <div className="col s6">{
                   vacancy.remote ?
-                    <span className="remote" /* Localize: it throws an exception */>
-                      Только удалённо
+                    <span className="remote">
+                      {localization.localize("remote")}
                     </span>
                   : ""
                 }</div>
@@ -77,10 +77,9 @@ React.FunctionComponent<VacancyLayerProps> =
               </section>
               <a
                 className="btn waves-effect"
-                onClick={(): void => discard(window.open("#"))} /* TODO: 
-                get the tg:// link here */
+                onClick={(): void => discard(window.open("#"))}
               >
-                Откликнуться в Telegram
+                {localization.localize("respondInTelegram")}
                 <i className="material-icons left">
                   <InlineIcon icon={telegramIcon} height={23} />
                 </i>

@@ -4,21 +4,24 @@ import {Guid} from "../guid";
 
 
 /* NOT EMPTY */
-
-export class ValidationErrorEmpty extends ValidationError {
+export class Empty extends ValidationError {
+  static kGuid: string = "e0280609-5823-419a-9a50-6438111fe01e";
+  
   constructor () {
-    super(new Guid("3d112e0b-2070-4f30-b865-3e4d1facec68"));
+    super(new Guid(Empty.kGuid));
   }
 };
 
 export const ruleNotEmpty = (value: string): ValidationError[] =>
-  value === "" ? [new ValidationErrorEmpty()] : [];
+  value === "" ? [new Empty()] : [];
 
 
 /* GUID */
-export class ValidationErrorNotGuid extends ValidationError {
+export class NotGuid extends ValidationError {
+  static kGuid: string = "d30f4ed2-722e-4d75-844b-ca1f098bae29";
+  
   constructor () {
-    super(new Guid("70062b0c-996a-48c1-a7f2-b0b4353e6fa0"));
+    super(new Guid(Empty.kGuid));
   }
 };
 
@@ -27,7 +30,7 @@ export const ruleIsGuid = (value: string): ValidationError[] => {
     /^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[8-b][0-9a-f]{3}-[0-9a-f]{12}$/;
 
   if (value.match(guidMask) === null)
-    return [new ValidationErrorNotGuid()];
+    return [new NotGuid()];
 
   else
     return [];

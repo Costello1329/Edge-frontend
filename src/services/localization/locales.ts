@@ -14,7 +14,8 @@ export interface Locale {
   joinOurTelegram: string,
   home: string,
   vacancies: string,
-  vacancy: string
+  vacancy: string,
+  postVacancy: string,
   watchAllVacancies: string,
   telegramGroupName: string,
   russian: string,
@@ -26,6 +27,7 @@ export interface Locale {
   city: string,
   salary: string,
   all: string,
+  remote: string,
   remoteOnly: string,
   vacancyLevelIntern: string,
   vacancyLevelJunior: string,
@@ -41,7 +43,9 @@ export interface Locale {
   vacancySkillMobile: string,
   vacancySkillDesktop: string,
   vacancySkillDataScience: string,
-  vacancySkillSecurityEngineer: string
+  vacancySkillSecurityEngineer: string,
+  respondInTelegram: string,
+  companyName: string
 };
 
 export const ru_RU: Locale = {
@@ -59,10 +63,11 @@ export const ru_RU: Locale = {
   mainLayerCompaniesTitle: "Нам доверяют",
   viewVacancies: "Посмотреть",
   putVacancy: "Разместить",
-  joinOurTelegram: "Присоединяйтесь к нам в&nbsp;Telegram:",
+  joinOurTelegram: "Присоединяйтесь к нам в Telegram:",
   home: "Домой",
   vacancies: "Вакансии",
   vacancy: "Вакансия",
+  postVacancy: "Разместить вакансию",
   watchAllVacancies: "Посмотреть все",
   telegramGroupName: "@sns_deanon",
   russian: "Русский",
@@ -74,6 +79,7 @@ export const ru_RU: Locale = {
   city: "Город",
   salary: "Ставка",
   all: "Все",
+  remote: "Удаленно",
   remoteOnly: "Только удаленно",
   vacancyLevelIntern: "Intern",
   vacancyLevelJunior: "Junior",
@@ -89,7 +95,9 @@ export const ru_RU: Locale = {
   vacancySkillMobile: "Mobile",
   vacancySkillDesktop: "Desktop",
   vacancySkillDataScience: "Data Science",
-  vacancySkillSecurityEngineer: "Security Engineer"
+  vacancySkillSecurityEngineer: "Security Engineer",
+  respondInTelegram: "Откликнуться в Telegram",
+  companyName: "Название компании"
 };
 
 export const en_GB: Locale = {} as Locale;

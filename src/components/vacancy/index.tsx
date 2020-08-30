@@ -8,7 +8,8 @@ import "./styles.scss";
 
 
 
-const kMaxCompanyWordLength: number = 9; // TODO: вынести на общий уровень, в настройки?
+// TODO: sift up this property to a higher level interface? Maybe create config?
+const kMaxCompanyWordLength: number = 9;
 
 
 export const Vacancy: React.FunctionComponent<VacancyProps> =
@@ -57,8 +58,8 @@ export const Vacancy: React.FunctionComponent<VacancyProps> =
           </div>
           <div className="col s6">{
             props.remote ?
-            <span className="remote" /* Localize: it throws an exception */>
-              Только удалённо
+            <span className="remote">
+              {localization.localize("remote")}
             </span> : ""
           }</div>
         </section>

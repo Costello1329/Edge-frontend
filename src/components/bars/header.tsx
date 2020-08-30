@@ -17,7 +17,6 @@ interface HeaderIcon {
 
 type HeaderProps = {
   icons: HeaderIcon[],
-  homePageUrl: string,
 } & RouteComponentProps;
 
 const InnerHeader: React.FunctionComponent<HeaderProps> =
@@ -28,7 +27,7 @@ const InnerHeader: React.FunctionComponent<HeaderProps> =
           {
             props.location.pathname === "/" ?
             <a className="edgeBarText"><EdgeLogo/></a> :
-            <Link to={props.homePageUrl}>
+            <Link to={"/"}>
               <a className="edgeBarText"><EdgeLogo/></a>
             </Link>
           }

@@ -7,7 +7,6 @@ import "./styles.scss";
 
 
 interface MainLayerProps {
-  vacanciesPageUrl: string,
   companyLogoSrcs: JSX.Element[]
 }
 
@@ -29,11 +28,13 @@ export const MainLayer: React.FunctionComponent<MainLayerProps> =
             )
           }
           <div className="mainLayerButtons">
-            <a className="btn waves-effect">
-              {localization.localize("putVacancy")}
-              <i className="material-icons left">add</i>
-            </a>
-            <Link to={props.vacanciesPageUrl} className="btnRight">
+            <Link to={"/post_vacancy"}>
+              <a className="btn waves-effect">
+                {localization.localize("putVacancy")}
+                <i className="material-icons left">add</i>
+              </a>
+            </Link>
+            <Link to={"/vacancies"} className="btnRight">
               <a className="btn waves-effect">
                 <i className="material-icons left">format_align_justify</i>
                 {localization.localize("viewVacancies")}
@@ -52,8 +53,7 @@ export const MainLayer: React.FunctionComponent<MainLayerProps> =
                   className="mainLayerCompanyLogo"
                   key={`main-layer-logo-${index}`}
                 >
-                  <span></span>
-                  {logo}
+                  <span>{logo}</span>
                 </div>
             )
           }</div>

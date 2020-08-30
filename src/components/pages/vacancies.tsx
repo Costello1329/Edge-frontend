@@ -1,11 +1,11 @@
 import React from "react";
-import {discard} from "../../utils/Discard";
+import {discard} from "../../utils/discard";
 import {BreadcrumbsLayer} from "../layers/breadcrumbs";
 import {VacanciesFilterLayer} from "../layers/vacanciesFilter";
 import {localization} from "../../services/localization";
 import {Breadcrumb} from "../layers/breadcrumbs";
 import {Vacancy} from "../../models/vacancy";
-import {Preloader} from "../preloader";
+import {Preloader} from "../ui/preloader";
 import {vacancies} from "../../models/statics";
 
 
@@ -19,18 +19,14 @@ const breadcrumbs: Breadcrumb[] = [{
 }];
 
 
-interface VacanciesPageProps {
-  homePageUrl: string
-};
-
 interface VacanciesPageState {
   loading: boolean,
   vacancies: Vacancy[]
 }
 
 export class VacanciesPage
-extends React.Component<VacanciesPageProps, VacanciesPageState> {
-  constructor (props: VacanciesPageProps) {
+extends React.Component<{}, VacanciesPageState> {
+  constructor (props: {}) {
     super(props);
     this.state = {
       loading: false,
