@@ -1,4 +1,4 @@
-import {ValidationError} from "../../../../utils/validation/validator";
+import {ValidationError, Localizer} from "../../../../utils/validation/validator";
 import {Guid} from "../../../../utils/guid";
 
 
@@ -49,5 +49,25 @@ export const ruleIsCompany = (value: string): ValidationError[] => {
   if (value.indexOf("  ") !== -1)
     validationErrors.push(new DoubledSpaces());
 
-  return validationErrors;
+  if (value.length !== 0 && (value[0] === ' ' || value[value.length - 1] === ' '))
+    validationErrors.push(new SideSpaces());
+
+    return validationErrors;
 };
+
+
+export const companyLocalizer: Localizer =
+  (error: ValidationError): string | null => {
+    switch (error.guid.str) {
+      case ProhibitedSymbols.kGuid:
+        return "Запрещенный символ";
+      case TooLong.kGuid:
+        return "Длинная строка";
+      case SideSpaces.kGuid:
+        return "Пробелы в начале и конце запрещены";
+      case DoubledSpaces.kGuid:
+        return "Сдвоенные пробелы запрещены";
+    }
+
+    return null;
+  }

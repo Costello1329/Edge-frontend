@@ -1,9 +1,10 @@
 import React from "react";
 import {Input} from "../../ui/input";
 import {Validator} from "../../../utils/validation/validator";
-import {ruleNotEmpty} from "../../../utils/validation/commonValidators";
-import {ruleIsCompany} from "./validation/company";
-import { localization } from "../../../services/localization";
+import {ruleNotEmpty, commonLocalizer}
+  from "../../../utils/validation/commonValidators";
+import {ruleIsCompany, companyLocalizer} from "./validation/company";
+import {localization} from "../../../services/localization";
 
 
 
@@ -25,10 +26,15 @@ extends React.Component<{}, PostVacancyFormLayerState> {
           title = {localization.localize("companyName")}
           id = "post-vacancy-form-company-name"
           type = "text"
-          validator = {new Validator([
-            ruleNotEmpty,
-            ruleIsCompany
-          ])}
+          validator = {
+            new Validator([
+              ruleNotEmpty,
+              ruleIsCompany
+            ], [
+              commonLocalizer,
+              companyLocalizer
+            ])
+          }
         />
       </div>;
 };

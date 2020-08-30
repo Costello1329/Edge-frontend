@@ -1,5 +1,6 @@
 import {ValidationError} from "./validator";
 import {Guid} from "../guid";
+import { localization } from "../../services/localization";
 
 
 
@@ -35,3 +36,14 @@ export const ruleIsGuid = (value: string): ValidationError[] => {
   else
     return [];
 };
+
+
+/* LOCALIZER */
+export const commonLocalizer = (error: ValidationError): string | null => {
+  switch (error.guid.str) {
+    case Empty.kGuid:
+      return localization.localize("EmptyValidationError");
+  }
+
+  return null;
+}

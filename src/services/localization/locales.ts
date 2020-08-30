@@ -45,7 +45,8 @@ export interface Locale {
   vacancySkillDataScience: string,
   vacancySkillSecurityEngineer: string,
   respondInTelegram: string,
-  companyName: string
+  companyName: string,
+  EmptyValidationError: string
 };
 
 export const ru_RU: Locale = {
@@ -97,7 +98,8 @@ export const ru_RU: Locale = {
   vacancySkillDataScience: "Data Science",
   vacancySkillSecurityEngineer: "Security Engineer",
   respondInTelegram: "Откликнуться в Telegram",
-  companyName: "Название компании"
+  companyName: "Название компании",
+  EmptyValidationError: "Обязательное поле"
 };
 
 export const en_GB: Locale = {} as Locale;
