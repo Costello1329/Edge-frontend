@@ -85,10 +85,14 @@
   }
 
   & .mainLayerButtons {
-    margin-top: 25px;
+    margin-top: 15px;
 
-    & > .btnRight {
-      margin-left: 15px;
+    & .btn {
+      margin-top: 10px;
+    }
+
+    & .btnLeft {
+      margin-right: 15px;
     }
 
     & a.btn {
