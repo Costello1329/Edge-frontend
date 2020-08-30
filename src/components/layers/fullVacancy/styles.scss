@@ -16,3 +16,21 @@ a.btn {
     background-color: $telegram;
   }
 }
+
+span.website {
+  &:before {
+    content: "•";
+    margin: 0 7px;
+  }
+  
+  & a {
+    color: $warmText;
+    border-bottom-color: rgba(251,249,222,.4);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+
+    &:hover {
+      border-bottom: none;
+    }
+  }
+}

@@ -58,5 +58,12 @@
 
   .details {
     margin-bottom: 0;
+    position: relative;
+
+    & .stickToBottom {
+      position: absolute;
+      bottom: 0;
+      right: 0.75em !important;
+    }
   }
 };

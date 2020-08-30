@@ -48,6 +48,22 @@ React.FunctionComponent<FullVacancyLayerProps> =
                         "smaller" : ""
                     ])}>{vacancy.company.name}</h5>
                   </div>
+                  <div className="col s12 colNoSidePadding">
+                    <p className="right pNoMargin secondLine">
+                      <span className="industry">
+                        {vacancy.company.industry}
+                      </span>
+                      <span className="website">
+                        <a 
+                          href="{vacancy.company.website}" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                        >
+                          {vacancy.company.website}
+                        </a>
+                      </span>
+                    </p>
+                  </div>
                   <div className="col s12 colNoSidePadding location">
                     <p className="right pNoMargin secondLine">
                       {`${vacancy.location.city}, ${vacancy.location.country}`}

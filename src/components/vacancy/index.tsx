@@ -56,7 +56,7 @@ export const Vacancy: React.FunctionComponent<VacancyProps> =
               <h6>{props.salary.from} – {props.salary.to} $</h6>
             </div>
           </div>
-          <div className="col s6">{
+          <div className="col s6 stickToBottom">{
             props.remote ?
             <span className="remote">
               {localization.localize("remote")}
