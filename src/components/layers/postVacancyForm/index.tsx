@@ -5,6 +5,7 @@ import {ruleNotEmpty, commonLocalizer}
   from "../../../utils/validation/commonValidators";
 import {ruleIsCompany, companyLocalizer} from "./validation/company";
 import {localization} from "../../../services/localization";
+import {ruleIsSalary, salaryLocalizer} from "./validation/salary";
 
 
 
@@ -14,8 +15,8 @@ interface PostVacancyFormLayerState {
 
 export class PostVacancyFormLayer
 extends React.Component<{}, PostVacancyFormLayerState> {
-  constructor (props: {}) {
-    super(props);
+  constructor () {
+    super({});
     this.state = {};
   }
 
@@ -33,6 +34,20 @@ extends React.Component<{}, PostVacancyFormLayerState> {
             ], [
               commonLocalizer,
               companyLocalizer
+            ])
+          }
+        />
+        <Input
+          title = {localization.localize("salaryFrom")}
+          id = "post-vacancy-form-company-name"
+          type = "text"
+          validator = {
+            new Validator([
+              ruleNotEmpty,
+              ruleIsSalary
+            ], [
+              commonLocalizer,
+              salaryLocalizer
             ])
           }
         />

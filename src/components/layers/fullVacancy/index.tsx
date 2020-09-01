@@ -12,6 +12,36 @@ import "./styles.scss";
 
 const kMaxCompanyWordLength: number = 9;
 
+const removeSchemaFromUrl =
+  (str: string): string => {
+    const allowedSchemas = ["http", "https"];
+
+    for (const schema of allowedSchemas) {
+      const fullSchema: string = `${schema}://`;
+      const candidate: string = str.substr(0, fullSchema.length);
+
+      if (candidate === fullSchema)
+        return str.substring(candidate.length);
+    }
+
+    return str;
+  };
+
+const splitParagraphs =
+  (str: string): string[] => {
+    const paragraphs: string[] = [];
+
+    str.split("\n").forEach(
+      (paragraph: string): void => {
+        if (paragraph !== "")
+          paragraphs.push(paragraph);
+      }
+    );
+
+    return paragraphs;
+  };
+
+
 interface FullVacancyLayerProps {
   vacancy: FullVacancy;
 };
@@ -54,12 +84,11 @@ React.FunctionComponent<FullVacancyLayerProps> =
                         {vacancy.company.industry}
                       </span>
                       <span className="website">
-                        <a 
-                          href="{vacancy.company.website}" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                        >
-                          {vacancy.company.website}
+                        <a onClick={
+                          (): void =>
+                            discard(open(vacancy.company.website)?.focus())
+                        }>
+                          {removeSchemaFromUrl(vacancy.company.website)}
                         </a>
                       </span>
                     </p>
@@ -80,7 +109,7 @@ React.FunctionComponent<FullVacancyLayerProps> =
                     <h6>{vacancy.salary.from} – {vacancy.salary.to} $</h6>
                   </div>
                 </div>
-                <div className="col s6">{
+                <div className="col s6 stickToBottom">{
                   vacancy.remote ?
                     <span className="remote">
                       {localization.localize("remote")}
@@ -89,11 +118,14 @@ React.FunctionComponent<FullVacancyLayerProps> =
                 }</div>
               </section>
               <section className="description">
-                {vacancy.description /* TODO: auto <p> */} 
+                {splitParagraphs(vacancy.description).map(
+                  (paragraph: string): JSX.Element =>
+                    <p>{paragraph}</p>
+                )}
               </section>
               <a
                 className="btn waves-effect"
-                onClick={(): void => discard(window.open("#"))}
+                onClick={(): void => alert(vacancy.contact.telegram)}
               >
                 {localization.localize("respondInTelegram")}
                 <i className="material-icons left">

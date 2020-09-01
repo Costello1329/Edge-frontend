@@ -46,7 +46,14 @@ export interface Locale {
   vacancySkillSecurityEngineer: string,
   respondInTelegram: string,
   companyName: string,
-  EmptyValidationError: string
+  salaryFrom: string,
+  EmptyValidationError: string,
+  ValidationErrorCompanyProhibitedSymbols: string,
+  ValidationErrorCompanyTooLong: string,
+  ValidationErrorCompanySideSpaces: string,
+  ValidationErrorCompanyDoubledSpaces: string,
+  ValidationErrorSalaryNotOnlyNumbers: string,
+  ValidationErrorSalaryTooBigNumber: string,
 };
 
 export const ru_RU: Locale = {
@@ -99,7 +106,14 @@ export const ru_RU: Locale = {
   vacancySkillSecurityEngineer: "Security Engineer",
   respondInTelegram: "Откликнуться в Telegram",
   companyName: "Название компании",
-  EmptyValidationError: "Обязательное поле"
+  salaryFrom: "Зарплата от",
+  EmptyValidationError: "Обязательное поле",
+  ValidationErrorCompanyProhibitedSymbols: "Запрещенный символ",
+  ValidationErrorCompanyTooLong: "Слишком длинная строка",
+  ValidationErrorCompanySideSpaces: "Пробелы в начале и конце строки запрещены",
+  ValidationErrorCompanyDoubledSpaces: "Сдвоенные пробелы запрещены",
+  ValidationErrorSalaryNotOnlyNumbers: "Разрешены только числа",
+  ValidationErrorSalaryTooBigNumber: "Слишком большое число"
 };
 
 export const en_GB: Locale = {} as Locale;

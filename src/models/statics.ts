@@ -98,7 +98,7 @@ export const fullVacancy: FullVacancy = {
   company: {
     name: "Mail",
     industry: "Desktop, mobile",
-    website: "mail.ru"
+    website: "https://mail.ru"
   },
   salary: {
     from: 3000,
@@ -107,11 +107,11 @@ export const fullVacancy: FullVacancy = {
   level: VacancyLevel.CTO,
   skill: VacancySkill.Fullstack,
   stack: ["Java", "Docker"],
-  remote: false,
+  remote: true,
   description:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \
     Praesent sed semper dui. Sed interdum nunc pulvinar, accumsan \
-    purus vel, fringilla massa. Aenean ex felis, euismod vel tortor ut, finibus \
+    purus vel, fringilla massa. Aenean ex felis, euismod vel \n tortor ut, finibus \
     accumsan lectus. Phasellus et lorem ultricies, maximus magna in, aliquam nula. \
     Sed sit amet molestie dui, vel sollicitudin nisl. Pellentesque vitae dignissim \
     enim. Aenean tempus porta tellus. Ut venenatis iaculis ornare. Donec felis \

@@ -26,8 +26,8 @@ interface VacanciesPageState {
 
 export class VacanciesPage
 extends React.Component<{}, VacanciesPageState> {
-  constructor (props: {}) {
-    super(props);
+  constructor () {
+    super({});
     this.state = {
       loading: false,
       vacancies: []

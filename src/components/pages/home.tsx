@@ -19,10 +19,8 @@ import "./styles.scss";
 const kVacanciesCount: number = 4;
 
 
-interface HomePageProps {};
-
-export const HomePage: React.FunctionComponent<HomePageProps> =
-  (props: HomePageProps): JSX.Element =>
+export const HomePage: React.FunctionComponent =
+  (): JSX.Element =>
     <React.Fragment>
       <MainLayer
         companyLogoSrcs = {[

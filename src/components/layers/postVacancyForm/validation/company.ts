@@ -1,5 +1,6 @@
 import {ValidationError, Localizer} from "../../../../utils/validation/validator";
 import {Guid} from "../../../../utils/guid";
+import { localization } from "../../../../services/localization";
 
 
 
@@ -17,7 +18,7 @@ export class TooLong extends ValidationError {
   constructor () {
     super(new Guid(TooLong.kGuid));
   }
-}
+};
 
 export class SideSpaces extends ValidationError {
   static kGuid: string = "a2e4598a-ea9b-4223-8d53-32adac4a3faf";
@@ -25,7 +26,7 @@ export class SideSpaces extends ValidationError {
   constructor () {
     super(new Guid(SideSpaces.kGuid));
   }
-}
+};
 
 export class DoubledSpaces extends ValidationError {
   static kGuid: string = "151f20aa-a08a-43f4-9672-32e31e06b505";
@@ -33,7 +34,7 @@ export class DoubledSpaces extends ValidationError {
   constructor () {
     super(new Guid(DoubledSpaces.kGuid));
   }
-}
+};
 
 export const ruleIsCompany = (value: string): ValidationError[] => {
   const allowedSymbolsMask: RegExp = /^[\x20-\x7e]*$/;
@@ -60,14 +61,14 @@ export const companyLocalizer: Localizer =
   (error: ValidationError): string | null => {
     switch (error.guid.str) {
       case ProhibitedSymbols.kGuid:
-        return "Запрещенный символ";
+        return localization.localize("ValidationErrorCompanyProhibitedSymbols");
       case TooLong.kGuid:
-        return "Длинная строка";
+        return localization.localize("ValidationErrorCompanyTooLong");
       case SideSpaces.kGuid:
-        return "Пробелы в начале и конце запрещены";
+        return localization.localize("ValidationErrorCompanySideSpaces");
       case DoubledSpaces.kGuid:
-        return "Сдвоенные пробелы запрещены";
+        return localization.localize("ValidationErrorCompanyDoubledSpaces");
     }
 
     return null;
-  }
+  };
