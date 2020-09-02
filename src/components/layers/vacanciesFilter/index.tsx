@@ -194,7 +194,7 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
                               </option>
                           )
                         }
-                      </select>  
+                      </select>
                     </div>
                   </div>
                   <div className="row">
