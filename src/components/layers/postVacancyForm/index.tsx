@@ -16,7 +16,7 @@ import "./styles.scss";
 
 interface PostVacancyFormLayerState {
 
-};
+}
 
 export class PostVacancyFormLayer
 extends React.Component<{}, PostVacancyFormLayerState> {

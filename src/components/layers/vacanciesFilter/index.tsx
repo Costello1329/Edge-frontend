@@ -11,7 +11,7 @@ import "./styles.scss";
 
 interface VacanciesFilterLayerProps {
   vacancies: VacancyProps[];
-};
+}
 
 interface VacanciesFilterLayerState {
   vacanciesFiltered: VacancyProps[],
@@ -20,7 +20,7 @@ interface VacanciesFilterLayerState {
   vacancySkill: null | number,
   vacancyLocation: null | number,
   vacancyRemoteOnly: boolean
-};
+}
 
 export class VacanciesFilterLayer
 extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
@@ -266,4 +266,4 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
         </div>
       </div>
     </div>;
-};
+}

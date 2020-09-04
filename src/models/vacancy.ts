@@ -41,7 +41,7 @@ export interface FullVacancy {
   stack: string[],
   remote: boolean,
   description: string
-};
+}
 
 export enum VacancyLevel {
   Intern = "vacancyLevelIntern",
@@ -49,7 +49,7 @@ export enum VacancyLevel {
   Middle = "vacancyLevelMiddle",
   Senior = "vacancyLevelSenior",
   CTO = "vacancyLevelCTO"
-};
+}
 
 export enum VacancySkill {
   Frontend = "vacancySkillFrontend",
@@ -62,4 +62,4 @@ export enum VacancySkill {
   Desktop = "vacancySkillDesktop",
   DataScience = "vacancySkillDataScience",
   SecurityEngineer = "vacancySkillSecurityEngineer"
-};
+}

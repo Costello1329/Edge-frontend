@@ -11,7 +11,7 @@ export interface InputProps {
   type: "text" | "password",
   validator: Validator,
   changeCallback?: (value: string, validationError: ValidationError | null) => void
-};
+}
 
 interface InputState {
   value: string,
@@ -116,4 +116,4 @@ export class Input extends React.Component<InputProps, InputState> {
       }
     </div>
   };
-};
+}

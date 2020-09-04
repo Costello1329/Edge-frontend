@@ -44,7 +44,7 @@ const splitParagraphs =
 
 interface FullVacancyLayerProps {
   vacancy: FullVacancy;
-};
+}
 
 export const FullVacancyLayer:
 React.FunctionComponent<FullVacancyLayerProps> =
@@ -52,7 +52,7 @@ React.FunctionComponent<FullVacancyLayerProps> =
     <div className="vacancyLayer">
       <div className="container">
         <div className="fullVacancy row">
-          <div className="col s12 l9">
+          <div className="col s12">
             <div className={classNames(
               "card-panel",
               "vacancy",

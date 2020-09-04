@@ -27,7 +27,7 @@ const getBreadcrumbs =
 
 interface VacancyPageProps {
   vacancyGuid: string
-};
+}
 
 interface VacancyPageState {
   loaded: boolean,
@@ -67,4 +67,4 @@ extends React.Component<VacancyPageProps, VacancyPageState> {
         )
       }
     </React.Fragment>;
-};
+}

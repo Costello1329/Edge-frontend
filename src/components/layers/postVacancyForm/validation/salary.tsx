@@ -10,7 +10,7 @@ export class NotOnlyNumbers extends ValidationError {
   constructor () {
     super(new Guid(NotOnlyNumbers.kGuid));
   }
-};
+}
 
 export class TooBigNumber extends ValidationError {
   static kGuid: string = "5c4fb03e-13d1-42f1-9d49-777d6fa2fba5";
@@ -18,7 +18,7 @@ export class TooBigNumber extends ValidationError {
   constructor () {
     super(new Guid(TooBigNumber.kGuid));
   }
-};
+}
 
 export const ruleIsSalary = (value: string): ValidationError[] => {
   const errors: ValidationError[] = [];

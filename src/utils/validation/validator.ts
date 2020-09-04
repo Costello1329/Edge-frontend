@@ -3,7 +3,7 @@ import {Guid} from "../guid/index";
 
 export abstract class ValidationError {
   constructor (public readonly guid: Guid) {}
-};
+}
 
 export type ValidationRule = (value: string) => ValidationError[];
 export type Localizer = (error: ValidationError) => string | null;
@@ -50,4 +50,4 @@ export class Validator {
     this.localize = Validator.combineLocalizers(localizers);
     this.prioritize = prioritizer;
   }
-};
+}

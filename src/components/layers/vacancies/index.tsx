@@ -14,7 +14,7 @@ interface VacanciesLayerProps {
     text: string,
     url: string
   }
-};
+}
 
 export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
   (props: VacanciesLayerProps): JSX.Element =>

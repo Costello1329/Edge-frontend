@@ -74,4 +74,4 @@ export class App extends React.Component {
       </main>
       <Footer/>
     </Router>;
-};
+}

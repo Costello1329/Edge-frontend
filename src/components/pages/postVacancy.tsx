@@ -15,16 +15,9 @@ const breadcrumbs: Breadcrumb[] = [{
 }];
 
 
-export class PostVacancyPage
-extends React.Component {
-  constructor () {
-    super({});
-    this.state = {};
-  }
-
-  public readonly render = (): JSX.Element =>
+export const PostVacancyPage: React.FunctionComponent =
+  (): JSX.Element =>
     <React.Fragment>
       <BreadcrumbsLayer breadcrumbs={breadcrumbs}/>
       <PostVacancyFormLayer/>
     </React.Fragment>;
-};

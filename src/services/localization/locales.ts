@@ -1,7 +1,7 @@
 export enum LocaleType {
   ru_RU = "ru_RU",
   en_GB = "en_GB"
-};
+}
 
 export interface Locale {
   copyrightText: string,
@@ -68,7 +68,7 @@ export interface Locale {
   ValidationErrorCompanyDoubledSpaces: string,
   ValidationErrorSalaryNotOnlyNumbers: string,
   ValidationErrorSalaryTooBigNumber: string,
-};
+}
 
 export const ru_RU: Locale = {
   copyrightText: "© 2020 Allisto",

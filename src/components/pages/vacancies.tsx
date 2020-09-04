@@ -56,4 +56,4 @@ extends React.Component<{}, VacanciesPageState> {
         <VacanciesFilterLayer vacancies={this.state.vacancies}/>
       }
     </React.Fragment>;
-};
+}

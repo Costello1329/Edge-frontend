@@ -8,7 +8,7 @@ import "./styles.scss";
 export interface Breadcrumb {
   text: string,
   url: string
-};
+}
 
 type BreadcrumbsLayerProps = {
   breadcrumbs: Breadcrumb[]

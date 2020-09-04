@@ -11,10 +11,11 @@ export class Empty extends ValidationError {
   constructor () {
     super(new Guid(Empty.kGuid));
   }
-};
+}
 
-export const ruleNotEmpty = (value: string): ValidationError[] =>
-  value === "" ? [new Empty()] : [];
+export const ruleNotEmpty =
+  (value: string): ValidationError[] =>
+    value === "" ? [new Empty()] : [];
 
 
 /* GUID */
@@ -24,26 +25,28 @@ export class NotGuid extends ValidationError {
   constructor () {
     super(new Guid(Empty.kGuid));
   }
-};
+}
 
-export const ruleIsGuid = (value: string): ValidationError[] => {
-  const guidMask: RegExp =
-    /^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[8-b][0-9a-f]{3}-[0-9a-f]{12}$/;
+export const ruleIsGuid =
+  (value: string): ValidationError[] => {
+    const guidMask: RegExp =
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[8-b][0-9a-f]{3}-[0-9a-f]{12}$/;
 
-  if (value.match(guidMask) === null)
-    return [new NotGuid()];
+    if (value.match(guidMask) === null)
+      return [new NotGuid()];
 
-  else
-    return [];
-};
+    else
+      return [];
+  };
 
 
 /* LOCALIZER */
-export const commonLocalizer = (error: ValidationError): string | null => {
-  switch (error.guid.str) {
-    case Empty.kGuid:
-      return localization.localize("EmptyValidationError");
-  }
+export const commonLocalizer =
+  (error: ValidationError): string | null => {
+    switch (error.guid.str) {
+      case Empty.kGuid:
+        return localization.localize("EmptyValidationError");
+    }
 
-  return null;
-}
+    return null;
+  };
