@@ -2,108 +2,110 @@
 @import "../../../theme/colors.scss";
 
 
-section {
-  &.post {
-    margin-bottom: 2em;
-  }
-
-  & h4 {
-    color: $warmText;
-  }
-
-  & .col.form {
-    & .left {
-      padding-right: 1em !important;
+.postVacancyForm {
+  & section {
+    &.post {
+      margin-bottom: 2em;
     }
 
-    & .right {
-      padding-left: 1em !important;
-    }
-
-    & .inline-text {
+    & h4 {
       color: $warmText;
-      position: relative;
-      bottom: 5px;
-    }
-  }
-
-  & .input-field {
-    color: $warmText !important;
-
-    &.inline {
-      margin: 0 0 0 7px !important;
     }
 
-    & label,
-    & input[type=text]:focus + label {
-      color: $warmTextDarken !important;
+    & .col.form {
+      & .left {
+        padding-right: 1em !important;
+      }
+
+      & .right {
+        padding-left: 1em !important;
+      }
+
+      & .inline-text {
+        color: $warmText;
+        position: relative;
+        bottom: 5px;
+      }
     }
 
-    & input[type=text]:focus,
-    & input[type=text].valid {
-      border-bottom: 1px solid $warmTextDarken !important;
-      box-shadow: 0 1px 0 0 $warmTextDarken !important;
+    & .input-field {
+      color: $warmText !important;
+
+      &.inline {
+        margin: 0 0 0 7px !important;
+      }
+
+      & label,
+      & input[type=text]:focus + label {
+        color: $warmTextDarken !important;
+      }
+
+      & input[type=text]:focus,
+      & input[type=text].valid {
+        border-bottom: 1px solid $warmTextDarken !important;
+        box-shadow: 0 1px 0 0 $warmTextDarken !important;
+      }
+
+      & input[type=text].invalid {
+        border-bottom: 1px solid $contrast !important;
+        box-shadow: 0 1px 0 0 $contrast !important;
+      }
     }
 
-    & input[type=text].invalid {
-      border-bottom: 1px solid $contrast !important;
-      box-shadow: 0 1px 0 0 $contrast !important;
-    }
-  }
+    textarea {
+      &:focus + label {
+        color: $warmTextDarken !important;
+      }
 
-  textarea {
-    &:focus + label {
-      color: $warmTextDarken !important;
+      &:focus {
+        border-bottom: 1px solid $warmTextDarken !important;
+        box-shadow: 0 1px 0 0 $warmTextDarken !important;
+      }
     }
 
-    &:focus {
-      border-bottom: 1px solid $warmTextDarken !important;
-      box-shadow: 0 1px 0 0 $warmTextDarken !important;
-    }
-  }
+    & .select-wrapper {
+      & input.select-dropdown {
+        border-bottom-color: $warmTextDarken !important;
+        color: $warmText !important;
+      }
 
-  & .select-wrapper {
-    & input.select-dropdown {
-      border-bottom-color: $warmTextDarken !important;
+      & .caret {
+        fill: $warmTextDarken !important;
+      }
+    }
+
+    & .select-dropdown.dropdown-content li.selected {
+      background-color: $baseHalfLighten !important;
+    }
+
+    & .select-dropdown li.disabled, 
+    & .select-dropdown li.disabled > span, 
+    & .select-dropdown li.optgroup {
+        color: $warmTextDarken !important;
+        background-color: $baseHalfLighten !important;
+    }
+
+    & .dropdown-content li > span {
       color: $warmText !important;
     }
 
-    & .caret {
-      fill: $warmTextDarken !important;
+    & #post-vacancy-form-company-name,
+    & #post-vacancy-form-company-name:not(:focus) + label,
+    & .form > .select-wrapper input {
+      font-size: 1.64rem !important;
     }
-  }
 
-  & .select-dropdown.dropdown-content li.selected {
-    background-color: $baseHalfLighten !important;
-  }
+    & #post-vacancy-form-salary-from,
+    & #post-vacancy-form-salary-from + label,
+    & #post-vacancy-form-salary-to,
+    & #post-vacancy-form-salary-to + label {
+      font-weight: bold;
+    }
 
-  & .select-dropdown li.disabled, 
-  & .select-dropdown li.disabled > span, 
-  & .select-dropdown li.optgroup {
-      color: $warmTextDarken !important;
-      background-color: $baseHalfLighten !important;
-  }
-
-  & .dropdown-content li > span {
-    color: $warmText !important;
-  }
-
-  & #post-vacancy-form-company-name,
-  & #post-vacancy-form-company-name:not(:focus) + label,
-  & .form > .select-wrapper input {
-    font-size: 1.64rem !important;
-  }
-
-  & #post-vacancy-form-salary-from,
-  & #post-vacancy-form-salary-from + label,
-  & #post-vacancy-form-salary-to,
-  & #post-vacancy-form-salary-to + label {
-    font-weight: bold;
-  }
-
-  & a.btn,
-  & a.btn:hover {
-    background-color: $contrast !important;
-    color: $warmText !important;
+    & a.btn:not(.disabled),
+    & a.btn:not(.disabled):hover {
+      background-color: $contrast !important;
+      color: $warmText !important;
+    }
   }
 }

@@ -63,11 +63,19 @@ export interface Locale {
   contactsPhone: string,
   EmptyValidationError: string,
   ValidationErrorCompanyProhibitedSymbols: string,
+  ValidationErrorCompanyTooShort: string,
   ValidationErrorCompanyTooLong: string,
   ValidationErrorCompanySideSpaces: string,
   ValidationErrorCompanyDoubledSpaces: string,
   ValidationErrorSalaryNotOnlyNumbers: string,
+  ValidationErrorSalaryTooSmallNumber: string,
   ValidationErrorSalaryTooBigNumber: string,
+  ValidationErrorSalaryLessThan: (bound: number) => string,
+  ValidationErrorStartsNotWithSchema: string,
+  ValidationErrorSpaces: string,
+  ValidationErrorSalaryNotEmail: string,
+  ValidationErrorSalaryNotTelegram: string,
+  ValidationErrorSalaryNotPhone: string
 }
 
 export const ru_RU: Locale = {
@@ -137,11 +145,20 @@ export const ru_RU: Locale = {
   contactsPhone: "Телефон",
   EmptyValidationError: "Обязательное поле",
   ValidationErrorCompanyProhibitedSymbols: "Запрещенный символ",
+  ValidationErrorCompanyTooShort: "Слишком короткая строка",
   ValidationErrorCompanyTooLong: "Слишком длинная строка",
   ValidationErrorCompanySideSpaces: "Пробелы в начале и конце строки запрещены",
   ValidationErrorCompanyDoubledSpaces: "Сдвоенные пробелы запрещены",
   ValidationErrorSalaryNotOnlyNumbers: "Разрешены только числа",
-  ValidationErrorSalaryTooBigNumber: "Слишком большое число"
+  ValidationErrorSalaryTooSmallNumber: "Слишком маленькое число",
+  ValidationErrorSalaryTooBigNumber: "Слишком большое число",
+  ValidationErrorSalaryLessThan:
+    (bound: number): string => `Не должно быть меньше ${bound}`,
+  ValidationErrorStartsNotWithSchema: "Должно начинаться с http:// или https://",
+  ValidationErrorSpaces: "Пробелы запрещены",
+  ValidationErrorSalaryNotEmail: "Неверный формат email",
+  ValidationErrorSalaryNotTelegram: "Неверный формат",
+  ValidationErrorSalaryNotPhone: "Неверный формат. Пример: +7(999)018-99-33"
 };
 
 export const en_GB: Locale = {} as Locale;

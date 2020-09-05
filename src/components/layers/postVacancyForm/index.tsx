@@ -1,33 +1,116 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import {Input} from "../../ui/input";
-import {Validator} from "../../../utils/validation/validator";
+import {Validator, ValidationError} from "../../../utils/validation/validator";
 import {ruleNotEmpty, commonLocalizer}
   from "../../../utils/validation/commonValidators";
 import {ruleIsCompany, companyLocalizer} from "./validation/company";
+import {ruleIsSite, siteLocalizer} from "./validation/site";
 import {localization} from "../../../services/localization";
-import {ruleIsSalary, salaryLocalizer} from "./validation/salary";
-import { Vacancy as VacancyProps, VacancyLevel, VacancySkill }
+import {ruleIsSalary, salaryLocalizer, ruleNotLessThan, LessThan}
+  from "./validation/salary";
+import {VacancyLevel, VacancySkill, FullVacancy}
   from "../../../models/vacancy";
+import classNames from "classnames";
+import {localizer, ruleNotShort} from "./validation";
+import {ruleIsLocation} from "./validation/location";
+import {ruleIsEmail, ruleIsTelegram, ruleIsPhone, contactsLocalizer}
+  from "./validation/contacts";
 
 import "./styles.scss";
 
 
 
-interface PostVacancyFormLayerState {
+type InputValue<T = string> =  { value: T, error: boolean };
 
-}
+type PostVacancyFormLayerState = {
+  contact: Record<keyof FullVacancy["contact"], InputValue>,
+  location: Record<keyof FullVacancy["location"], InputValue>,
+  company: Record<keyof FullVacancy["company"], InputValue>,
+  salary: Record<keyof FullVacancy["salary"], InputValue<number>>,
+  level: VacancyLevel | null,
+  skill: VacancySkill | null,
+  description: InputValue,
+} & Pick<FullVacancy, "stack" | "remote">;
+
 
 export class PostVacancyFormLayer
 extends React.Component<{}, PostVacancyFormLayerState> {
   constructor () {
     super({});
-    this.state = {};
+    this.state = {
+      contact: {
+        email: {
+          value: "",
+          error: false
+        },
+        phone: {
+          value: "",
+          error: false
+        },
+        telegram: {
+          value: "",
+          error: false
+        },
+      },
+      location: {
+        country: {
+          value: "",
+          error: false
+        },
+        city: {
+          value: "",
+          error: false
+        },
+      },
+      company: {
+        name: {
+          value: "",
+          error: false
+        },
+        industry: {
+          value: "",
+          error: false
+        },
+        website: {
+          value: "",
+          error: false
+        },
+      },
+      salary: {
+        from: {
+          value: 0,
+          error: false
+        },
+        to: {
+          value: 0,
+          error: false
+        }
+      },
+      level: null,
+      skill: null,
+      stack: [],
+      remote: false,
+      description: {
+        value: "",
+        error: false
+      }
+    };
   }
+
+  private readonly isButtonDisabled =
+    (): boolean =>
+      this.state.contact.email.error ||
+      this.state.contact.phone.error ||
+      this.state.contact.telegram.error ||
+      this.state.company.name.error ||
+      this.state.company.industry.error ||
+      this.state.company.website.error ||
+      this.state.location.country.error ||
+      this.state.description.error
 
   public readonly render =
     (): JSX.Element =>
-      <div className="container">
+      <div className="container postVacancyForm">
         <section className="row company">
           <div className="col s12 l3 header">
             <h4>
@@ -45,8 +128,19 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                   ruleIsCompany
                 ], [
                   commonLocalizer,
-                  companyLocalizer
+                  companyLocalizer,
+                  localizer
                 ])
+              }
+              changeCallback={
+                (value: string, error: ValidationError | null): void =>
+                  this.setState((state: PostVacancyFormLayerState) => ({
+                    company: {
+                      ... state.company,
+                      name: { value, error: error !== null }
+                    }
+                  })
+                )
               }
             />
             <div className="col s6 left">
@@ -56,11 +150,9 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 type="text"
                 validator={
                   new Validator([
-                    ruleNotEmpty,
-                    ruleIsCompany
+                    ruleNotEmpty
                   ], [
-                    commonLocalizer,
-                    companyLocalizer
+                    commonLocalizer
                   ])
                 }
               />
@@ -73,11 +165,21 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 validator={
                   new Validator([
                     ruleNotEmpty,
-                    ruleIsCompany
+                    ruleIsSite
                   ], [
                     commonLocalizer,
-                    companyLocalizer
+                    siteLocalizer
                   ])
+                }
+                changeCallback={
+                  (value: string, error: ValidationError | null): void =>
+                    this.setState((state: PostVacancyFormLayerState) => ({
+                      company: {
+                        ... state.company,
+                        website: { value, error: error !== null }
+                      }
+                    })
+                  )
                 }
               />
             </div>
@@ -98,11 +200,21 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 validator={
                   new Validator([
                     ruleNotEmpty,
-                    ruleIsCompany
+                    ruleIsLocation
                   ], [
                     commonLocalizer,
-                    companyLocalizer
+                    localizer
                   ])
+                }
+                changeCallback={
+                  (value: string, error: ValidationError | null): void =>
+                    this.setState((state: PostVacancyFormLayerState) => ({
+                      location: {
+                        ... state.location,
+                        country: { value, error: error !== null }
+                      }
+                    })
+                  )
                 }
               />
             </div>
@@ -114,11 +226,21 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 validator={
                   new Validator([
                     ruleNotEmpty,
-                    ruleIsCompany
+                    ruleIsLocation
                   ], [
                     commonLocalizer,
-                    companyLocalizer
+                    localizer
                   ])
+                }
+                changeCallback={
+                  (value: string, error: ValidationError | null): void =>
+                    this.setState((state: PostVacancyFormLayerState) => ({
+                      location: {
+                        ... state.location,
+                        city: { value, error: error !== null }
+                      }
+                    })
+                  )
                 }
               />
             </div>
@@ -175,7 +297,6 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 <option value="" disabled selected>
                   {localization.localize("candidateStack")}
                 </option>
-
               </select>
             </div>
           </div>
@@ -201,6 +322,16 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                     salaryLocalizer
                   ])
                 }
+                changeCallback={
+                  (value: string, error: ValidationError | null): void =>
+                    this.setState((state: PostVacancyFormLayerState) => ({
+                      salary: {
+                        ... state.salary,
+                        from: { value: parseInt(value, 10), error: error !== null }
+                      }
+                    })
+                  )
+                }
               />
             </div>
             <div className="col s6 right">
@@ -211,11 +342,27 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 validator={
                   new Validator([
                     ruleNotEmpty,
-                    ruleIsSalary
+                    ruleIsSalary,
+                    ruleNotLessThan(this.state.salary.from.value)
                   ], [
                     commonLocalizer,
                     salaryLocalizer
-                  ])
+                  ], (errors: ValidationError[]): ValidationError => {
+                    const found = errors.find(e => e instanceof LessThan);
+                    if (found !== undefined)
+                      return found;
+                    else return errors[0];
+                  })
+                }
+                changeCallback={
+                  (value: string, error: ValidationError | null): void =>
+                    this.setState((state: PostVacancyFormLayerState) => ({
+                      salary: {
+                        ... state.salary,
+                        to: { value: parseInt(value, 10), error: error !== null }
+                      }
+                    })
+                  )
                 }
               />
             </div>
@@ -228,7 +375,10 @@ extends React.Component<{}, PostVacancyFormLayerState> {
             </h4>
           </div>
           <div className="col s12 l9 form">
-            <textarea id="post-vacancy-form-description" className="materialize-textarea"></textarea>
+            <textarea
+              id="post-vacancy-form-description"
+              className="materialize-textarea"
+            ></textarea>
           </div>
         </section>
         <section className="row contacts">
@@ -245,11 +395,21 @@ extends React.Component<{}, PostVacancyFormLayerState> {
               validator={
                 new Validator([
                   ruleNotEmpty,
-                  ruleIsCompany
+                  ruleIsEmail
                 ], [
                   commonLocalizer,
-                  companyLocalizer
+                  contactsLocalizer
                 ])
+              }
+              changeCallback={
+                (value: string, error: ValidationError | null): void =>
+                  this.setState((state: PostVacancyFormLayerState) => ({
+                    contact: {
+                      ... state.contact,
+                      email: { value, error: error !== null }
+                    }
+                  })
+                )
               }
             />
             <div className="col s6 left">
@@ -260,11 +420,23 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 validator={
                   new Validator([
                     ruleNotEmpty,
-                    ruleIsCompany
+                    ruleNotShort,
+                    ruleIsTelegram
                   ], [
+                    localizer,
                     commonLocalizer,
-                    companyLocalizer
+                    contactsLocalizer
                   ])
+                }
+                changeCallback={
+                  (value: string, error: ValidationError | null): void =>
+                    this.setState((state: PostVacancyFormLayerState) => ({
+                      contact: {
+                        ... state.contact,
+                        telegram: { value, error: error !== null }
+                      }
+                    })
+                  )
                 }
               />
             </div>
@@ -276,11 +448,21 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 validator={
                   new Validator([
                     ruleNotEmpty,
-                    ruleIsCompany
+                    ruleIsPhone
                   ], [
                     commonLocalizer,
-                    companyLocalizer
+                    contactsLocalizer
                   ])
+                }
+                changeCallback={
+                  (value: string, error: ValidationError | null): void =>
+                    this.setState((state: PostVacancyFormLayerState) => ({
+                      contact: {
+                        ... state.contact,
+                        phone: { value, error: error !== null }
+                      }
+                    })
+                  )
                 }
               />
             </div>
@@ -290,11 +472,14 @@ extends React.Component<{}, PostVacancyFormLayerState> {
           <div className="col s12 l3 header">
           </div>
           <div className="col s12 l9 form">
-            <Link to={"/"}>
-              <a className="btn waves-effect">
-                {localization.localize("postVacancy")}
-              </a>
-            </Link>
+            <a
+              className={classNames([
+                "btn",
+                "waves-effect",
+                this.isButtonDisabled() ? "disabled" : ""
+              ])}
+              onClick={(): void => alert(JSON.stringify(this.state))}
+            >{localization.localize("postVacancy")}</a>
           </div>
         </section>
       </div>;

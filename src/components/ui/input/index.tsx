@@ -87,7 +87,10 @@ export class Input extends React.Component<InputProps, InputState> {
       ((prevValidationError !== null) && (validationError === null))
     ) || (
       ((prevValidationError !== null) && (validationError !== null)) &&
-      (prevValidationError.guid.str !== validationError.guid.str)
+      ((prevValidationError.guid.str !== validationError.guid.str) || (
+        this.props.validator.localize(prevValidationError) !==
+        this.props.validator.localize(validationError)
+      ))
     ))
       this.setState(
         { validationError },
@@ -95,25 +98,25 @@ export class Input extends React.Component<InputProps, InputState> {
       );
   }
 
-  public readonly render = (): JSX.Element => {
-    return <div className = "input-field">
-      <input
-        id = {this.props.id}
-        type = {this.props.type}
-        value = {this.state.value}
-        onChange = {
-          (event: React.ChangeEvent<HTMLInputElement>): void =>
-            this.handleChange(event.target.value)
+  public readonly render = 
+    (): JSX.Element =>
+      <div className = "input-field">
+        <input
+          id = {this.props.id}
+          type = {this.props.type}
+          value = {this.state.value}
+          onChange = {
+            (event: React.ChangeEvent<HTMLInputElement>): void =>
+              this.handleChange(event.target.value)
+          }
+        />
+        <label htmlFor = {this.props.id}>{this.props.title}</label>
+        {
+          this.state.validationError !== null ?
+          <span>
+            {this.props.validator.localize(this.state.validationError)}
+          </span> :
+          <></>
         }
-      />
-      <label htmlFor = {this.props.id}>{this.props.title}</label>
-      {
-        this.state.validationError !== null ?
-        <span>
-          {this.props.validator.localize(this.state.validationError)}
-        </span> :
-        <></>
-      }
-    </div>
-  };
+      </div>;
 }

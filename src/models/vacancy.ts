@@ -35,7 +35,7 @@ export interface FullVacancy {
   salary: {
     from: number,
     to: number
-  }
+  },
   level: VacancyLevel,
   skill: VacancySkill,
   stack: string[],
