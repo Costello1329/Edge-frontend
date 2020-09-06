@@ -29,7 +29,7 @@ export interface FullVacancy {
   },
   company: {
     name: string,
-    industry: string,
+    industry: VacancyIndustry,
     website: string
   },
   salary: {
@@ -38,7 +38,7 @@ export interface FullVacancy {
   },
   level: VacancyLevel,
   skill: VacancySkill,
-  stack: string[],
+  stack: VacancyStack[],
   remote: boolean,
   description: string
 }
@@ -62,4 +62,17 @@ export enum VacancySkill {
   Desktop = "vacancySkillDesktop",
   DataScience = "vacancySkillDataScience",
   SecurityEngineer = "vacancySkillSecurityEngineer"
+}
+
+export enum VacancyStack {
+  Java = "vacancyStackJava",
+  Python = "vacancyStackPython",
+  Ruby = "vacancyStackRuby",
+  cURL = "vacancyStackCURL"
+}
+
+export enum VacancyIndustry {
+  DataScience = "vacancyIndustryDataScience",
+  Bank = "vacancyIndustryBank",
+  Enterprise = "vacancyIndustryEnterprise"
 }

@@ -1,9 +1,7 @@
 import React from "react";
 import {BrowserRouter as Router, Route, Redirect, Switch, RouteComponentProps}
   from "react-router-dom";
-import Materialize from "materialize-css"; 
 import telegramIcon from '@iconify/icons-mdi/telegram';
-import {discard} from "../../utils/discard";
 import {Header} from "../bars/header";
 import {Footer} from "../bars/footer";
 import {preferences} from "../../services/preferences";
@@ -19,11 +17,8 @@ import "./styles.scss";
 
 
 
-export class App extends React.Component {
-  public readonly componentDidMount = (): void =>
-    discard(setTimeout((): void => Materialize.AutoInit()));
-
-  public readonly render = (): JSX.Element =>
+export const App: React.FunctionComponent =
+  (): JSX.Element =>
     <Router>
       <Dropdown
         id="dropdown-lang"
@@ -40,7 +35,7 @@ export class App extends React.Component {
           /// telegramIcon package has not been updated
           /// yet for new IconofyIcon support.
           data: { icon: telegramIcon as any, height: 29 },
-          callback: (): void => discard(window.open(preferences.telegramGroup)),
+          callback: (): void => void(window.open(preferences.telegramGroup)),
           dataTarget: undefined,
           class: undefined
         }, {
@@ -74,4 +69,3 @@ export class App extends React.Component {
       </main>
       <Footer/>
     </Router>;
-}

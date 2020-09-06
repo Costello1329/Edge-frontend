@@ -4,7 +4,6 @@ import {FullVacancy} from "../../../models/vacancy";
 import {InlineIcon} from '@iconify/react';
 import telegramIcon from '@iconify/icons-mdi/telegram';
 import classNames from "classnames";
-import {discard} from "../../../utils/discard";
 
 import "./styles.scss";
 
@@ -86,7 +85,7 @@ React.FunctionComponent<FullVacancyLayerProps> =
                       <span className="website">
                         <a onClick={
                           (): void =>
-                            discard(open(vacancy.company.website)?.focus())
+                            void(open(vacancy.company.website)?.focus())
                         }>
                           {removeSchemaFromUrl(vacancy.company.website)}
                         </a>

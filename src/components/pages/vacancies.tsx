@@ -1,5 +1,4 @@
 import React from "react";
-import {discard} from "../../utils/discard";
 import {BreadcrumbsLayer} from "../layers/breadcrumbs";
 import {VacanciesFilterLayer} from "../layers/vacanciesFilter";
 import {localization} from "../../services/localization";
@@ -38,7 +37,7 @@ extends React.Component<{}, VacanciesPageState> {
     this.setState(
       { loading: true }, 
       (): void =>
-        discard(setTimeout(
+        void(setTimeout(
           (): void =>
             this.setState({ loading: false, vacancies }), 
           1000

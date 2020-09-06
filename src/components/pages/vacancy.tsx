@@ -1,5 +1,4 @@
 import React from "react";
-import {discard} from "../../utils/discard";
 import {BreadcrumbsLayer} from "../layers/breadcrumbs";
 import {localization} from "../../services/localization";
 import {Breadcrumb} from "../layers/breadcrumbs";
@@ -45,7 +44,7 @@ extends React.Component<VacancyPageProps, VacancyPageState> {
   }
 
   public readonly componentDidMount = (): void =>
-    discard(setTimeout(
+    void(setTimeout(
       (): void => this.setState({
         loaded: true,
         vacancy: fullVacancy

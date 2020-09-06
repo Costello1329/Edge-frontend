@@ -1,6 +1,7 @@
 import React from "react";
 import {Validator, ValidationError} from "../../../utils/validation/validator";
-import {discard} from "../../../utils/discard";
+
+import "./styles.scss";
 
 
 
@@ -65,12 +66,14 @@ export class Input extends React.Component<InputProps, InputState> {
     );
   }
 
-  public componentDidMount = (): void =>
-    discard(this.mounted = true);
+  public componentDidMount =
+    (): void =>
+      void(this.mounted = true);
   
 
-  public componentWillUnmount = (): void =>
-    discard(this.mounted = false);
+  public componentWillUnmount =
+    (): void =>
+      void(this.mounted = false);
 
   public componentDidUpdate (prevProps: InputProps): void {
     if (!this.mounted)
@@ -111,12 +114,10 @@ export class Input extends React.Component<InputProps, InputState> {
           }
         />
         <label htmlFor = {this.props.id}>{this.props.title}</label>
-        {
+        <span className="inputErrorText">{
           this.state.validationError !== null ?
-          <span>
-            {this.props.validator.localize(this.state.validationError)}
-          </span> :
-          <></>
-        }
+          this.props.validator.localize(this.state.validationError) :
+          ""
+        }</span>
       </div>;
 }

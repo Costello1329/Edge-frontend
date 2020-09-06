@@ -1,5 +1,5 @@
 import {getRandomGuid} from "../utils/guid";
-import {Vacancy, VacancyLevel, VacancySkill, FullVacancy} from "./vacancy";
+import {Vacancy, VacancyLevel, VacancySkill, FullVacancy, VacancyIndustry, VacancyStack} from "./vacancy";
 
 
 
@@ -14,7 +14,7 @@ export const vacancies: Vacancy[] = [{
   salary: { from: 3000, to: 5000 },
   level: VacancyLevel.Senior,
   skill: VacancySkill.Fullstack,
-  stack: ["JS", "TS", "React", "SCSS", "SASS", "Rust", "Python"],
+  stack: [VacancyStack.Java, VacancyStack.Ruby],
   remote: false
 }, {
   guid: getRandomGuid(),
@@ -27,7 +27,7 @@ export const vacancies: Vacancy[] = [{
   salary: { from: 2000, to: 2500 },
   level: VacancyLevel.Middle,
   skill: VacancySkill.Fullstack,
-  stack: ["JS", "TS", "React"],
+  stack: [VacancyStack.Java, VacancyStack.Ruby],
   remote: false
 }, {
   guid: getRandomGuid(),
@@ -40,7 +40,7 @@ export const vacancies: Vacancy[] = [{
   salary: { from: 4000, to: 5000 },
   level: VacancyLevel.Senior,
   skill: VacancySkill.Backend,
-  stack: ["Scala", "Java", "Yaml"],
+  stack: [VacancyStack.Java, VacancyStack.Ruby],
   remote: false
 }, {
   guid: getRandomGuid(),
@@ -53,7 +53,7 @@ export const vacancies: Vacancy[] = [{
   salary: { from: 1000, to: 2000 },
   level: VacancyLevel.Middle,
   skill: VacancySkill.Desktop,
-  stack: ["1C"],
+  stack: [VacancyStack.Java, VacancyStack.Ruby],
   remote: true
 }, {
   guid: getRandomGuid(),
@@ -66,7 +66,7 @@ export const vacancies: Vacancy[] = [{
   salary: { from: 100, to: 100 },
   level: VacancyLevel.CTO,
   skill: VacancySkill.SecurityEngineer,
-  stack: ["AutoHotkey", "Docker", "SSH"],
+  stack: [VacancyStack.Java, VacancyStack.Ruby],
   remote: true
 }, {
   guid: getRandomGuid(),
@@ -79,7 +79,7 @@ export const vacancies: Vacancy[] = [{
   salary: { from: 10000, to: 15000 },
   level: VacancyLevel.Middle,
   skill: VacancySkill.Fullstack,
-  stack: ["Js", "Ts", "React", "Redux", "MobX", "Python", "Django", "SQL"],
+  stack: [VacancyStack.Java, VacancyStack.Ruby],
   remote: true
 }];
 
@@ -97,7 +97,7 @@ export const fullVacancy: FullVacancy = {
   },
   company: {
     name: "Mail",
-    industry: "Desktop, mobile",
+    industry: VacancyIndustry.Bank,
     website: "https://mail.ru"
   },
   salary: {
@@ -106,7 +106,7 @@ export const fullVacancy: FullVacancy = {
   },
   level: VacancyLevel.CTO,
   skill: VacancySkill.Fullstack,
-  stack: ["Java", "Docker"],
+  stack: [VacancyStack.Java, VacancyStack.Python],
   remote: true,
   description:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \

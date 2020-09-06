@@ -2,7 +2,6 @@ import React from "react";
 import {localization} from "../../../services/localization";
 import {InlineIcon} from '@iconify/react';
 import telegramIcon from '@iconify/icons-mdi/telegram';
-import {discard} from "../../../utils/discard";
 
 
 import "./styles.scss";
@@ -20,7 +19,7 @@ export const TelegramLayer: React.FunctionComponent<TelegramLayerProps> =
         <h5>{localization.localize("joinOurTelegram")}</h5>
         <a
           className="btn waves-effect"
-          onClick={(): void => discard(window.open(props.link))}
+          onClick={(): void => void(window.open(props.link))}
         >
           {localization.localize("telegramGroupName")}
           <i className="material-icons left">

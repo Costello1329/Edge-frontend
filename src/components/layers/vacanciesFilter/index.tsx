@@ -36,24 +36,22 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
     };
   }
 
-  private readonly getExistingLocations =
-    (vacancies: VacancyProps[]): string[] =>
-      [... new Set(vacancies.map(vac => vac.location.city))];
-
   public readonly componentDidMount = (): void =>
     this.updateDynamicContent();
 
-  public componentDidUpdate (prevProps: VacanciesFilterLayerProps) {
-    if (prevProps !== this.props)
+  public readonly componentDidUpdate =
+    (prevProps: VacanciesFilterLayerProps): void =>
+      prevProps !== this.props ?
       this.setState({
         vacanciesFiltered: [... this.props.vacancies],
         existingLocations: this.getExistingLocations(this.props.vacancies),
-      });
-  }
+      }) : void(0);
 
-  public updateDynamicContent (): void {
+  private updateDynamicContent (): void {
     const selects: HTMLSelectElement[] =
-      [... document.querySelectorAll("select")];
+      [... document.querySelectorAll<HTMLSelectElement>(
+        "select.vacancyFilterSelect"
+      )];
 
     selects.map(
       (el: HTMLSelectElement) =>
@@ -65,6 +63,10 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
       }
     );
   }
+
+  private readonly getExistingLocations =
+    (vacancies: VacancyProps[]): string[] =>
+      [... new Set(vacancies.map(vac => vac.location.city))];
 
   private readonly getFilteredVacancies = (
     levelOption: number,
@@ -152,6 +154,7 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
                           ... this.state.vacancyLevel === null ?
                           {} : {value: this.state.vacancyLevel}
                         }
+                        className="vacancyFilterSelect"
                         onChange = {
                           (event: React.ChangeEvent<HTMLSelectElement>): void =>
                             this.handleVacancyLevelChange(
@@ -177,6 +180,7 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
                           ... this.state.vacancySkill === null ?
                           {} : {value: this.state.vacancySkill}
                         }
+                        className="vacancyFilterSelect"
                         onChange = {
                           (event: React.ChangeEvent<HTMLSelectElement>): void =>
                             this.handleVacancySkillChange(
@@ -204,6 +208,7 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
                           ... this.state.vacancyLocation === null ?
                           {} : {value: this.state.vacancyLocation}
                         }
+                        className="vacancyFilterSelect"
                         onChange = {
                           (event: React.ChangeEvent<HTMLSelectElement>): void =>
                             this.handleVacancyLocationChange(
