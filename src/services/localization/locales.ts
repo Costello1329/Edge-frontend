@@ -75,7 +75,10 @@ export interface Locale {
   ValidationErrorSpaces: string,
   ValidationErrorSalaryNotEmail: string,
   ValidationErrorSalaryNotTelegram: string,
-  ValidationErrorSalaryNotPhone: string
+  ValidationErrorSalaryNotPhone: string,
+  vacancyIndustryDataScience: string,
+  vacancyIndustryBank: string,
+  vacancyIndustryEnterprise: string
 }
 
 export const ru_RU: Locale = {
@@ -158,7 +161,10 @@ export const ru_RU: Locale = {
   ValidationErrorSpaces: "Пробелы запрещены",
   ValidationErrorSalaryNotEmail: "Неверный формат email",
   ValidationErrorSalaryNotTelegram: "Неверный формат",
-  ValidationErrorSalaryNotPhone: "Неверный формат. Пример: +7(999)018-99-33"
+  ValidationErrorSalaryNotPhone: "Неверный формат. Пример: +7(999)018-99-33",
+  vacancyIndustryDataScience: "Data Science",
+  vacancyIndustryBank: "Bank",
+  vacancyIndustryEnterprise: "Enterprise"
 };
 
 export const en_GB: Locale = {} as Locale;

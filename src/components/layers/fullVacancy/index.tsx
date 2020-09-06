@@ -80,7 +80,7 @@ React.FunctionComponent<FullVacancyLayerProps> =
                   <div className="col s12 colNoSidePadding">
                     <p className="right pNoMargin secondLine">
                       <span className="industry">
-                        {vacancy.company.industry}
+                        {localization.localize(vacancy.company.industry)}
                       </span>
                       <span className="website">
                         <a onClick={
