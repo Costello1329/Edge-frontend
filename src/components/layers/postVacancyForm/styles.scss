@@ -63,6 +63,9 @@
   }
 
   & .select-wrapper {
+    margin-top: 1em;
+    margin-bottom: 1em;
+
     & input.select-dropdown {
       border-bottom-color: $warmTextDarken !important;
       color: $warmText !important;
@@ -100,4 +103,8 @@
     background-color: $contrast !important;
     color: $warmText !important;
   }
+}
+
+label[for=post-vacancy-form-location-remote] {
+  color: $warmTextDarken !important;
 }

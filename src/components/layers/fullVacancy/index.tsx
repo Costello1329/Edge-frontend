@@ -78,7 +78,7 @@ React.FunctionComponent<FullVacancyLayerProps> =
                         "smaller" : ""
                     ])}>{vacancy.company.name}</h5>
                   </div>
-                  <div className="col s12 colNoSidePadding">
+                  <div className="col s12 colNoSidePadding industryAndWebsite">
                     <p className="right pNoMargin secondLine">
                       <span className="industry">
                         {VacancyIndustry[vacancy.company.industry]}
