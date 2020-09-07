@@ -28,7 +28,7 @@ const InnerHeader: React.FunctionComponent<HeaderProps> =
             props.location.pathname === "/" ?
             <a className="edgeBarText"><EdgeLogo/></a> :
             <Link to={"/"}>
-              <a className="edgeBarText"><EdgeLogo/></a>
+              <span className="edgeBarText"><EdgeLogo/></span>
             </Link>
           }
           <ul id="nav-mobile" className="right">{

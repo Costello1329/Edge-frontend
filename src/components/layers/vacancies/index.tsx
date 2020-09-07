@@ -26,7 +26,7 @@ export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
         <div className="vacancies row">{
           props.vacancies.map(
             (vacancy: VacancyProps): JSX.Element =>
-              <article className="col s12">
+              <article className="col s12" key={`vacancy-${vacancy.guid.str}`}>
                 <Vacancy {... vacancy}/>
               </article>
           )
@@ -34,10 +34,10 @@ export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
           props.button !== null ? 
           <div className="row rowNoBottomMargin center-align">
             <Link to={props.button.url}>
-              <a className="btn waves-effect">
+              <button className="btn waves-effect">
                 <i className="material-icons left">format_align_justify</i>
                 {props.button.text}
-              </a>
+              </button>
             </Link>
           </div> : 
           <></>

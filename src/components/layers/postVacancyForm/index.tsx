@@ -33,15 +33,14 @@ type PostVacancyFormLayerState = {
   salary: Record<keyof FullVacancy["salary"], InputValue<number>>,
   level: FullVacancy["level"] | null,
   skill: FullVacancy["skill"] | null,
-  stack: number[]
   description: InputValue,
-} & Pick<FullVacancy, "remote">;
+} & Pick<FullVacancy, "stack" | "remote">;
 
 
 export class PostVacancyFormLayer
 extends React.Component<{}, PostVacancyFormLayerState> {
-  constructor () {
-    super({});
+  constructor (props: {}) {
+    super(props);
     this.state = {
       contact: {
         email: {
@@ -90,7 +89,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
       },
       level: null,
       skill: null,
-      stack: [0],
+      stack: [],
       remote: false,
       description: {
         value: "",
@@ -120,13 +119,17 @@ extends React.Component<{}, PostVacancyFormLayerState> {
   }
 
   private readonly handleStackChange =
-    (str: HTMLCollectionOf<HTMLOptionElement>): void =>
+    (options: HTMLCollectionOf<HTMLOptionElement>): void =>
       this.setState({
         stack:
-          [... str].map(
-            (option: HTMLOptionElement): number =>
-              parseInt(option.value)
-          )
+          [... options]
+            .filter(
+              (option: HTMLOptionElement): boolean =>
+                option.value !== ""
+            ).map(
+              (option: HTMLOptionElement): keyof typeof VacancyStack =>
+                option.value as keyof typeof VacancyStack
+            )
       });
 
   private readonly isButtonDisabled =
@@ -182,31 +185,42 @@ extends React.Component<{}, PostVacancyFormLayerState> {
             </div>
             <div className="col s6 left">
               <select
-                {
-                  ... this.state.company.industry !== null ?
-                  {value: this.state.company.industry} :
-                  {}
+                value={
+                  this.state.company.industry !== null ?
+                  this.state.company.industry : ""
                 }
                 className="postVacancyFormSelect"
                 onChange = {
                   (event: React.ChangeEvent<HTMLSelectElement>): void => {
-                    const industry: VacancyIndustry =
-                      Object.values(VacancyIndustry)[parseInt(event.target.value)];
-
-                    this.setState(state => ({
-                      company: { ... state.company, industry }
-                    }));
+                    const industry: keyof typeof VacancyIndustry | null =
+                      event.target.value !== "" ?
+                      event.target.value as keyof typeof VacancyIndustry:
+                      null
+                    
+                    this.setState(
+                      state => ({
+                        company: {
+                          ... state.company,
+                          industry
+                        }
+                      })
+                    )
                   }
                 }
               >
-                <option value="" disabled selected>
-                  {localization.localize("companyIndustry")}
-                </option>
+                <option
+                  value=""
+                  disabled
+                >{localization.localize("companyIndustry")}</option>
                 {
-                  [... Object.keys(VacancyIndustry)].map(
-                    (key: string, index: number): JSX.Element =>
-                      <option value={index.toString()}>{key}</option>
-                  )
+                  (Object.keys(VacancyIndustry) as (keyof typeof VacancyIndustry)[])
+                    .map(
+                      (key: keyof typeof VacancyIndustry): JSX.Element =>
+                        <option
+                          value={key}
+                          key={`post-vacancy-form-industry-option-${key}`}
+                        >{VacancyIndustry[key]}</option>
+                    )
                 }
               </select>
             </div>
@@ -319,50 +333,56 @@ extends React.Component<{}, PostVacancyFormLayerState> {
           </div>
           <div className="col s12 l9 form">
             <select
-              {... this.state.skill === null ? {} : {value: this.state.skill}}
+              value={this.state.skill !== null ? this.state.skill : ""}
               className="postVacancyFormSelect"
               onChange = {
                 (event: React.ChangeEvent<HTMLSelectElement>): void =>
                   this.setState({
                     skill:
-                      Object.values(VacancySkill)[parseInt(event.target.value)]
+                      event.target.value !== "" ?
+                      event.target.value as keyof typeof VacancySkill :
+                      null
                   })
               }
             >
-              <option value="" disabled selected>
+              <option value="" disabled>
                 {localization.localize("candidateSkill")}
               </option>
               {
-                [...Object.values(VacancySkill)].map(
-                  (value: string, index: number): JSX.Element =>
-                    <option value={index.toString()}>
-                      {localization.localize(value as any)}
-                    </option>
+                (Object.keys(VacancySkill) as (keyof typeof VacancySkill)[]).map(
+                  (key: keyof typeof VacancySkill): JSX.Element =>
+                    <option
+                      value={key}
+                      key={`post-vacancy-form-skill-option-${key}`} 
+                    >{VacancySkill[key]}</option>
                 )
               }
             </select>
             <div className="col s6 left">
               <select
+                value={this.state.level !== null ? this.state.level : ""}
                 className="postVacancyFormSelect"
                 id="post-vacancy-form-candidate-level"
-                {... this.state.level === null ? {} : {value: this.state.level}}
                 onChange = {
                   (event: React.ChangeEvent<HTMLSelectElement>): void =>
                     this.setState({
                       level:
-                        Object.values(VacancyLevel)[parseInt(event.target.value)]
+                        event.target.value !== "" ?
+                        event.target.value as keyof typeof VacancyLevel :
+                        null
                     })
                 }
               >
-                <option value="" disabled selected>
+                <option value="" disabled>
                   {localization.localize("candidateLevel")}
                 </option>
                 {
-                  [...Object.values(VacancyLevel)].map(
-                    (value: string, index: number): JSX.Element =>
-                      <option value={index.toString()}>
-                        {localization.localize(value as any)}
-                      </option>
+                  (Object.keys(VacancyLevel) as (keyof typeof VacancyLevel)[]).map(
+                    (key: keyof typeof VacancyLevel): JSX.Element =>
+                      <option
+                        value={key}
+                        key={`post-vacancy-form-level-option-${key}`} 
+                      >{VacancyLevel[key]}</option>
                   )
                 }
               </select>
@@ -375,21 +395,19 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                   (event: React.ChangeEvent<HTMLSelectElement>): void =>
                     this.handleStackChange(event.target.selectedOptions)
                 }
+                value={["", ... this.state.stack]}
               >
                 <option
-                  value="0"
+                  value=""
                   disabled
-                  selected={this.state.stack.indexOf(0) !== -1}
-                >
-                  {localization.localize("candidateStack")}
-                </option>
+                >{localization.localize("candidateStack")}</option>
                 {
-                  Object.keys(VacancyStack).map(
-                    (key: string, index: number): JSX.Element =>
+                  (Object.keys(VacancyStack) as (keyof typeof VacancyStack)[]).map(
+                    (key: keyof typeof VacancyStack): JSX.Element =>
                       <option
-                        value={(index + 1).toString()}
-                        selected={this.state.stack.indexOf(index + 1) !== -1}
-                      >{key}</option>
+                        value={key}
+                        key={`post-vacancy-form-stack-option-${key}`} 
+                      >{VacancyStack[key]}</option>
                   )
                 }
               </select>

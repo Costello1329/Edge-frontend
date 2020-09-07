@@ -12,13 +12,17 @@ import {HomePage} from "../pages/home";
 import {VacanciesPage} from "../pages/vacancies";
 import {VacancyPage} from "../pages/vacancy";
 import {PostVacancyPage} from "../pages/postVacancy";
+import Materialize from "materialize-css";
 
 import "./styles.scss";
 
 
 
-export const App: React.FunctionComponent =
-  (): JSX.Element =>
+export class App extends React.Component {
+  public readonly componentDidMount = (): void =>
+    void(Materialize.Dropdown.init(document.querySelectorAll('.dropdown-trigger')));
+
+  public readonly render = (): JSX.Element =>
     <Router>
       <Dropdown
         id="dropdown-lang"
@@ -68,4 +72,5 @@ export const App: React.FunctionComponent =
         </Switch>
       </main>
       <Footer/>
-    </Router>;
+    </Router>
+}

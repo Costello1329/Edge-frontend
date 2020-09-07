@@ -29,11 +29,6 @@ export interface Locale {
   all: string,
   remote: string,
   remoteOnly: string,
-  vacancyLevelIntern: string,
-  vacancyLevelJunior: string,
-  vacancyLevelMiddle: string,
-  vacancyLevelSenior: string,
-  vacancyLevelCTO: string,
   vacancySkillFrontend: string,
   vacancySkillBackend: string,
   vacancySkillFullstack: string,
@@ -75,10 +70,7 @@ export interface Locale {
   ValidationErrorSpaces: string,
   ValidationErrorSalaryNotEmail: string,
   ValidationErrorSalaryNotTelegram: string,
-  ValidationErrorSalaryNotPhone: string,
-  vacancyIndustryDataScience: string,
-  vacancyIndustryBank: string,
-  vacancyIndustryEnterprise: string
+  ValidationErrorSalaryNotPhone: string
 }
 
 export const ru_RU: Locale = {
@@ -114,11 +106,6 @@ export const ru_RU: Locale = {
   all: "Все",
   remote: "Удаленно",
   remoteOnly: "Только удаленно",
-  vacancyLevelIntern: "Intern",
-  vacancyLevelJunior: "Junior",
-  vacancyLevelMiddle: "Middle",
-  vacancyLevelSenior: "Senior",
-  vacancyLevelCTO: "CTO",
   vacancySkillFrontend: "Frontend",
   vacancySkillBackend: "Backend",
   vacancySkillFullstack: "Fullstack",
@@ -161,10 +148,7 @@ export const ru_RU: Locale = {
   ValidationErrorSpaces: "Пробелы запрещены",
   ValidationErrorSalaryNotEmail: "Неверный формат email",
   ValidationErrorSalaryNotTelegram: "Неверный формат",
-  ValidationErrorSalaryNotPhone: "Неверный формат. Пример: +7(999)018-99-33",
-  vacancyIndustryDataScience: "Data Science",
-  vacancyIndustryBank: "Bank",
-  vacancyIndustryEnterprise: "Enterprise"
+  ValidationErrorSalaryNotPhone: "Неверный формат. Пример: +7(999)018-99-33"
 };
 
 export const en_GB: Locale = {} as Locale;

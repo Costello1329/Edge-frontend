@@ -20,7 +20,10 @@ export const BreadcrumbsLayer: React.FunctionComponent<BreadcrumbsLayerProps> =
       <div className="nav-wrapper container">{
         props.breadcrumbs.map(
           (breadcrumb: Breadcrumb, index: number): JSX.Element =>
-            <span className="breadcrumb clickable">{
+            <span
+              className="breadcrumb clickable"
+              key={`breadcrumb-${index.toString()}`} 
+            >{
               index === props.breadcrumbs.length - 1 ?
               breadcrumb.text :
               <Link to={breadcrumb.url}>

@@ -15,10 +15,9 @@ interface VacanciesFilterLayerProps {
 
 interface VacanciesFilterLayerState {
   vacanciesFiltered: VacancyProps[],
-  existingLocations: string[],
-  vacancyLevel: null | number,
-  vacancySkill: null | number,
-  vacancyLocation: null | number,
+  vacancyLevel: null | "all" | keyof typeof VacancyLevel,
+  vacancySkill: null | "all" | keyof typeof VacancySkill,
+  vacancyLocation: null | "all" | string,
   vacancyRemoteOnly: boolean
 }
 
@@ -28,7 +27,6 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
     super(props);
     this.state = {
       vacanciesFiltered: [... this.props.vacancies],
-      existingLocations: this.getExistingLocations(this.props.vacancies),
       vacancyLevel: null,
       vacancySkill: null,
       vacancyLocation: null,
@@ -37,15 +35,34 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
   }
 
   public readonly componentDidMount = (): void =>
-    this.updateDynamicContent();
+    this.initializeDynamicContent();
+
+  private initializeDynamicContent (): void {
+    const selects: HTMLSelectElement[] =
+      [... document.querySelectorAll<HTMLSelectElement>(
+        "select.vacancyFilterSelect"
+      )];
+
+    selects.map(
+      (el: HTMLSelectElement) =>
+        Materialize.FormSelect.getInstance(el)
+    ).forEach(
+      (el: Materialize.FormSelect, index: number): void =>
+        el === undefined ?
+        void(Materialize.FormSelect.init(selects[index])) :
+        void(0)
+    );
+  }
 
   public readonly componentDidUpdate =
-    (prevProps: VacanciesFilterLayerProps): void =>
-      prevProps !== this.props ?
-      this.setState({
-        vacanciesFiltered: [... this.props.vacancies],
-        existingLocations: this.getExistingLocations(this.props.vacancies),
-      }) : void(0);
+    (prevProps: VacanciesFilterLayerProps): void => {
+      this.updateDynamicContent();
+
+      if (prevProps !== this.props)
+        this.setState({
+          vacanciesFiltered: [... this.props.vacancies]
+        });
+    };
 
   private updateDynamicContent (): void {
     const selects: HTMLSelectElement[] =
@@ -57,68 +74,60 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
       (el: HTMLSelectElement) =>
         Materialize.FormSelect.getInstance(el)
     ).forEach(
-      (el: Materialize.FormSelect, index: number): void => {
-        if (el === undefined)
-          Materialize.FormSelect.init(selects[index]);
-      }
+      (el: Materialize.FormSelect): void =>
+        el.destroy()
     );
+
+    this.initializeDynamicContent();
   }
 
-  private readonly getExistingLocations =
-    (vacancies: VacancyProps[]): string[] =>
-      [... new Set(vacancies.map(vac => vac.location.city))];
-
   private readonly getFilteredVacancies = (
-    levelOption: number,
-    skillOption: number,
-    locationOption: number,
+    levelOption: keyof typeof VacancyLevel | null,
+    skillOption: keyof typeof VacancySkill | null,
+    locationOption: string | null,
     vacancyRemoteOnly: boolean
   ): VacancyProps[] =>
     this.props.vacancies.filter(
       (vacancy: VacancyProps): boolean =>
-        (levelOption === 0 ?
-          true :
-          (vacancy.level === Object.values(VacancyLevel)[levelOption - 1])
-        ) && (skillOption === 0 ?
-          true :
-          (vacancy.skill === Object.values(VacancySkill)[skillOption - 1])
-        ) && (locationOption === 0 ?
-          true : (
-            vacancy.location.city ===
-            this.state.existingLocations[locationOption - 1]
-          )
-        ) && (vacancyRemoteOnly ? vacancy.remote : true)
+        (levelOption === null || vacancy.level === levelOption) && 
+        (skillOption === null || vacancy.skill === skillOption) &&
+        (locationOption === null || vacancy.location.city === locationOption) &&
+        (!vacancyRemoteOnly || vacancy.remote)
     );
+  
+    private readonly removeAll =
+      <T extends any>(value: T | "all"): T | null =>
+        value === "all" ? null : value;
 
   private readonly handleVacancyLevelChange =
-    (vacancyLevel: number): void =>
+    (vacancyLevel: keyof typeof VacancyLevel | null | "all"): void =>
       this.setState({
         vacanciesFiltered: this.getFilteredVacancies(
-          vacancyLevel,
-          this.removeNullOption(this.state.vacancySkill),
-          this.removeNullOption(this.state.vacancyLocation),
+          this.removeAll<keyof typeof VacancyLevel | null>(vacancyLevel),
+          this.removeAll<keyof typeof VacancySkill | null>(this.state.vacancySkill),
+          this.removeAll<string | null>(this.state.vacancyLocation),
           this.state.vacancyRemoteOnly
         ), vacancyLevel
       });
 
   private readonly handleVacancySkillChange =
-    (vacancySkill: number): void =>
+    (vacancySkill: keyof typeof VacancySkill | null | "all"): void =>
       this.setState({
         vacanciesFiltered: this.getFilteredVacancies(
-          this.removeNullOption(this.state.vacancyLevel),
-          vacancySkill,
-          this.removeNullOption(this.state.vacancyLocation),
+          this.removeAll<keyof typeof VacancyLevel | null>(this.state.vacancyLevel),
+          this.removeAll<keyof typeof VacancySkill | null>(vacancySkill),
+          this.removeAll<string | null>(this.state.vacancyLocation),
           this.state.vacancyRemoteOnly
         ), vacancySkill
       });
 
   private readonly handleVacancyLocationChange =
-    (vacancyLocation: number): void =>
+    (vacancyLocation: string | null | "all"): void =>
       this.setState({
         vacanciesFiltered: this.getFilteredVacancies(
-          this.removeNullOption(this.state.vacancyLevel),
-          this.removeNullOption(this.state.vacancySkill),
-          vacancyLocation,
+          this.removeAll<keyof typeof VacancyLevel | null>(this.state.vacancyLevel),
+          this.removeAll<keyof typeof VacancySkill | null>(this.state.vacancySkill),
+          this.removeAll<string | null>(vacancyLocation),
           this.state.vacancyRemoteOnly
         ), vacancyLocation
       });
@@ -127,16 +136,90 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
     (vacancyRemoteOnly: boolean): void =>
       this.setState({
         vacanciesFiltered: this.getFilteredVacancies(
-          this.removeNullOption(this.state.vacancyLevel),
-          this.removeNullOption(this.state.vacancySkill),
-          this.removeNullOption(this.state.vacancyLocation),
+          this.removeAll<keyof typeof VacancyLevel | null>(this.state.vacancyLevel),
+          this.removeAll<keyof typeof VacancySkill | null>(this.state.vacancySkill),
+          this.removeAll<string | null>(this.state.vacancyLocation),
           vacancyRemoteOnly
         ), vacancyRemoteOnly
       });
-  
-  private readonly removeNullOption =
-    (option: number | null): number =>
-      option === null ? 0 : option
+
+  private readonly getLevelOptions =
+    (): (keyof typeof VacancyLevel)[] => {
+      const filtered: VacancyProps[] =
+        this.getFilteredVacancies(
+          null,
+          this.removeAll<keyof typeof VacancySkill | null>(this.state.vacancySkill),
+          this.removeAll<string | null>(this.state.vacancyLocation),
+          this.state.vacancyRemoteOnly
+        );
+
+      return (
+        [... Object.keys(VacancyLevel)] as
+        (keyof typeof VacancyLevel)[]
+      ).filter(
+        (key: keyof typeof VacancyLevel): boolean =>
+          filtered.find(
+            (vacancy: VacancyProps): boolean =>
+              vacancy.level === key
+          ) !== undefined
+      );
+    };
+
+  private readonly getSkillOptions =
+    (): (keyof typeof VacancySkill)[] => {
+      const filtered: VacancyProps[] =
+        this.getFilteredVacancies(
+          this.removeAll<keyof typeof VacancyLevel | null>(this.state.vacancyLevel),
+          null,
+          this.removeAll<string | null>(this.state.vacancyLocation),
+          this.state.vacancyRemoteOnly
+        );
+
+      return (
+        [... Object.keys(VacancySkill)] as
+        (keyof typeof VacancySkill)[]
+      ).filter(
+        (key: keyof typeof VacancySkill): boolean =>
+          filtered.find(
+            (vacancy: VacancyProps): boolean =>
+              vacancy.skill === key
+          ) !== undefined
+      );
+    };
+
+  private readonly getLocationOptions =
+    (): string[] => {
+      const filtered: VacancyProps[] =
+        this.getFilteredVacancies(
+          this.removeAll<keyof typeof VacancyLevel | null>(this.state.vacancyLevel),
+          this.removeAll<keyof typeof VacancySkill | null>(this.state.vacancySkill),
+          null,
+          this.state.vacancyRemoteOnly
+        );
+
+      return [... new Set(this.props.vacancies.map(
+        (vacancy: VacancyProps): string =>
+          vacancy.location.city
+      ))].filter(
+        (location: string): boolean =>
+          filtered.find(
+            (vacancy: VacancyProps): boolean =>
+              vacancy.location.city === location
+          ) !== undefined
+      );
+    };
+
+  private readonly canShowRemoteOnlyChecbox =
+    (): boolean =>
+      this.getFilteredVacancies(
+        this.removeAll<keyof typeof VacancyLevel | null>(this.state.vacancyLevel),
+        this.removeAll<keyof typeof VacancySkill | null>(this.state.vacancySkill),
+        this.removeAll<string | null>(this.state.vacancyLocation),
+        false
+      ).find(
+        (vacancy: VacancyProps): boolean =>
+          vacancy.remote
+      ) !== undefined;
 
   public readonly render = (): JSX.Element => 
     <div className="vacanciesFilterLayer">
@@ -150,52 +233,68 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
                   <div className="row">
                     <div className = "col s12 m6 l12 noSidePadding">
                       <select
-                        {
-                          ... this.state.vacancyLevel === null ?
-                          {} : {value: this.state.vacancyLevel}
+                        value={
+                          this.state.vacancyLevel !== null ?
+                          this.state.vacancyLevel : ""
                         }
                         className="vacancyFilterSelect"
                         onChange = {
                           (event: React.ChangeEvent<HTMLSelectElement>): void =>
                             this.handleVacancyLevelChange(
-                              parseInt(event.target.value))
+                              event.target.value !== "" ?
+                              event.target.value as
+                                (keyof typeof VacancyLevel | "all") :
+                              null
+                            )
                         }
                       >
-                        <option value="" disabled selected>
+                        <option value="" disabled>
                           {localization.localize("level")}
                         </option>
+                        <option
+                          value={"all"}
+                        >{localization.localize("all")}</option>
                         {
-                          ["all", ... Object.values(VacancyLevel)].map(
-                            (value: string, index: number): JSX.Element =>
-                              <option value={index}>
-                                {localization.localize(value as any)}
-                              </option>
+                          this.getLevelOptions().map(
+                            (key: keyof typeof VacancyLevel): JSX.Element =>
+                              <option
+                                value={key}
+                                key={`vacancy-filter-level-option-${key}`}
+                              >{VacancyLevel[key]}</option>
                           )
                         }
                       </select>  
                     </div>
                     <div className="col s12 m6 l12 noSidePadding">
                       <select
-                        {
-                          ... this.state.vacancySkill === null ?
-                          {} : {value: this.state.vacancySkill}
+                        value={
+                          this.state.vacancySkill !== null ?
+                          this.state.vacancySkill : ""
                         }
                         className="vacancyFilterSelect"
                         onChange = {
                           (event: React.ChangeEvent<HTMLSelectElement>): void =>
                             this.handleVacancySkillChange(
-                              parseInt(event.target.value))
+                              event.target.value !== "" ?
+                              event.target.value as
+                                (keyof typeof VacancySkill | "all") :
+                              null
+                            )
                         }
                       >
-                        <option value="" disabled selected>
+                        <option value="" disabled>
                           {localization.localize("stack")}
                         </option>
+                        <option value={"all"}>
+                          {localization.localize("all")}
+                        </option>
                         {
-                          ["all", ... Object.values(VacancySkill)].map(
-                            (value: string, index: number): JSX.Element =>
-                              <option value={index}>
-                                {localization.localize(value as any)}
-                              </option>
+                          this.getSkillOptions().map(
+                            (key: keyof typeof VacancySkill): JSX.Element =>
+                              <option
+                                value={key}
+                                key={`vacancy-filter-skill-option-${key}`}
+                              >{VacancySkill[key]}</option>
                           )
                         }
                       </select>
@@ -204,25 +303,33 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
                   <div className="row">
                     <div className="col s12 m6 l12 noSidePadding">
                       <select
-                        {
-                          ... this.state.vacancyLocation === null ?
-                          {} : {value: this.state.vacancyLocation}
+                        value={
+                          this.state.vacancyLocation !== null ?
+                          this.state.vacancyLocation : ""
                         }
                         className="vacancyFilterSelect"
                         onChange = {
                           (event: React.ChangeEvent<HTMLSelectElement>): void =>
                             this.handleVacancyLocationChange(
-                              parseInt(event.target.value))
+                              event.target.value !== "" ?
+                              event.target.value as (string | "all") :
+                              null
+                            )
                         }
                       >
-                        <option value="" disabled selected>
+                        <option value="" disabled>
                           {localization.localize("city")}
                         </option>
-                        <option value={0}>{localization.localize("all")}</option>
+                        <option value={"all"}>
+                          {localization.localize("all")}
+                        </option>
                         {
-                          this.state.existingLocations.map(
-                            (value: string, index: number): JSX.Element =>
-                              <option value={index + 1}>{value}</option>
+                          this.getLocationOptions().map(
+                            (key: string): JSX.Element =>
+                              <option
+                                value={key}
+                                key={`vacancy-filter-location-option-${key}`}
+                              >{key}</option>
                           )
                         }
                       </select>
@@ -237,6 +344,7 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
                             (event: React.ChangeEvent<HTMLInputElement>): void =>
                               this.handleRemoteOnlyChange(event.target.checked)
                           }
+                          disabled={!this.canShowRemoteOnlyChecbox()}
                         />
                         <span>{localization.localize("remoteOnly")}</span>
                       </label>
@@ -255,15 +363,12 @@ extends React.Component<VacanciesFilterLayerProps, VacanciesFilterLayerState> {
                 )
                   return 0;
 
-                else if (first.premium)
-                  return -1;
-
                 else
-                  return 1;
+                  return first.premium ? -1 : 1;
               }
             ).map(
               (vacancy: VacancyProps): JSX.Element =>
-                <article className="col s12">
+                <article className="col s12" key={`vacancy-${vacancy.guid.str}`}>
                   <Vacancy {... vacancy}/>
                 </article>
             )

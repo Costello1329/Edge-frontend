@@ -1,6 +1,7 @@
 import React from "react";
 import {localization} from "../../../services/localization";
-import {FullVacancy} from "../../../models/vacancy";
+import {FullVacancy, VacancyLevel, VacancySkill, VacancyIndustry, VacancyStack} 
+  from "../../../models/vacancy";
 import {InlineIcon} from '@iconify/react';
 import telegramIcon from '@iconify/icons-mdi/telegram';
 import classNames from "classnames";
@@ -59,9 +60,9 @@ React.FunctionComponent<FullVacancyLayerProps> =
             )}>
               <header className="row">
                 <div className="col s6 jobTitle">
-                  <h5>{localization.localize(vacancy.skill as any)}</h5>
+                  <h5>{VacancySkill[vacancy.skill]}</h5>
                   <p className="secondLine pNoMargin">
-                    {localization.localize(vacancy.level)}
+                    {VacancyLevel[vacancy.level]}
                   </p>
                 </div>
                 <div className="col s6">
@@ -80,7 +81,7 @@ React.FunctionComponent<FullVacancyLayerProps> =
                   <div className="col s12 colNoSidePadding">
                     <p className="right pNoMargin secondLine">
                       <span className="industry">
-                        {localization.localize(vacancy.company.industry)}
+                        {VacancyIndustry[vacancy.company.industry]}
                       </span>
                       <span className="website">
                         <a onClick={
@@ -102,7 +103,7 @@ React.FunctionComponent<FullVacancyLayerProps> =
               <section className="row details">
                 <div className="col s6">
                   <div className="stack">
-                    <p>{vacancy.stack.join(", ")}</p>
+                    <p>{vacancy.stack.map(key => VacancyStack[key]).join(", ")}</p>
                   </div>
                   <div className="moneySummary">
                     <h6>{vacancy.salary.from} – {vacancy.salary.to} $</h6>
@@ -118,8 +119,10 @@ React.FunctionComponent<FullVacancyLayerProps> =
               </section>
               <section className="description">
                 {splitParagraphs(vacancy.description).map(
-                  (paragraph: string): JSX.Element =>
-                    <p>{paragraph}</p>
+                  (paragraph: string, index: number): JSX.Element =>
+                    <p key={
+                      `full-vacancy-${vacancy.guid.str}-description-par-${index}`
+                    }>{paragraph}</p>
                 )}
               </section>
               <a

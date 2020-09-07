@@ -1,5 +1,6 @@
 import React from "react";
-import {Vacancy as VacancyProps} from "../../models/vacancy";
+import {Vacancy as VacancyProps, VacancySkill, VacancyLevel, VacancyStack}
+  from "../../models/vacancy";
 import {Link} from "react-router-dom";
 import {localization} from "../../services/localization";
 import classNames from "classnames";
@@ -22,9 +23,9 @@ export const Vacancy: React.FunctionComponent<VacancyProps> =
       )}>
         <header className="row">
           <div className="col s6 jobTitle">
-            <h5>{localization.localize(props.skill as any)}</h5>
+            <h5>{VacancySkill[props.skill]}</h5>
             <p className="secondLine pNoMargin">
-              {localization.localize(props.level)}
+              {VacancyLevel[props.level]}
             </p>
           </div>
           <div className="col s6">
@@ -50,7 +51,7 @@ export const Vacancy: React.FunctionComponent<VacancyProps> =
         <section className="row details">
           <div className="col s6">
             <div className="stack">
-              <p>{props.stack.join(", ")}</p>
+              <p>{props.stack.map(key => VacancyStack[key]).join(", ")}</p>
             </div>
             <div className="moneySummary">
               <h6>{props.salary.from} – {props.salary.to} $</h6>
