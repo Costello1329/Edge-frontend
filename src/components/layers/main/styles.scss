@@ -97,7 +97,12 @@
 
     & button.btn {
       background-color: $contrast;
-      color: $warmText
+      color: $warmText;
+      padding: 0 12px !important;
+
+      & > i {
+        margin-right: 8px !important;
+      }
     }
   }
 }

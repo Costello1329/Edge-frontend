@@ -36,7 +36,7 @@ export const MainLayer: React.FunctionComponent<MainLayerProps> =
             </Link>
             <Link to={"/vacancies"}>
               <button className="btn waves-effect">
-                <i className="material-icons left">format_align_justify</i>
+                <i className="material-icons left">visibility</i>
                 {localization.localize("viewVacancies")}
               </button>
             </Link>
