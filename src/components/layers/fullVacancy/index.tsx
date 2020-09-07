@@ -127,7 +127,8 @@ React.FunctionComponent<FullVacancyLayerProps> =
               </section>
               <a
                 className="btn waves-effect"
-                onClick={(): void => alert(vacancy.contact.telegram)}
+                onClick={(): void => 
+                  void(open(`https://t.me/${vacancy.contact.telegram}`)?.focus())}
               >
                 {localization.localize("respondInTelegram")}
                 <i className="material-icons left">

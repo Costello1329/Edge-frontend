@@ -107,7 +107,7 @@ export const fullVacancy: FullVacancy = {
   contact: {
     email: "mail@mail.ru",
     phone: "+7(915)042-08-03",
-    telegram: "mainain"
+    telegram: "konstantinleladze"
   },
   location: {
     country: "Russia",
