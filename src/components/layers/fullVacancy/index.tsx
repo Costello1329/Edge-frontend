@@ -5,6 +5,7 @@ import {FullVacancy, VacancyLevel, VacancySkill, VacancyIndustry, VacancyStack}
 import {InlineIcon} from '@iconify/react';
 import telegramIcon from '@iconify/icons-mdi/telegram';
 import classNames from "classnames";
+import {formatSalary} from "../../../utils/formatters/salary";
 
 import "./styles.scss";
 
@@ -106,7 +107,12 @@ React.FunctionComponent<FullVacancyLayerProps> =
                     <p>{vacancy.stack.map(key => VacancyStack[key]).join(", ")}</p>
                   </div>
                   <div className="moneySummary">
-                    <h6>{vacancy.salary.from} – {vacancy.salary.to} $</h6>
+                  <h6>{`${
+                      formatSalary(vacancy.salary.from)
+                    } – ${
+                      formatSalary(vacancy.salary.to)
+                    } $`
+                  }</h6>
                   </div>
                 </div>
                 <div className="col s6 stickToBottom">{

@@ -4,6 +4,7 @@ import {Vacancy as VacancyProps, VacancySkill, VacancyLevel, VacancyStack}
 import {Link} from "react-router-dom";
 import {localization} from "../../services/localization";
 import classNames from "classnames";
+import {formatSalary} from "../../utils/formatters/salary";
 
 import "./styles.scss";
 
@@ -54,7 +55,12 @@ export const Vacancy: React.FunctionComponent<VacancyProps> =
               <p>{props.stack.map(key => VacancyStack[key]).join(", ")}</p>
             </div>
             <div className="moneySummary">
-              <h6>{props.salary.from} – {props.salary.to} $</h6>
+              <h6>{`${
+                  formatSalary(props.salary.from)
+                } – ${
+                  formatSalary(props.salary.to)
+                } $`
+              }</h6>
             </div>
           </div>
           <div className="col s6 stickToBottom">{
