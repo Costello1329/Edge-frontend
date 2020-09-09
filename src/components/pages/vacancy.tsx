@@ -7,6 +7,7 @@ import {Preloader} from "../ui/preloader";
 import {FullVacancyLayer} from "../layers/fullVacancy";
 import {fullVacancy} from "../../models/statics";
 import {Redirect} from "react-router-dom";
+import {Guid} from "../../utils/guid";
 
 
 
@@ -25,7 +26,7 @@ const getBreadcrumbs =
 
 
 interface VacancyPageProps {
-  vacancyGuid: string
+  vacancyGuid: Guid
 }
 
 interface VacancyPageState {
@@ -54,7 +55,7 @@ extends React.Component<VacancyPageProps, VacancyPageState> {
 
   public readonly render = (): JSX.Element =>
     <React.Fragment>
-      <BreadcrumbsLayer breadcrumbs={getBreadcrumbs(this.props.vacancyGuid)}/>
+      <BreadcrumbsLayer breadcrumbs={getBreadcrumbs(this.props.vacancyGuid.str)}/>
       {
         !this.state.loaded ?
         <div className="container preloaderWrapper">

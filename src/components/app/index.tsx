@@ -15,6 +15,7 @@ import {PostVacancyPage} from "../pages/postVacancy";
 import Materialize from "materialize-css";
 
 import "./styles.scss";
+import { Guid } from "../../utils/guid";
 
 
 
@@ -61,11 +62,19 @@ export class App extends React.Component {
             <PostVacancyPage/>
           </Route>
           <Route
-            path = {"/vacancies/:guid"}
+            path = {"/vacancies/:str"}
             exact
             component = {
-              (innerProps: RouteComponentProps<{ guid: string }>): JSX.Element =>
-                <VacancyPage vacancyGuid = {innerProps.match.params.guid}/>
+              (innerProps: RouteComponentProps<{ str: string }>): JSX.Element => {
+                try {
+                  alert(innerProps.match.params.str);
+                  return <VacancyPage vacancyGuid={
+                    new Guid(innerProps.match.params.str)
+                  }/>;
+                } catch (_) {
+                  return <Redirect to="/"/>;
+                }
+              }
             }
           />
           <Redirect to = "/"/>

@@ -35,7 +35,7 @@ export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
           <div className="row rowNoBottomMargin center-align">
             <Link to={props.button.url}>
               <button className="btn waves-effect">
-                <i className="material-icons left">format_align_justify</i>
+                <i className="material-icons left">visibility</i>
                 {props.button.text}
               </button>
             </Link>
