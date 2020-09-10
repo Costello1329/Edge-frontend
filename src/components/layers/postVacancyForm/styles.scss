@@ -2,9 +2,7 @@
 @import "../../../theme/colors.scss";
 
 
-.postVacancyForm section {
-
-  
+.postVacancyForm section {  
   &.post {
     margin-bottom: 2em;
   }
@@ -121,17 +119,41 @@
     background-color: $contrast !important;
     color: $warmText !important;
   }
-}
 
-label[for=post-vacancy-form-location-remote] {
-  color: $warmTextDarken !important;
+  label[for=post-vacancy-form-location-remote] {
+    color: $warmTextDarken !important;
 
-  & span {
-    margin-top: 1em;
+    & span {
+      margin-top: 1em;
+    }
   }
-}
 
-[type="checkbox"]:checked + span:not(.lever)::before {
-  border-right: 2px solid $warmTextDarken !important;
-  border-bottom: 2px solid $warmTextDarken !important;
+  [type="checkbox"]:checked + span:not(.lever)::before {
+    border-right: 2px solid $warmTextDarken !important;
+    border-bottom: 2px solid $warmTextDarken !important;
+  }
+  
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus
+  input:-webkit-autofill, 
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    // border: 0;
+    -webkit-text-fill-color: $warmText;
+    box-shadow: 0 0 0px 1000px transparent inset;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+    transition: background-color 5000s ease-in-out 0s;
+    background: -webkit-linear-gradient(
+      top, 
+      rgba(255,255,255,0) 0%
+      rgba(0,174,255,0.04) 50%
+      rgba(255,255,255,0) 51%
+      rgba(0,174,255,0.03) 100%
+    );
+  }
 }
