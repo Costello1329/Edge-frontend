@@ -3,21 +3,36 @@
 
 
 .postVacancyForm section {
+
+  
   &.post {
     margin-bottom: 2em;
   }
 
   & h5 {
     color: $warmText;
+    line-height: 46px;
+    margin-top: 1rem;
   }
 
   & .col.form {
+
     & .left {
-      padding-right: 1em !important;
+      padding-right: 0.5em !important;
     }
 
     & .right {
-      padding-left: 1em !important;
+      padding-left: 0.5em !important;
+    }
+
+    @media #{$medium-and-up} {
+      & .left {
+        padding-right: 1em !important;
+      }
+  
+      & .right {
+        padding-left: 1em !important;
+      }
     }
 
     & .inline-text {
@@ -29,6 +44,12 @@
 
   & .input-field {
     color: $warmText !important;
+    position: relative;
+
+    & input {
+      margin-bottom: 0;
+      color: $warmText;
+    }
 
     &.inline {
       margin: 0 0 0 7px !important;
@@ -52,6 +73,9 @@
   }
 
   textarea {
+    color: $warmText !important;
+    height: 48px;
+
     &:focus + label {
       color: $warmTextDarken !important;
     }
@@ -63,12 +87,13 @@
   }
 
   & .select-wrapper {
-    margin-top: 1em;
-    margin-bottom: 1em;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 
     & input.select-dropdown {
       border-bottom-color: $warmTextDarken !important;
       color: $warmText !important;
+      font-size: inherit !important;
     }
 
     & .caret {
@@ -90,13 +115,6 @@
   & .dropdown-content li > span {
     color: $warmText !important;
   }
-§
-  & #post-vacancy-form-salary-from,
-  & #post-vacancy-form-salary-from + label,
-  & #post-vacancy-form-salary-to,
-  & #post-vacancy-form-salary-to + label {
-    font-weight: bold;
-  }
 
   & a.btn:not(.disabled),
   & a.btn:not(.disabled):hover {
@@ -107,4 +125,13 @@
 
 label[for=post-vacancy-form-location-remote] {
   color: $warmTextDarken !important;
+
+  & span {
+    margin-top: 1em;
+  }
+}
+
+[type="checkbox"]:checked + span:not(.lever)::before {
+  border-right: 2px solid $warmTextDarken !important;
+  border-bottom: 2px solid $warmTextDarken !important;
 }

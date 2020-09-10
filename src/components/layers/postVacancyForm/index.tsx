@@ -21,7 +21,7 @@ import "./styles.scss";
 
 
 
-type InputValue<T = string> =  { value: T, error: boolean };
+type InputValue<T = string> = { value: T, error: boolean };
 
 type PostVacancyFormLayerState = {
   contact: Record<keyof FullVacancy["contact"], InputValue>,
@@ -33,7 +33,7 @@ type PostVacancyFormLayerState = {
   salary: Record<keyof FullVacancy["salary"], InputValue<number>>,
   level: FullVacancy["level"] | null,
   skill: FullVacancy["skill"] | null,
-  description: InputValue,
+  description: string,
 } & Pick<FullVacancy, "stack" | "remote">;
 
 
@@ -91,10 +91,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
       skill: null,
       stack: [],
       remote: false,
-      description: {
-        value: "",
-        error: false
-      }
+      description: ""
     };
   }
 
@@ -183,7 +180,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 }
               />
             </div>
-            <div className="col s6 left">
+            <div className="col s12 m6 left">
               <select
                 value={
                   this.state.company.industry !== null ?
@@ -224,7 +221,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 }
               </select>
             </div>
-            <div className="col s6 right">
+            <div className="col s12 m6 right">
               <Input
                 title={localization.localize("companyWebsite")}
                 id="post-vacancy-form-company-website"
@@ -250,16 +247,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 }
               />
             </div>
-          </div>
-        </section>
-        <section className="row location">
-          <div className="col s12 l3 header">
-            <h5>
-              {localization.localize("location")}
-            </h5>
-          </div>
-          <div className="col s12 l9 form">
-            <div className="col s6 left">
+            <div className="col s12 m6 left">
               <Input
                 title={localization.localize("locationCountry")}
                 id="post-vacancy-form-location-country"
@@ -285,7 +273,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 }
               />
             </div>
-            <div className="col s6 right">
+            <div className="col s12 m6 right">
               <Input
                 title={localization.localize("locationCity")}
                 id="post-vacancy-form-location-city"
@@ -358,7 +346,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 )
               }
             </select>
-            <div className="col s6 left">
+            <div className="col s6 left always-half">
               <select
                 value={this.state.level !== null ? this.state.level : ""}
                 className="postVacancyFormSelect"
@@ -387,7 +375,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 }
               </select>
             </div>
-            <div className="col s6 right">
+            <div className="col s6 right always-half">
               <select
                 className="postVacancyFormSelect"
                 multiple
@@ -419,7 +407,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
             <h5>{localization.localize("salary")}</h5>
           </div>
           <div className="col s12 l9 form">
-            <div className="col s6 left">
+            <div className="col s6 left always-half">
               <Input
                 title={localization.localize("salaryFrom")}
                 id="post-vacancy-form-salary-from"
@@ -445,7 +433,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 }
               />
             </div>
-            <div className="col s6 right">
+            <div className="col s6 right always-half">
               <Input
                 title={localization.localize("salaryTo")}
                 id="post-vacancy-form-salary-to"
@@ -477,28 +465,19 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 }
               />
             </div>
-          </div>
-        </section>
-        <section className="row description">
-          <div className="col s12 l3 header">
-            <h5>
-              {localization.localize("description")}
-            </h5>
-          </div>
-          <div className="col s12 l9 form">
-            <textarea
-              id="post-vacancy-form-description"
-              className="materialize-textarea"
-            ></textarea>
-          </div>
-        </section>
-        <section className="row contacts">
-          <div className="col s12 l3 header">
-            <h5>
-              {localization.localize("contacts")}
-            </h5>
-          </div>
-          <div className="col s12 l9 form">
+            <div className="input-field">
+              <textarea
+                id="post-vacancy-form-description"
+                className="materialize-textarea"
+                value={this.state.description}
+                onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
+                  this.setState({ description: event.target.value })
+                }
+              ></textarea>
+              <label htmlFor="post-vacancy-form-description">
+                {localization.localize("description")}
+              </label>
+            </div>
             <Input
               title={localization.localize("contactsEmail")}
               id="post-vacancy-form-contacts-email"
