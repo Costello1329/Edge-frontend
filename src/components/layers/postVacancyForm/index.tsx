@@ -465,43 +465,47 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 }
               />
             </div>
-            <div className="input-field">
-              <textarea
-                id="post-vacancy-form-description"
-                className="materialize-textarea"
-                value={this.state.description}
-                onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
-                  this.setState({ description: event.target.value })
-                }
-              ></textarea>
-              <label htmlFor="post-vacancy-form-description">
-                {localization.localize("description")}
-              </label>
+            <div className="col s12">
+              <div className="input-field">
+                <textarea
+                  id="post-vacancy-form-description"
+                  className="materialize-textarea"
+                  value={this.state.description}
+                  onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
+                    this.setState({ description: event.target.value })
+                  }
+                ></textarea>
+                <label htmlFor="post-vacancy-form-description">
+                  {localization.localize("description")}
+                </label>
+              </div>
             </div>
-            <Input
-              title={localization.localize("contactsEmail")}
-              id="post-vacancy-form-contacts-email"
-              type="text"
-              validator={
-                new Validator([
-                  ruleNotEmpty,
-                  ruleIsEmail
-                ], [
-                  commonLocalizer,
-                  contactsLocalizer
-                ])
-              }
-              changeCallback={
-                (value: string, error: ValidationError | null): void =>
-                  this.setState((state: PostVacancyFormLayerState) => ({
-                    contact: {
-                      ... state.contact,
-                      email: { value, error: error !== null }
-                    }
-                  })
-                )
-              }
-            />
+            <div className="col s12">
+              <Input
+                title={localization.localize("contactsEmail")}
+                id="post-vacancy-form-contacts-email"
+                type="text"
+                validator={
+                  new Validator([
+                    ruleNotEmpty,
+                    ruleIsEmail
+                  ], [
+                    commonLocalizer,
+                    contactsLocalizer
+                  ])
+                }
+                changeCallback={
+                  (value: string, error: ValidationError | null): void =>
+                    this.setState((state: PostVacancyFormLayerState) => ({
+                      contact: {
+                        ... state.contact,
+                        email: { value, error: error !== null }
+                      }
+                    })
+                  )
+                }
+              />
+            </div>
             <div className="col s6 left">
               <Input
                 title="Telegram"
