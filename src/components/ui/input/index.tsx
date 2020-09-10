@@ -1,5 +1,6 @@
 import React from "react";
 import {Validator, ValidationError} from "../../../utils/validation/validator";
+import classNames from "classnames";
 
 import "./styles.scss";
 
@@ -126,7 +127,11 @@ export class Input extends React.Component<InputProps, InputState> {
           />
         }
         <label htmlFor = {this.props.id}>{this.props.title}</label>
-        <span className="inputErrorText">{
+        <span className={classNames([
+          "inputErrorText",
+          this.state.validationError !== null ?
+          "show" : "hide"
+        ])}>{
           this.state.validationError !== null ?
           this.props.validator.localize(this.state.validationError) :
           ""
