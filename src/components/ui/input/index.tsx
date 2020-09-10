@@ -9,7 +9,7 @@ export interface InputProps {
   title: string,
   initialValue?: string,
   id: string,
-  type: "text" | "password",
+  type: "input-text" | "input-password" | "textarea",
   validator: Validator,
   changeCallback?: (value: string, validationError: ValidationError | null) => void
 }
@@ -104,15 +104,27 @@ export class Input extends React.Component<InputProps, InputState> {
   public readonly render = 
     (): JSX.Element =>
       <div className = "input-field">
-        <input
-          id = {this.props.id}
-          type = {this.props.type}
-          value = {this.state.value}
-          onChange = {
-            (event: React.ChangeEvent<HTMLInputElement>): void =>
-              this.handleChange(event.target.value)
-          }
-        />
+        {
+          this.props.type === "textarea" ?
+          <textarea
+            id={this.props.id}
+            className="materialize-textarea"
+            value={this.state.value}
+            onChange={
+              (event: React.ChangeEvent<HTMLTextAreaElement>): void =>
+                this.handleChange(event.target.value)
+            }
+          /> :
+          <input
+            id={this.props.id}
+            type = {this.props.type === "input-text" ? "text" : "password"}
+            value = {this.state.value}
+            onChange = {
+              (event: React.ChangeEvent<HTMLInputElement>): void =>
+                this.handleChange(event.target.value)
+            }
+          />
+        }
         <label htmlFor = {this.props.id}>{this.props.title}</label>
         <span className="inputErrorText">{
           this.state.validationError !== null ?

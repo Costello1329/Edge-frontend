@@ -33,7 +33,7 @@ type PostVacancyFormLayerState = {
   salary: Record<keyof FullVacancy["salary"], InputValue<number>>,
   level: FullVacancy["level"] | null,
   skill: FullVacancy["skill"] | null,
-  description: string,
+  description: InputValue,
 } & Pick<FullVacancy, "stack" | "remote">;
 
 
@@ -91,7 +91,10 @@ extends React.Component<{}, PostVacancyFormLayerState> {
       skill: null,
       stack: [],
       remote: false,
-      description: ""
+      description: {
+        value: "",
+        error: false
+      }
     };
   }
 
@@ -141,6 +144,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
       this.state.stack.length <= 1 ||
       this.state.salary.from.error ||
       this.state.salary.to.error ||
+      this.state.description.error ||
       this.state.contact.email.error ||
       this.state.contact.telegram.error ||
       this.state.contact.phone.error;
@@ -157,7 +161,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
               <Input
                 title={localization.localize("companyName")}
                 id="post-vacancy-form-company-name"
-                type="text"
+                type="input-text"
                 validator={
                   new Validator([
                     ruleNotEmpty,
@@ -225,7 +229,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
               <Input
                 title={localization.localize("companyWebsite")}
                 id="post-vacancy-form-company-website"
-                type="text"
+                type="input-text"
                 validator={
                   new Validator([
                     ruleNotEmpty,
@@ -251,7 +255,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
               <Input
                 title={localization.localize("locationCountry")}
                 id="post-vacancy-form-location-country"
-                type="text"
+                type="input-text"
                 validator={
                   new Validator([
                     ruleNotEmpty,
@@ -277,7 +281,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
               <Input
                 title={localization.localize("locationCity")}
                 id="post-vacancy-form-location-city"
-                type="text"
+                type="input-text"
                 validator={
                   new Validator([
                     ruleNotEmpty,
@@ -411,7 +415,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
               <Input
                 title={localization.localize("salaryFrom")}
                 id="post-vacancy-form-salary-from"
-                type="text"
+                type="input-text"
                 validator={
                   new Validator([
                     ruleNotEmpty,
@@ -437,7 +441,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
               <Input
                 title={localization.localize("salaryTo")}
                 id="post-vacancy-form-salary-to"
-                type="text"
+                type="input-text"
                 validator={
                   new Validator([
                     ruleNotEmpty,
@@ -467,24 +471,28 @@ extends React.Component<{}, PostVacancyFormLayerState> {
             </div>
             <div className="col s12">
               <div className="input-field">
-                <textarea
+                <Input
+                  title={localization.localize("description")}
                   id="post-vacancy-form-description"
-                  className="materialize-textarea"
-                  value={this.state.description}
-                  onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
-                    this.setState({ description: event.target.value })
+                  type="textarea"
+                  changeCallback={
+                    (value: string, error: ValidationError | null): void =>
+                      this.setState({
+                        description: {
+                          value,
+                          error: error !== null
+                        }
+                      })
                   }
-                ></textarea>
-                <label htmlFor="post-vacancy-form-description">
-                  {localization.localize("description")}
-                </label>
+                  validator={new Validator([ruleNotEmpty], [commonLocalizer])}
+                />
               </div>
             </div>
             <div className="col s12">
               <Input
                 title={localization.localize("contactsEmail")}
                 id="post-vacancy-form-contacts-email"
-                type="text"
+                type="input-text"
                 validator={
                   new Validator([
                     ruleNotEmpty,
@@ -510,7 +518,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
               <Input
                 title="Telegram"
                 id="post-vacancy-form-contacts-telegram"
-                type="text"
+                type="input-text"
                 validator={
                   new Validator([
                     ruleNotEmpty,
@@ -538,7 +546,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
               <Input
                 title={localization.localize("contactsPhone")}
                 id="post-vacancy-form-contacts-phone"
-                type="text"
+                type="input-text"
                 validator={
                   new Validator([
                     ruleNotEmpty,
