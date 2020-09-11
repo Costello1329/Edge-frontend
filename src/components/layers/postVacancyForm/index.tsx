@@ -141,7 +141,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
       this.state.location.city.error ||
       this.state.skill === null ||
       this.state.level === null ||
-      this.state.stack.length <= 1 ||
+      this.state.stack.length < 1 ||
       this.state.salary.from.error ||
       this.state.salary.to.error ||
       this.state.description.error ||
