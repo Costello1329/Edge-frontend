@@ -1,8 +1,8 @@
 import React from "react";
 import {Validator, ValidationError} from "../../../utils/validation/validator";
-import classNames from "classnames";
-
-import "./styles.scss";
+import {ErrorText} from "./errorText";
+import { localization } from "../../../services/localization";
+import { getRandomGuid } from "../../../utils/guid";
 
 
 
@@ -77,11 +77,11 @@ export class Input extends React.Component<InputProps, InputState> {
       void(this.mounted = false);
 
   public componentDidUpdate (prevProps: InputProps): void {
-    if (!this.mounted)
+    if (!this.mounted || prevProps.validator === this.props.validator)
       return;
 
     const prevValidationError: ValidationError | null =
-    this.getValidationError(prevProps.validator, this.state.value);
+      this.getValidationError(prevProps.validator, this.state.value);
 
     const validationError: ValidationError | null =
       this.getValidationError(this.props.validator, this.state.value);
@@ -127,14 +127,20 @@ export class Input extends React.Component<InputProps, InputState> {
           />
         }
         <label htmlFor = {this.props.id}>{this.props.title}</label>
-        <span className={classNames([
-          "inputErrorText",
-          this.state.validationError !== null ?
-          "show" : "hide"
-        ])}>{
-          this.state.validationError !== null ?
-          this.props.validator.localize(this.state.validationError) :
-          ""
-        }</span>
+        <ErrorText
+          id={`${this.props.id}-error-text`}
+          show={this.state.validationError !== null}
+          text={
+            ((): string => {
+              if (this.state.validationError === null)
+                return "";
+
+              const localized: string | null =
+                this.props.validator.localize(this.state.validationError);
+
+              return localized !== null ? localized : "";
+            })()
+          }
+        />
       </div>;
 }
