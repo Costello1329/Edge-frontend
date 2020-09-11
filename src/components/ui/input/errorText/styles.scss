@@ -11,7 +11,7 @@
   border-radius: 4px;
   margin-top: 12px;
   z-index: 1000;
-  box-shadow: 0 2px 0 rgba(255, 91, 91, 0.75);
+  border-bottom: 2px solid $redBorder;
   transition: opacity 0.3s ease-in-out !important;
 
   &:before {
