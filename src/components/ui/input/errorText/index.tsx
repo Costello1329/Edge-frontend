@@ -53,18 +53,13 @@ export class ErrorText extends React.Component<ErrorTextProps, ErrorTextState> {
       }
     }
 
-  public readonly render = (): JSX.Element => {
-    if (this.props.id === "post-vacancy-form-company-name-error-text")
-      console.log(this.state.animation);
-
-    return (
+  public readonly render =
+    (): JSX.Element =>
       <span className={classNames([
           "input-error-text",
           this.state.animation !== "undone" ? this.state.animation : ""
         ])}
       >
         {this.props.text}
-      </span>
-    );
-  }
+      </span>;
 }
