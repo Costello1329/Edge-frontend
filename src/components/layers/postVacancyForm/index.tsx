@@ -152,12 +152,15 @@ extends React.Component<{}, PostVacancyFormLayerState> {
   public readonly render =
     (): JSX.Element =>
       <div className="container postVacancyForm">
-        <section className="row company">
+        <section className="row">
           <div className="col s12 l3 header">
             <h5>{localization.localize("company")}</h5>
+            <p className="hide-on-med-and-down">
+              {localization.localize("vacancyPostFormCompanyDescription")}
+            </p>
           </div>
           <div className="col s12 l9 form">
-            <div className="col s12 left">
+            <div className="col s12 colNoSidePadding">
               <Input
                 title={localization.localize("companyName")}
                 id="post-vacancy-form-company-name"
@@ -319,9 +322,12 @@ extends React.Component<{}, PostVacancyFormLayerState> {
             </label>
           </div>
         </section>
-        <section className="row candidate">
+        <section className="row">
           <div className="col s12 l3 header">
             <h5>{localization.localize("candidate")}</h5>
+            <p className="hide-on-med-and-down">
+              {localization.localize("vacancyPostFormCandidateDescription")}
+            </p>
           </div>
           <div className="col s12 l9 form">
             <select
@@ -406,9 +412,12 @@ extends React.Component<{}, PostVacancyFormLayerState> {
             </div>
           </div>
         </section>
-        <section className="row salary">
+        <section className="row">
           <div className="col s12 l3 header">
-            <h5>{localization.localize("salary")}</h5>
+            <h5>{localization.localize("offer")}</h5>
+            <p className="hide-on-med-and-down">
+              {localization.localize("vacancyPostFormOfferDescription")}
+            </p>
           </div>
           <div className="col s12 l9 form">
             <div className="col s6 left always-half">

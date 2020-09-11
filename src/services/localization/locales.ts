@@ -25,7 +25,7 @@ export interface Locale {
   stack: string,
   location: string,
   city: string,
-  salary: string,
+  offer: string,
   all: string,
   remote: string,
   remoteOnly: string,
@@ -70,7 +70,10 @@ export interface Locale {
   ValidationErrorSpaces: string,
   ValidationErrorSalaryNotEmail: string,
   ValidationErrorSalaryNotTelegram: string,
-  ValidationErrorSalaryNotPhone: string
+  ValidationErrorSalaryNotPhone: string,
+  vacancyPostFormCompanyDescription: string,
+  vacancyPostFormCandidateDescription: string,
+  vacancyPostFormOfferDescription: string
 }
 
 export const ru_RU: Locale = {
@@ -102,7 +105,7 @@ export const ru_RU: Locale = {
   stack: "Область",
   location: "Локация",
   city: "Город",
-  salary: "Ставка",
+  offer: "Оффер",
   all: "Все",
   remote: "Удаленно",
   remoteOnly: "Только удаленно",
@@ -148,7 +151,16 @@ export const ru_RU: Locale = {
   ValidationErrorSpaces: "Пробелы запрещены",
   ValidationErrorSalaryNotEmail: "Неверный формат email",
   ValidationErrorSalaryNotTelegram: "Неверный формат",
-  ValidationErrorSalaryNotPhone: "Неверный формат. Пример: +7 999 018-99-33"
+  ValidationErrorSalaryNotPhone: "Неверный формат. Пример: +7 999 018-99-33",
+  vacancyPostFormCompanyDescription:
+    "Указание ссылки на специальную страницу с детальной информацией \
+    по вакансии увеличивает шансы на подбор квалифицированного специалиста.",
+  vacancyPostFormCandidateDescription:
+    "Рекоендуем перечислить требуемый стек технологий. Это поможет \
+    в таргетинге необходимого специалиста.",
+  vacancyPostFormOfferDescription:
+    "Указывайте честную зарплатную вилку и пишите подробное описание. \
+    Откровенность – залог установления доверительных отношений с обеих сторон."
 };
 
 export const en_GB: Locale = {} as Locale;

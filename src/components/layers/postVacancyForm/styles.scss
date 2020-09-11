@@ -1,16 +1,28 @@
 @import "materialize-css/sass/materialize.scss";
 @import "../../../theme/colors.scss";
 
+.postVacancyForm {
+  margin-top: 14px !important;
+  margin-bottom: 48px !important;
+}
 
 .postVacancyForm section {  
   &.post {
     margin-bottom: 2em;
   }
 
-  & h5 {
-    color: $warmText;
-    line-height: 46px;
-    margin-top: 1rem;
+  & .header {
+    padding-right: 28px;
+
+    & h5 {
+      color: $warmText;
+      line-height: 46px;
+      margin-top: 1rem;
+    }
+
+    & p {
+      color: $warmTextDarken;
+    }
   }
 
   & .col.form {

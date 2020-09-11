@@ -67,7 +67,6 @@ export class App extends React.Component {
             component = {
               (innerProps: RouteComponentProps<{ str: string }>): JSX.Element => {
                 try {
-                  alert(innerProps.match.params.str);
                   return <VacancyPage vacancyGuid={
                     new Guid(innerProps.match.params.str)
                   }/>;
