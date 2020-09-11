@@ -35,6 +35,11 @@ main {
   padding: 0 0.75em;
 }
 
+::selection {
+  color: $base;
+  background: $warmTextLighten;
+}
+
 @media #{$large-and-up} {
   .row .col.l5_5 {
     width: percentage(11/24);
