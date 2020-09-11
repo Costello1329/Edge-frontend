@@ -155,7 +155,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
         <section className="row">
           <div className="col s12 l3 header">
             <h5>{localization.localize("company")}</h5>
-            <p className="hide-on-med-and-down">
+            <p className="pNoMargin hide-on-med-and-down">
               {localization.localize("vacancyPostFormCompanyDescription")}
             </p>
           </div>
@@ -325,7 +325,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
         <section className="row">
           <div className="col s12 l3 header">
             <h5>{localization.localize("candidate")}</h5>
-            <p className="hide-on-med-and-down">
+            <p className="pNoMargin hide-on-med-and-down">
               {localization.localize("vacancyPostFormCandidateDescription")}
             </p>
           </div>
@@ -415,7 +415,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
         <section className="row">
           <div className="col s12 l3 header">
             <h5>{localization.localize("offer")}</h5>
-            <p className="hide-on-med-and-down">
+            <p className="pNoMargin hide-on-med-and-down">
               {localization.localize("vacancyPostFormOfferDescription")}
             </p>
           </div>
