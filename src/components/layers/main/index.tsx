@@ -7,14 +7,15 @@ import "./styles.scss";
 
 
 interface MainLayerProps {
-  companyLogoSrcs: JSX.Element[]
+  // companyLogoSrcs: JSX.Element[]
 }
 
 export const MainLayer: React.FunctionComponent<MainLayerProps> =
   (props: MainLayerProps): JSX.Element =>
     <div className="row rowNoBottomMargin mainLayer z-depth-1">
       <div className="container">
-        <div className="col s12 l5_5 offset-m1 colNoSidePadding right">
+        {/* <div className="col s12 l5_5 offset-m1 colNoSidePadding right"> */}
+        <div className="col s12 l8 colNoSidePadding">
           <h3 className="first mainLayerText">
             {localization.localize("mainLayerTitle")}
           </h3>
@@ -42,7 +43,7 @@ export const MainLayer: React.FunctionComponent<MainLayerProps> =
             </Link>
           </div>
         </div>
-        <div className="col s12 l5_5 colNoSidePadding left">
+        {/* <div className="col s12 l5_5 colNoSidePadding left">
           <h3 className="second mainLayerText center">
             {localization.localize("mainLayerCompaniesTitle")}
           </h3>
@@ -57,6 +58,6 @@ export const MainLayer: React.FunctionComponent<MainLayerProps> =
                 </div>
             )
           }</div>
-        </div>
+        </div> */}
       </div>
     </div>;
