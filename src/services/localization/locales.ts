@@ -8,7 +8,6 @@ export interface Locale {
   allRightsReserved: string,
   mainLayerTitle: string,
   mainLayerParagraphs: string[],
-  mainLayerCompaniesTitle: string,
   viewVacancies: string,
   putVacancy: string,
   joinOurTelegram: string,
@@ -87,7 +86,6 @@ export const ru_RU: Locale = {
     правилам портала. Вакансии крупных компаний размещаются бесплатно \
     в\u00a0кратчайшие сроки."
   ],
-  mainLayerCompaniesTitle: "Нам доверяют",
   viewVacancies: "Посмотреть",
   putVacancy: "Разместить",
   joinOurTelegram: "Присоединяйтесь к нам в\u00a0Telegram:",
@@ -160,6 +158,85 @@ export const ru_RU: Locale = {
     Откровенность\u00a0— залог установления доверительных отношений с\u00a0обеих сторон."
 };
 
-export const en_GB: Locale = {} as Locale;
-
-// export const en_GB: Locale = {};
+export const en_GB: Locale = {
+  copyrightText: "© 2020 Allisto",
+  allRightsReserved: "All rights reserved.",
+  mainLayerTitle: "About",
+  mainLayerParagraphs: [
+    "We're a large web portal featuring the best IT vacancies around. \
+    We provide access to the best offers on the market to our colleagues \
+    and targeted job posting to HRs.",
+    "All the vacancies are thoroughly validated and moderated. \
+    Vacancies for big companies are posted for free, as soon as possible."
+  ],
+  viewVacancies: "Explore",
+  putVacancy: "Post a job",
+  joinOurTelegram: "Join us on\u00a0Telegram:",
+  home: "Home",
+  vacancies: "Jobs",
+  vacancy: "Job",
+  postVacancy: "Post",
+  watchAllVacancies: "See all",
+  russian: "Русский",
+  english: "English",
+  filter: "Filter",
+  level: "Level",
+  stack: "Stack",
+  location: "Location",
+  city: "City",
+  offer: "Offer",
+  all: "All",
+  remote: "Remote",
+  remoteOnly: "Remote only",
+  vacancySkillFrontend: "Frontend",
+  vacancySkillBackend: "Backend",
+  vacancySkillFullstack: "Fullstack",
+  vacancySkillDevOps: "Dev Ops",
+  vacancySkillAndroid: "Android",
+  vacancySkilliOS: "iOS",
+  vacancySkillMobile: "Mobile",
+  vacancySkillDesktop: "Desktop",
+  vacancySkillDataScience: "Data Science",
+  vacancySkillSecurityEngineer: "Security Engineer",
+  respondInTelegram: "Respond over\u00a0Telegram",
+  company: "Company",
+  companyName: "Title",
+  companyIndustry: "Industry",
+  companyWebsite: "Website",
+  locationCountry: "Country",
+  locationCity: "City",
+  candidate: "Candidate",
+  candidateSkill: "Skill",
+  candidateLevel: "Level",
+  candidateStack: "Stack",
+  salaryFrom: "From\u00a0($)",
+  salaryTo: "To\u00a0($)",
+  description: "Description",
+  contacts: "Contacts",
+  contactsEmail: "E-mail",
+  contactsPhone: "Mobile number",
+  EmptyValidationError: "Required",
+  ValidationErrorCompanyProhibitedSymbols: "Prohibited symbol",
+  ValidationErrorCompanyTooShort: "Too short",
+  ValidationErrorCompanyTooLong: "Too long",
+  ValidationErrorCompanySideSpaces: "Please remove the spaces at the beginning and the end",
+  ValidationErrorCompanyDoubledSpaces: "Please remove doubled spaces",
+  ValidationErrorSalaryNotOnlyNumbers: "Number only here",
+  ValidationErrorSalaryTooSmallNumber: "To small",
+  ValidationErrorSalaryTooBigNumber: "Too big",
+  ValidationErrorSalaryLessThan:
+    (bound: number): string => `Shouldn't be less than ${bound}`,
+  ValidationErrorStartsNotWithSchema: "Should start with http:// or https://",
+  ValidationErrorSpaces: "No spaces here",
+  ValidationErrorSalaryNotEmail: "Wrong e-mail format",
+  ValidationErrorSalaryNotTelegram: "Wrong format",
+  ValidationErrorSalaryNotPhone: "Wrong format. Should be: +44\u00a007123\u00a0456789",
+  vacancyPostFormCompanyDescription:
+    "If you include a link to detailed information about your company \
+    it will be easier for you to find a good candidate.",
+  vacancyPostFormCandidateDescription:
+    "The more detailed stack, the better.",
+  vacancyPostFormOfferDescription:
+    "Specify a fair salary range and write a good job description. \
+    Be frank: it's good to have candidates at “hello”!"
+};

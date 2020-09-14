@@ -43,7 +43,7 @@ export const ruleIsTelegram: ValidationRule =
 
 export const ruleIsPhone: ValidationRule =
   (value: string): ValidationError[] =>
-    value.match(/^\+[0-9]{1,4}\ [0-9]{1,4}\ ([0-9]+-)+([0-9]+)$/) === null ?
+    value.match(/^\+[0-9]{1,4}\ [0-9]{1,5}\ ([0-9]+(-| ))*([0-9]+)$/) === null ?
     [new NotPhone()] :
     [];
 
