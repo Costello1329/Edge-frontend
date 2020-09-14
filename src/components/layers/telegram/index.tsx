@@ -21,7 +21,7 @@ export const TelegramLayer: React.FunctionComponent<TelegramLayerProps> =
           className="btn waves-effect"
           onClick={(): void => void(window.open(props.link))}
         >
-          {localization.localize("telegramGroupName")}
+          {`@${props.link.split("/").pop()}`}
           <i className="material-icons left">
             <InlineIcon icon={telegramIcon} height={23}/>
           </i>

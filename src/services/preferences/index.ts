@@ -1,3 +1,3 @@
 export const preferences = {
-  telegramGroup: "https://tttttt.me/sns_deanon"
+  telegramGroup: "https://t.me/sns_deanon"
 };
