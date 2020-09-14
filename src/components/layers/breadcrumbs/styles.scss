@@ -20,3 +20,9 @@ main > nav {
 .breadcrumb::before {
   color: $warmTextDarken !important;
 }
+
+@media #{$small-and-down} {
+  .breadcrumb::before {
+    margin: 0 5px !important;
+  }
+}

@@ -11,7 +11,7 @@ export const formatSalary =
     for (let i = 0; i < digits.length - 3; ++ i)
       formatted += digits[i];
 
-    formatted += "\u2009";
+    formatted += "\u202f";
 
     for (let i = digits.length - 3; i < digits.length; ++ i)
       formatted += digits[i];

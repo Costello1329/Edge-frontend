@@ -59,7 +59,7 @@ export const Vacancy: React.FunctionComponent<VacancyProps> =
                   formatSalary(props.salary.from)
                 } – ${
                   formatSalary(props.salary.to)
-                } $`
+                }\u202f$`
               }</h6>
             </div>
           </div>

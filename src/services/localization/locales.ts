@@ -80,17 +80,17 @@ export const ru_RU: Locale = {
   allRightsReserved: "Все права защищены.",
   mainLayerTitle: "Кто мы",
   mainLayerParagraphs: [
-    "Мы – крупный портал, размещающий лучшие вакансии в сфере IT. \
-    Коллегам мы предоставляем доступ к лучшим предложениям на рынке, \
-    рекрутерам — таргетированное размещение.",
-    "Все вакансии проходят тщательную валидацию на предмет соответствия \
+    "Мы\u00a0– крупный портал, размещающий лучшие вакансии в\u00a0сфере IT. \
+    Коллегам мы предоставляем доступ к\u00a0лучшим предложениям на\u00a0рынке, \
+    рекрутерам\u00a0— таргетированное размещение.",
+    "Все вакансии проходят тщательную валидацию на\u00a0предмет соответствия \
     правилам портала. Вакансии крупных компаний размещаются бесплатно \
-    в кратчайшие сроки."
+    в\u00a0кратчайшие сроки."
   ],
   mainLayerCompaniesTitle: "Нам доверяют",
   viewVacancies: "Посмотреть",
   putVacancy: "Разместить",
-  joinOurTelegram: "Присоединяйтесь к нам в Telegram:",
+  joinOurTelegram: "Присоединяйтесь к нам в\u00a0Telegram:",
   home: "Домой",
   vacancies: "Вакансии",
   vacancy: "Вакансия",
@@ -117,7 +117,7 @@ export const ru_RU: Locale = {
   vacancySkillDesktop: "Desktop",
   vacancySkillDataScience: "Data Science",
   vacancySkillSecurityEngineer: "Security Engineer",
-  respondInTelegram: "Откликнуться в Telegram",
+  respondInTelegram: "Откликнуться в\u00a0Telegram",
   company: "Компания",
   companyName: "Название",
   companyIndustry: "Индустрия",
@@ -138,26 +138,26 @@ export const ru_RU: Locale = {
   ValidationErrorCompanyProhibitedSymbols: "Запрещенный символ",
   ValidationErrorCompanyTooShort: "Слишком короткая строка",
   ValidationErrorCompanyTooLong: "Слишком длинная строка",
-  ValidationErrorCompanySideSpaces: "Пробелы в начале и конце строки запрещены",
+  ValidationErrorCompanySideSpaces: "Пробелы в\u00a0начале и\u00a0конце строки запрещены",
   ValidationErrorCompanyDoubledSpaces: "Сдвоенные пробелы запрещены",
   ValidationErrorSalaryNotOnlyNumbers: "Разрешены только числа",
   ValidationErrorSalaryTooSmallNumber: "Слишком маленькое число",
   ValidationErrorSalaryTooBigNumber: "Слишком большое число",
   ValidationErrorSalaryLessThan:
-    (bound: number): string => `Не должно быть меньше ${bound}`,
-  ValidationErrorStartsNotWithSchema: "Должно начинаться с http:// или https://",
+    (bound: number): string => `Не\u00a0должно быть меньше ${bound}`,
+  ValidationErrorStartsNotWithSchema: "Должно начинаться с\u00a0http:// или\u00a0https://",
   ValidationErrorSpaces: "Пробелы запрещены",
   ValidationErrorSalaryNotEmail: "Неверный формат email",
   ValidationErrorSalaryNotTelegram: "Неверный формат",
-  ValidationErrorSalaryNotPhone: "Неверный формат. Пример: +7 999 018-99-33",
+  ValidationErrorSalaryNotPhone: "Неверный формат. Пример: +7\u00a0999\u00a0018-99-33",
   vacancyPostFormCompanyDescription:
-    "Указание ссылки на специальную страницу с детальной информацией \
-    по вакансии увеличивает шансы успешного подбора специалиста.",
+    "Указание ссылки на\u00a0специальную страницу с\u00a0детальной информацией \
+    по\u00a0вакансии увеличивает шансы успешного подбора специалиста.",
   vacancyPostFormCandidateDescription:
     "Подробно указанный стек способствует поиску сотрудника.",
   vacancyPostFormOfferDescription:
-    "Указывайте честную зарплатную вилку и пишите подробное описание. \
-    Откровенность – залог установления доверительных отношений с обеих сторон."
+    "Указывайте честную зарплатную вилку и\u00a0пишите подробное описание. \
+    Откровенность\u00a0— залог установления доверительных отношений с\u00a0обеих сторон."
 };
 
 export const en_GB: Locale = {} as Locale;

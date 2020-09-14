@@ -28,12 +28,30 @@
 
   & .col.form {
 
-    & .left {
-      padding-right: 0.5em !important;
+    @media #{$medium-only} {
+      & .left {
+        padding-right: 0.5em !important;
+      }
+
+      & .right {
+        padding-left: 0.5em !important;
+      }
     }
 
-    & .right {
-      padding-left: 0.5em !important;
+    @media #{$small-and-down} {
+      & .left {
+        padding-right: 0 !important;
+        &.s6 {
+          padding-right: 0.5em !important;
+        }
+      }
+
+      & .right {
+        padding-left: 0 !important;
+        &.s6 {
+          padding-left: 0.5em !important;
+        }
+      }
     }
 
     @media #{$medium-and-up} {
