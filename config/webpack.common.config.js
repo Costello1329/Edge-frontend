@@ -24,12 +24,15 @@ const commonRules = [
     }
   },
   {
-    test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
-    loader: "file-loader",
-    include: ["/assets/fonts/"],
-    options: {
-      outputPath: "assets"
-    }
+    test: /\.(woff|woff2)$/,
+    use: [
+      {
+        loader: "file-loader",
+        options: {
+            outputPath: "assets"
+        }
+      }
+    ]
   },
   {
     test: /\.svg$/,

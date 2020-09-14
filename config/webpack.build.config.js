@@ -4,15 +4,14 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const buildRules = [
   {
-    test: /\.(sa|sc|c)ss$/,
+    test: /\.(sa|sc)ss$/,
     use: [
       "style-loader",
       {
         loader: MiniCssExtractPlugin.loader
       },
-      {
-        loader: "css-loader"
-      },
+      "css-loader",
+      "resolve-url-loader",
       "sass-loader"
     ]
   }

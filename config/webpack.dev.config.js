@@ -4,8 +4,13 @@ const commonWebpackConfig = require("./webpack.common.config.js");
 
 const devRules = [
   {
-    test: /\.(sa|sc|c)ss$/,
-    use: ["style-loader", "css-loader", "sass-loader"]
+    test: /\.(sa|sc)ss$/,
+    use: [
+      "style-loader",
+      "css-loader",
+      "resolve-url-loader",
+      "sass-loader"
+    ]
   }
 ];
 
