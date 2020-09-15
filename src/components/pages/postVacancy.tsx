@@ -11,7 +11,7 @@ const breadcrumbs: Breadcrumb[] = [{
   url: "/"
 }, {
   text: localization.localize("postVacancy"),
-  url: "/post_vacancy"
+  url: "/post_job"
 }];
 
 

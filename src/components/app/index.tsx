@@ -55,16 +55,16 @@ export class App extends React.Component {
           <Route exact path="/">
             <HomePage/>
           </Route>
-          <Route exact path="/vacancies">
+          <Route exact path="/jobs">
             <VacanciesPage/>
           </Route>
-          <Route exact path="/post_vacancy">
+          <Route exact path="/post_job">
             <PostVacancyPage/>
           </Route>
           <Route
-            path = {"/vacancies/:str"}
+            path={"/jobs/:str"}
             exact
-            component = {
+            component={
               (innerProps: RouteComponentProps<{ str: string }>): JSX.Element => {
                 try {
                   return <VacancyPage vacancyGuid={

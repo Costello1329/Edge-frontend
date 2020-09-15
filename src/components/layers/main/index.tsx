@@ -29,13 +29,13 @@ export const MainLayer: React.FunctionComponent<MainLayerProps> =
             )
           }
           <div className="mainLayerButtons">
-            <Link to={"/post_vacancy"}>
+            <Link to={"/post_job"}>
               <button className="btn waves-effect btnLeft">
                 {localization.localize("putVacancy")}
                 <i className="material-icons left">add</i>
               </button>
             </Link>
-            <Link to={"/vacancies"}>
+            <Link to={"/jobs"}>
               <button className="btn waves-effect">
                 <i className="material-icons left">visibility</i>
                 {localization.localize("viewVacancies")}

@@ -35,7 +35,7 @@ export const HomePage: React.FunctionComponent =
       <VacanciesLayer
         button = {{
           text: localization.localize("watchAllVacancies"),
-          url: "/vacancies"
+          url: "/jobs"
         }}
         vacancies = {vacancies.slice(0, kVacanciesCount)}
       />

@@ -16,7 +16,7 @@ const kMaxCompanyWordLength: number = 9;
 
 export const Vacancy: React.FunctionComponent<VacancyProps> =
   (props: VacancyProps): JSX.Element =>
-    <Link to = {`vacancies/${props.guid.str}`}>
+    <Link to = {`jobs/${props.guid.str}`}>
       <div className={classNames(
         "card-panel",
         "vacancy",

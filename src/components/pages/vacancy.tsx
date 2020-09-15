@@ -18,10 +18,10 @@ const getBreadcrumbs =
     url: "/"
   }, {
     text: localization.localize("vacancies"),
-    url: "/vacancies"
+    url: "/jobs"
   }, {
     text: localization.localize("vacancy"),
-    url: `/vacancies/${vacancyGuid}`
+    url: `/jobs/${vacancyGuid}`
   }];
 
 
@@ -62,7 +62,7 @@ extends React.Component<VacancyPageProps, VacancyPageState> {
           <Preloader/>
         </div> : (
           this.state.vacancy === null ?
-          <Redirect to="/vacancies"/> :
+              <Redirect to="/jobs"/> :
           <FullVacancyLayer vacancy={this.state.vacancy}/>
         )
       }

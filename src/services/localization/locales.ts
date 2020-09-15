@@ -163,10 +163,10 @@ export const en_GB: Locale = {
   allRightsReserved: "All rights reserved.",
   mainLayerTitle: "About",
   mainLayerParagraphs: [
-    "We're a large web portal featuring the best IT vacancies around. \
+    "We're a large web portal featuring the best IT jobs around. \
     We provide access to the best offers on the market to our colleagues \
     and targeted job posting to HRs.",
-    "All the vacancies are thoroughly validated and moderated. \
+    "All the jobs are thoroughly validated and moderated. \
     Vacancies for big companies are posted for free, as soon as possible."
   ],
   viewVacancies: "Explore",
