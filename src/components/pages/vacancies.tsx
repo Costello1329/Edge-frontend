@@ -6,6 +6,11 @@ import {Breadcrumb} from "../layers/breadcrumbs";
 import {Vacancy} from "../../models/vacancy";
 import {Preloader} from "../ui/preloader";
 import {vacancies} from "../../models/statics";
+import {connection} from "../../services/api/get_jobs";
+import {smallJobToVacancy} from "../../models/converters";
+import {notifications} from "../../services/notifications";
+import {main} from "../../services/api/errors/main";
+import {LoadedSmile} from "../ui/loadedSmile";
 
 
 
@@ -19,7 +24,7 @@ const breadcrumbs: Breadcrumb[] = [{
 
 
 interface VacanciesPageState {
-  loading: boolean,
+  loaded: "no" | "success" | "error",
   vacancies: Vacancy[]
 }
 
@@ -28,31 +33,44 @@ extends React.Component<{}, VacanciesPageState> {
   constructor (props: {}) {
     super(props);
     this.state = {
-      loading: false,
+      loaded: "no",
       vacancies: []
     }
   }
 
-  public readonly componentDidMount = (): void =>
-    this.setState(
-      { loading: true }, 
-      (): void =>
-        void(setTimeout(
-          (): void =>
-            this.setState({ loading: false, vacancies }), 
-          1000
-        ))
-    );
+  public readonly componentDidMount = () =>
+    void(connection.send().then(
+      ({ jobs }) => this.setState({
+        loaded: "success",
+        vacancies: jobs.map(job => smallJobToVacancy(job))
+      }),
+      () => this.setState({
+        loaded: "error"
+      }, () => notifications.notify(main))
+    ));
 
   public readonly render = (): JSX.Element =>
     <React.Fragment>
       <BreadcrumbsLayer breadcrumbs={breadcrumbs}/>
-      {
-        this.state.loading ?
-        <div className="container preloaderWrapper">
-          <Preloader/>
-        </div> :
-        <VacanciesFilterLayer vacancies={this.state.vacancies}/>
-      }
+      {(() => {
+        switch(this.state.loaded) {
+          case "no":
+            return (
+              <div className="container preloaderWrapper">
+                <Preloader/>
+              </div>
+            );
+          case "success":
+            return (
+              <VacanciesFilterLayer vacancies={this.state.vacancies}/>
+            );
+          case "error":
+            return (
+              <div className="container">
+                <LoadedSmile type="error"/>
+              </div>
+            );
+        }
+      })()}
     </React.Fragment>;
 }

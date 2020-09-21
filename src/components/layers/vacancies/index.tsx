@@ -3,24 +3,24 @@ import {Vacancy as VacancyProps} from "../../../models/vacancy";
 import {localization} from "../../../services/localization";
 import {Link} from "react-router-dom";
 import {Vacancy} from "../../vacancy";
-import {vacancies} from "../../../models/statics";
 
 import "./styles.scss";
 
 
 
-const kVacanciesCount: number = 4;
+interface VacanciesLayerProps {
+  vacancies: VacancyProps[]
+}
 
-
-export const VacanciesLayer: React.FunctionComponent =
-  (): JSX.Element =>
+export const VacanciesLayer: React.FunctionComponent<VacanciesLayerProps> =
+  (props: VacanciesLayerProps): JSX.Element =>
     <div className="vacanciesLayer">
       <div className="container">
         <div className="row rowNoBottomMargin">
           <h3 className="col">{localization.localize("vacancies")}</h3>
         </div>
         <div className="vacancies row">{
-          vacancies.slice(0, kVacanciesCount).map(
+          props.vacancies.map(
             (vacancy: VacancyProps): JSX.Element =>
               <article className="col s12" key={`vacancy-${vacancy.guid.str}`}>
                 <Vacancy {... vacancy}/>

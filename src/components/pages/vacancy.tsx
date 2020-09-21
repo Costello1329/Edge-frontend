@@ -5,9 +5,14 @@ import {Breadcrumb} from "../layers/breadcrumbs";
 import {FullVacancy} from "../../models/vacancy";
 import {Preloader} from "../ui/preloader";
 import {FullVacancyLayer} from "../layers/fullVacancy";
-import {fullVacancy} from "../../models/statics";
+import {Job} from "../../models/job";
 import {Redirect} from "react-router-dom";
 import {Guid} from "../../utils/guid";
+import {connection} from "../../services/api/get_job";
+import {jobToFullVacancy} from "../../models/converters";
+import {notifications} from "../../services/notifications";
+import {main} from "../../services/api/errors/main";
+import {LoadedSmile} from "../ui/loadedSmile";
 
 
 
@@ -30,7 +35,7 @@ interface VacancyPageProps {
 }
 
 interface VacancyPageState {
-  loaded: boolean,
+  loaded: "no" | "success" | "error",
   vacancy: null | FullVacancy
 }
 
@@ -39,32 +44,44 @@ extends React.Component<VacancyPageProps, VacancyPageState> {
   constructor (props: VacancyPageProps) {
     super(props);
     this.state = {
-      loaded: false,
-      vacancy: null
+      loaded: "no",
+      vacancy: null,
     }
   }
 
-  public readonly componentDidMount = (): void =>
-    void(setTimeout(
-      (): void => this.setState({
-        loaded: true,
-        vacancy: fullVacancy
+  public readonly componentDidMount = () =>
+    void(connection.send({ id: this.props.vacancyGuid }).then(
+      (job: Job) => this.setState({
+        loaded: "success",
+        vacancy: jobToFullVacancy(job)
       }),
-      1000
+      () => this.setState({
+        loaded: "error"
+      }, () => notifications.notify(main))
     ));
 
   public readonly render = (): JSX.Element =>
     <React.Fragment>
       <BreadcrumbsLayer breadcrumbs={getBreadcrumbs(this.props.vacancyGuid.str)}/>
-      {
-        !this.state.loaded ?
-        <div className="container preloaderWrapper">
-          <Preloader/>
-        </div> : (
-          this.state.vacancy === null ?
+      {(() => {
+        switch(this.state.loaded) {
+          case "no":
+            return (
+              <div className="container preloaderWrapper">
+                <Preloader/>
+              </div>
+            );
+          case "success":
+            return this.state.vacancy === null ?
               <Redirect to="/jobs"/> :
-          <FullVacancyLayer vacancy={this.state.vacancy}/>
-        )
-      }
+              <FullVacancyLayer vacancy={this.state.vacancy}/>;
+          case "error":
+            return (
+              <div className="container">
+                <LoadedSmile type="error"/>
+              </div>
+            );
+        }
+      })()}
     </React.Fragment>;
 }

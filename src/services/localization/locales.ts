@@ -71,7 +71,11 @@ export interface Locale {
   ValidationErrorSalaryNotPhone: string,
   vacancyPostFormCompanyDescription: string,
   vacancyPostFormCandidateDescription: string,
-  vacancyPostFormOfferDescription: string
+  vacancyPostFormOfferDescription: string,
+  mainApiErrorTitle: string,
+  mainApiErrorDescription: string,
+  postJobSuccessTitle: string,
+  postJobSuccessMessage: string
 }
 
 export const ru_RU: Locale = {
@@ -136,18 +140,21 @@ export const ru_RU: Locale = {
   ValidationErrorCompanyProhibitedSymbols: "Запрещенный символ",
   ValidationErrorCompanyTooShort: "Слишком короткая строка",
   ValidationErrorCompanyTooLong: "Слишком длинная строка",
-  ValidationErrorCompanySideSpaces: "Пробелы в\u00a0начале и\u00a0конце строки запрещены",
+  ValidationErrorCompanySideSpaces:
+    "Пробелы в\u00a0начале и\u00a0конце строки запрещены",
   ValidationErrorCompanyDoubledSpaces: "Сдвоенные пробелы запрещены",
   ValidationErrorSalaryNotOnlyNumbers: "Разрешены только числа",
   ValidationErrorSalaryTooSmallNumber: "Слишком маленькое число",
   ValidationErrorSalaryTooBigNumber: "Слишком большое число",
   ValidationErrorSalaryLessThan:
     (bound: number): string => `Не\u00a0должно быть меньше ${bound}`,
-  ValidationErrorStartsNotWithSchema: "Должно начинаться с\u00a0http:// или\u00a0https://",
+  ValidationErrorStartsNotWithSchema:
+    "Должно начинаться с\u00a0http:// или\u00a0https://",
   ValidationErrorSpaces: "Пробелы запрещены",
   ValidationErrorSalaryNotEmail: "Неверный формат email",
   ValidationErrorSalaryNotTelegram: "Неверный формат",
-  ValidationErrorSalaryNotPhone: "Неверный формат. Пример: +7\u00a0999\u00a0018-99-33",
+  ValidationErrorSalaryNotPhone:
+    "Неверный формат. Пример: +7\u00a0999\u00a0018-99-33",
   vacancyPostFormCompanyDescription:
     "Указание ссылки на\u00a0специальную страницу с\u00a0детальной информацией \
     по\u00a0вакансии увеличивает шансы успешного подбора специалиста.",
@@ -155,7 +162,16 @@ export const ru_RU: Locale = {
     "Подробно указанный стек способствует поиску сотрудника.",
   vacancyPostFormOfferDescription:
     "Указывайте честную зарплатную вилку и\u00a0пишите подробное описание. \
-    Откровенность\u00a0— залог установления доверительных отношений с\u00a0обеих сторон."
+    Откровенность\u00a0— залог установления доверительных отношений \
+    с\u00a0обеих сторон.",
+  mainApiErrorTitle: "HTTP-ошибка",
+  mainApiErrorDescription:
+    "Непредвиденная HTTP-ошибка случилась при отправке HTTP-запроса. \
+    Попробуйте перезагрузить страницу.",
+  postJobSuccessTitle: "Вакансия отправлена",
+  postJobSuccessMessage:
+    "Вакансия была успешно отправлена на сервер. \
+    В случае успешной модерации она будет опубликована."
 };
 
 export const en_GB: Locale = {
@@ -219,7 +235,8 @@ export const en_GB: Locale = {
   ValidationErrorCompanyProhibitedSymbols: "Prohibited symbol",
   ValidationErrorCompanyTooShort: "Too short",
   ValidationErrorCompanyTooLong: "Too long",
-  ValidationErrorCompanySideSpaces: "Please remove the spaces at the beginning and the end",
+  ValidationErrorCompanySideSpaces:
+    "Please remove the spaces at the beginning and the end",
   ValidationErrorCompanyDoubledSpaces: "Please remove doubled spaces",
   ValidationErrorSalaryNotOnlyNumbers: "Number only here",
   ValidationErrorSalaryTooSmallNumber: "To small",
@@ -230,7 +247,8 @@ export const en_GB: Locale = {
   ValidationErrorSpaces: "No spaces here",
   ValidationErrorSalaryNotEmail: "Wrong e-mail format",
   ValidationErrorSalaryNotTelegram: "Wrong format",
-  ValidationErrorSalaryNotPhone: "Wrong format. Should be: +44\u00a007123\u00a0456789",
+  ValidationErrorSalaryNotPhone:
+    "Wrong format. Should be: +44\u00a007123\u00a0456789",
   vacancyPostFormCompanyDescription:
     "If you include a link to detailed information about your company \
     it will be easier for you to find a good candidate.",
@@ -238,5 +256,13 @@ export const en_GB: Locale = {
     "The more detailed stack, the better.",
   vacancyPostFormOfferDescription:
     "Specify a fair salary range and write a good job description. \
-    Be frank: it's good to have candidates at “hello”!"
+    Be frank: it's good to have candidates at “hello”!",
+  mainApiErrorTitle: "HTTP Error",
+  mainApiErrorDescription:
+    "An unknown HTTP error happened while sending the HTTP \
+    request. Try reloading the page.",
+    postJobSuccessTitle: "Job sent",
+    postJobSuccessMessage:
+      "Job has been successfully sent to the server. \
+      It will be posted after the moderation."
 };

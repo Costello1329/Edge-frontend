@@ -55,7 +55,8 @@ export const Vacancy: React.FunctionComponent<VacancyProps> =
               <p>{props.stack.map(key => VacancyStack[key]).join(", ")}</p>
             </div>
             <div className="moneySummary">
-              <h6>{`${
+              <h6>{
+                `${
                   formatSalary(props.salary.from)
                 } – ${
                   formatSalary(props.salary.to)

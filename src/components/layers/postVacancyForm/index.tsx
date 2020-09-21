@@ -16,6 +16,12 @@ import {ruleIsLocation} from "./validation/location";
 import {ruleIsEmail, ruleIsTelegram, ruleIsPhone, contactsLocalizer}
   from "./validation/contacts";
 import Materialize from "materialize-css";
+import {connection} from "../../../services/api/post_job";
+import {fullVacancyToJob} from "../../../models/converters";
+import {notifications} from "../../../services/notifications";
+import {main} from "../../../services/api/errors/main";
+import {Redirect}
+  from "react-router-dom";
 
 import "./styles.scss";
 
@@ -34,6 +40,7 @@ type PostVacancyFormLayerState = {
   level: FullVacancy["level"] | null,
   skill: FullVacancy["skill"] | null,
   description: InputValue,
+  redirect: boolean
 } & Pick<FullVacancy, "stack" | "remote">;
 
 
@@ -42,6 +49,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
   constructor (props: {}) {
     super(props);
     this.state = {
+      redirect: false,
       contact: {
         email: {
           value: "",
@@ -149,7 +157,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
       this.state.contact.telegram.error ||
       this.state.contact.phone.error;
 
-  public readonly render =
+  public readonly getForm =
     (): JSX.Element =>
       <div className="container postVacancyForm">
         <section className="row">
@@ -590,9 +598,50 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 "col s12",
                 this.isButtonDisabled() ? "disabled" : ""
               ])}
-              onClick={(): void => alert(JSON.stringify(this.state))}
+              onClick={
+                (): void =>
+                  void(connection.send(
+                    fullVacancyToJob({
+                      premium: false,
+                      contact: {
+                        email: this.state.contact.email.value,
+                        phone: this.state.contact.phone.value,
+                        telegram: this.state.contact.telegram.value
+                      },
+                      location: {
+                        country: this.state.location.country.value,
+                        city: this.state.location.city.value
+                      },
+                      company: {
+                        name: this.state.company.name.value,
+                        industry: this.state.company.industry!,
+                        website: this.state.company.website.value
+                      },
+                      salary: {
+                        from: this.state.salary.from.value,
+                        to: this.state.salary.to.value
+                      },
+                      level: this.state.level!,
+                      skill: this.state.skill!,
+                      stack: this.state.stack,
+                      remote: this.state.remote,
+                      description: this.state.description.value
+                    })
+                  ).then(() => {
+                    notifications.notify({
+                      type: "success",
+                      title: localization.localize("postJobSuccessTitle"),
+                      message: localization.localize("postJobSuccessMessage")
+                    });
+
+                    this.setState({ redirect: true });
+                  }).catch(() => notifications.notify(main)))
+              }
             >{localization.localize("postVacancy")}</a>
           </div>
         </section>
       </div>;
+
+      public readonly render = (): JSX.Element =>
+        this.state.redirect ? <Redirect to = "/"/> : this.getForm()
 };
