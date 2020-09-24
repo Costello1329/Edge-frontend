@@ -1,22 +1,9 @@
-const webpack = require("webpack");
 const commonWebpackConfig = require("./webpack.common.config.js");
 
 
-const devRules = [
-  {
-    test: /\.(sa|sc)ss$/,
-    use: [
-      "style-loader",
-      "css-loader",
-      "resolve-url-loader",
-      "sass-loader"
-    ]
-  }
-];
+const devRules = [];
 
-const devPlugins = [
-  new webpack.HotModuleReplacementPlugin()
-]
+const devPlugins = []
 
 module.exports = commonWebpackConfig.buildWebpackConfig(
   commonWebpackConfig.commonRules.concat(devRules),

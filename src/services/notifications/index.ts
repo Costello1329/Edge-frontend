@@ -46,7 +46,7 @@ class NotificationService {
           </div>
         </div>
       `,
-      displayLength: Math.max(wordsCount * 200, 3000),
+      displayLength: Math.min(wordsCount * 200, 4000),
       classes: notificationColor
     });
   }

@@ -5,8 +5,8 @@ import {getConnection, HttpMethod} from "./core";
 
 
 export const connection = getConnection(
-  "/get_job/",
-  HttpMethod.get,
+  "/get_job",
+  HttpMethod.post,
   (data: { id: Guid }) => ({ id: data.id.str }),
   deserializer
 );

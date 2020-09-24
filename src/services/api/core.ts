@@ -29,7 +29,7 @@ export class HttpConnection
       
       const fullRequest: RequestInit = {
         method: this.method,
-        mode: "no-cors",
+        mode: "cors",
         headers
       };
 
@@ -46,7 +46,7 @@ export class HttpConnection
           response.status !== 200 ?
           reject() :
           void(response.json().then((responseData: any) =>
-            resolve(this.responseDeserializer(responseData as RawResponseData))
+              resolve(this.responseDeserializer(responseData as RawResponseData))
           ))
         ).catch((_: any): void => reject());
     });

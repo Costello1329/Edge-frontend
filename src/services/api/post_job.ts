@@ -4,7 +4,7 @@ import {id} from "../../utils/id";
 
 
 export const connection = getConnection(
-  "/post_job/",
+  "/post_job",
   HttpMethod.post,
   id,
   id

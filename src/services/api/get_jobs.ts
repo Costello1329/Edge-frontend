@@ -6,8 +6,8 @@ import {RawSmallJob} from "../../models/job";
 
 export const connection = getConnection(
   "/get_jobs",
-  HttpMethod.get,
+  HttpMethod.post,
   (data: { count?: number }) => data,
-  (raw: { jobs: RawSmallJob[] }) =>
-    ({ jobs: raw.jobs.map(job => smallDeserializer(job)) })
+  (raw: RawSmallJob[]) =>
+    ({ jobs: raw.map(job => smallDeserializer(job)) })
 );

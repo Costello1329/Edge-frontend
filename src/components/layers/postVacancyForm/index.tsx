@@ -40,7 +40,7 @@ type PostVacancyFormLayerState = {
   level: FullVacancy["level"] | null,
   skill: FullVacancy["skill"] | null,
   description: InputValue,
-  redirect: boolean
+  status: "initial" | "pending" | "success"
 } & Pick<FullVacancy, "stack" | "remote">;
 
 
@@ -49,7 +49,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
   constructor (props: {}) {
     super(props);
     this.state = {
-      redirect: false,
+      status: "initial",
       contact: {
         email: {
           value: "",
@@ -142,6 +142,7 @@ extends React.Component<{}, PostVacancyFormLayerState> {
 
   private readonly isButtonDisabled =
     (): boolean =>
+      this.state.status === "pending" ||
       this.state.company.name.error ||
       this.state.company.industry === null ||
       this.state.company.website.error ||
@@ -599,8 +600,9 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                 this.isButtonDisabled() ? "disabled" : ""
               ])}
               onClick={
-                (): void =>
-                  void(connection.send(
+                (): void => this.setState(
+                  { status: "pending" },
+                  () => connection.send(
                     fullVacancyToJob({
                       premium: false,
                       contact: {
@@ -634,8 +636,14 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                       message: localization.localize("postJobSuccessMessage")
                     });
 
-                    this.setState({ redirect: true });
-                  }).catch(() => notifications.notify(main)))
+                    this.setState({ status: "success" });
+                  }).catch(() =>
+                    this.setState(
+                      { status: "initial" },
+                      () => notifications.notify(main)
+                    )
+                  )
+                )
               }
             >{localization.localize("postVacancy")}</a>
           </div>
@@ -643,5 +651,5 @@ extends React.Component<{}, PostVacancyFormLayerState> {
       </div>;
 
       public readonly render = (): JSX.Element =>
-        this.state.redirect ? <Redirect to = "/"/> : this.getForm()
+        this.state.status === "success" ? <Redirect to = "/"/> : this.getForm()
 };

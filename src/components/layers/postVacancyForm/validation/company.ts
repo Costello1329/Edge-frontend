@@ -16,7 +16,7 @@ export class ProhibitedSymbols extends ValidationError {
 
 export const ruleIsCompany: ValidationRule =
   (value: string): ValidationError[] => {
-    const allowedSymbolsMask: RegExp = /^[\x20-\x7e]*$/;
+    const allowedSymbolsMask: RegExp = /^[\w\u0410-\u044f ]*$/;
 
     let validationErrors: ValidationError[] = [
       ... ruleNotLong(value),

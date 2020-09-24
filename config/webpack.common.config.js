@@ -6,6 +6,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const OptimizeCSSAssetsPlugin =
   require("optimize-css-assets-webpack-plugin");
 // const LoadablePlugin = require("@loadable/webpack-plugin");
+const autoprefixer = require('autoprefixer');
 
 
 const commonRules = [
@@ -29,7 +30,7 @@ const commonRules = [
       {
         loader: "file-loader",
         options: {
-            outputPath: "assets"
+          outputPath: "assets"
         }
       }
     ]
@@ -40,6 +41,34 @@ const commonRules = [
     options: {
       outputPath: "assets"
     }
+  },
+  {
+    test: /\.(sa|sc)ss$/,
+    exclude: /node_modules/,
+    use: [
+      { loader: "style-loader", },
+      {
+        loader: "css-loader",
+        options: {
+          importLoaders: 1,
+          sourceMap: true
+        }
+      },
+      { loader: "resolve-url-loader" },
+      {
+        loader: "postcss-loader",
+        options: {
+          sourceMap: true,
+          postcssOptions: {
+            config: "./config/postcss.config.js"
+          }
+        }
+      },
+      {
+        loader: "sass-loader",
+        options: { sourceMap: true }
+      }
+    ]
   }
 ];
 
@@ -102,7 +131,7 @@ function buildWebpackConfig(rules, plugins, development) {
       hot: true,
       port: 1329,
       host: "localhost",
-      publicPath: 'http://localhost:1329/build/',
+      publicPath: "http://localhost:1329/build/",
       hotOnly: true
     },
 
