@@ -629,20 +629,17 @@ extends React.Component<{}, PostVacancyFormLayerState> {
                       remote: this.state.remote,
                       description: this.state.description.value
                     })
-                  ).then(() => {
-                    notifications.notify({
+                  ).then(() => this.setState(
+                    { status: "success" },
+                    () => notifications.notify({
                       type: "success",
                       title: localization.localize("postJobSuccessTitle"),
                       message: localization.localize("postJobSuccessMessage")
-                    });
-
-                    this.setState({ status: "success" });
-                  }).catch(() =>
-                    this.setState(
-                      { status: "initial" },
-                      () => notifications.notify(main)
-                    )
-                  )
+                    })
+                  )).catch(() => this.setState(
+                    { status: "initial" },
+                    () => notifications.notify(main)
+                  ))
                 )
               }
             >{localization.localize("postVacancy")}</a>

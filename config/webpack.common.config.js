@@ -1,52 +1,40 @@
 const webpack = require("webpack");
 
-const TerserJSPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const OptimizeCSSAssetsPlugin =
-  require("optimize-css-assets-webpack-plugin");
-// const LoadablePlugin = require("@loadable/webpack-plugin");
-const autoprefixer = require('autoprefixer');
 
+const root = path.resolve(__dirname, "../");
 
 const commonRules = [
   {
     test: /\.tsx?$/,
+    exclude: /node_modules/,
     loader: "ts-loader",
-    options: {
-      configFile: "config/tsconfig.json"
-    }
+    options: { configFile: `${root}/tsconfig.json` }
   },
   {
     test: /\.html$/,
+    exclude: /node_modules/,
     loader: "html-loader",
-    options: {
-      minimize: true
-    }
+    options: { minimize: true }
   },
   {
     test: /\.(woff|woff2)$/,
-    use: [
-      {
-        loader: "file-loader",
-        options: {
-          outputPath: "assets"
-        }
-      }
-    ]
+    exclude: /node_modules/,
+    loader: "url-loader",
+    options: { outputPath: "assets" }
   },
   {
     test: /\.svg$/,
+    exclude: /node_modules/,
     loader: "svg-react-loader",
-    options: {
-      outputPath: "assets"
-    }
+    options: { outputPath: "assets" }
   },
   {
-    test: /\.(sa|sc)ss$/,
+    test: /\.s(a|c)ss$/,
     exclude: /node_modules/,
     use: [
-      { loader: "style-loader", },
+      { loader: "style-loader" },
       {
         loader: "css-loader",
         options: {
@@ -58,32 +46,25 @@ const commonRules = [
       {
         loader: "postcss-loader",
         options: {
-          sourceMap: true,
-          postcssOptions: {
-            config: "./config/postcss.config.js"
-          }
+          postcssOptions: { config: "./config/postcss.config.js" }
         }
       },
       {
-        loader: "sass-loader",
-        options: { sourceMap: true }
-      }
+        loader: 'url-tilde-loader',
+        options: { replacement: `${root}/src` }
+      },
+      "sass-loader"
     ]
   }
 ];
 
 const commonPlugins = [
   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-  new MiniCssExtractPlugin({
-    filename: "assets/a[hash:7].css",
-    chunkFilename: "assets/v[id][contenthash:6].css"
-  }),
+  new MiniCssExtractPlugin(),
   new HtmlWebPackPlugin({
     template: "./public/index.html",
     filename: "./index.html",
-    // favicon: "./public/favicon.ico"
-  }),
-  // new LoadablePlugin({ filename: "stats.json", writeToDisk: true })
+  })
 ];
 
 function buildWebpackConfig(rules, plugins, development) {
@@ -92,10 +73,10 @@ function buildWebpackConfig(rules, plugins, development) {
     entry: "./src/index.tsx",
 
     output: {
-      path: `${__dirname}/../build`,
+      path: `${root}/../build`,
       publicPath: "",
-      filename: "assets/a[hash:7].js",
-      chunkFilename: "assets/v[id][contenthash:7].js"
+      // filename: "assets/a[hash:7].js",
+      // chunkFilename: "assets/v[id][contenthash:7].js"
     },
 
     module: {
@@ -103,51 +84,23 @@ function buildWebpackConfig(rules, plugins, development) {
     },
 
     resolve: {
+      alias: { '~/': `${root}/src/` },
       modules: ["../src", "../node_modules"],
-      extensions: [".css", "sass", ".scss", ".ts", ".tsx", ".js", ".json"]
+      extensions: [".scss", ".ts", ".tsx", ".js", ".json"]
     },
 
     plugins: plugins,
 
-    optimization: {
-      minimizer: [
-        new TerserJSPlugin({
-          cache: true,
-          parallel: true,
-          sourceMap: true
-        }),
-        new OptimizeCSSAssetsPlugin({})
-      ]
-    },
-
-    devtool: development ? "cheap-module-eval-source-map" : false,
-
     devServer: {
-      contentBase: `${__dirname}/../build`,
+      contentBase: `${root}/../build`,
       compress: true,
       disableHostCheck: true,
       historyApiFallback: true,
-      writeToDisk: true,
       hot: true,
       port: 1329,
       host: "localhost",
-      publicPath: "http://localhost:1329/build/",
-      hotOnly: true
-    },
-
-    /*stats: {
-      all: true,
-      children: false,
-      chunks: false,
-      modules: true,
-      maxModules: 0,
-      errors: true,
-      warnings: false,
-      moduleTrace: true,
-      errorDetails: true
-    }*/
+    }
   };
-
 }
 
 module.exports = {

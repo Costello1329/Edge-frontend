@@ -1,6 +1,6 @@
 import React from "react";
 import {localization} from "../../services/localization";
-import EdgeLogo from "../../../assets/svg/edge-logo.svg";
+import EdgeLogo from "../../assets/svg/edge-logo.svg";
 
 import "./styles.scss";
 

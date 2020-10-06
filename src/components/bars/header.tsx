@@ -2,7 +2,7 @@ import React from "react";
 import {Link, withRouter, RouteComponentProps} from "react-router-dom";
 import classNames from "classnames";
 import {IconifyIcon, InlineIcon} from "@iconify/react";
-import EdgeLogo from "../../../assets/svg/edge-logo.svg";
+import EdgeLogo from "../../assets/svg/edge-logo.svg";
 
 import "./styles.scss";
 

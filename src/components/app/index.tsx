@@ -12,10 +12,10 @@ import {HomePage} from "../pages/home";
 import {VacanciesPage} from "../pages/vacancies";
 import {VacancyPage} from "../pages/vacancy";
 import {PostVacancyPage} from "../pages/postVacancy";
+import {Guid} from "../../utils/guid";
 import Materialize from "materialize-css";
 
 import "./styles.scss";
-import { Guid } from "../../utils/guid";
 
 
 
