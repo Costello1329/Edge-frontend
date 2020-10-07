@@ -2,6 +2,7 @@ const webpack = require("webpack");
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const path = require("path");
 
 const root = path.resolve(__dirname, "../");
 
@@ -70,10 +71,10 @@ const commonPlugins = [
 function buildWebpackConfig(rules, plugins, development) {
   return {
     mode: development ? "development" : "production",
-    entry: "./src/index.tsx",
+    entry: `${root}/src/index.tsx`,
 
     output: {
-      path: `${root}/../build`,
+      path: `${root}/build`,
       publicPath: "",
       // filename: "assets/a[hash:7].js",
       // chunkFilename: "assets/v[id][contenthash:7].js"
