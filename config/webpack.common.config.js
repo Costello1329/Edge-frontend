@@ -11,7 +11,7 @@ const commonRules = [
     test: /\.tsx?$/,
     exclude: /node_modules/,
     loader: "ts-loader",
-    options: { configFile: `${root}/tsconfig.json` }
+    options: { configFile: `${root}/config/tsconfig.json` }
   },
   {
     test: /\.html$/,
